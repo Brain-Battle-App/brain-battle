@@ -45,8 +45,18 @@ import elite from "../assets/images/elite.png";
 import mastermind from "../assets/images/mastermind.png";
 import kingQueen from "../assets/images/kingQueen.png";
 import legend from "../assets/images/legend.png";
-
+import send from "../assets/images/send.png";
 import demoLogo from "../assets/images/demo-logo.png";
+import map2 from "../assets/images/map2.png";
+
+import ukFlagCircle from "../assets/images/uk-flag-circle.png";
+import highSchoolMedal from "../assets/images/highSchoolMedal.png";
+import medal from "../assets/images/medal.png";
+import rank2 from "../assets/images/rank2.png";
+import rank1 from "../assets/images/rank1.png";
+import rank3 from "../assets/images/rank3.png";
+
+
 
 export default {
   legend,
@@ -97,4 +107,13 @@ export default {
   demoLogo,
   brainJester,
   uzbekistan,
+  send,
+  ukFlagCircle,
+  map2,
+  highSchoolMedal,
+  medal,
+  rank2,
+  rank1,
+  rank3
+  
 };

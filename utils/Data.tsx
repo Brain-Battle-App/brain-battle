@@ -185,12 +185,25 @@ export const FindFriends = [
     image: images.user14,
   },
 ];
-
-export const leaderBoardUserData = [
+export const createUserData = [
   {
     name: "Carol Lyons",
     points: "590 ELO",
-    rooseveltBadge: images.athletics,
+    rooseveltBadge: images.roosevelt,
+    image: images.user15,
+    count: "4",
+  },
+  {
+    name: "Zain Vaccaro",
+    points: "448 ELO",
+    rooseveltBadge: images.roosevelt,
+    image: images.user16,
+    count: "5",
+  },
+  {
+    name: "Carol Lyons",
+    points: "590 ELO",
+    rooseveltBadge: images.highSchoolMedal,
     image: images.user15,
     count: "4",
   },
