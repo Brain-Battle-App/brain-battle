@@ -64,7 +64,8 @@ export const AllTimeGraphData: LineDataItem[] = [
           style={{
             color: "#626262",
             fontSize: verticalScale(13),
-            fontFamily: "ClashDisplay-Medium",
+            fontWeight:"600",
+            fontFamily: "ClashDisplayMedium",
           }}
         >
           1000

@@ -151,7 +151,8 @@ const RewardProgress = ({
               }}
             >
               <CustomText
-                fontFam={"ClashDisplay-Medium"}
+                fontFam={"ClashDisplayMedium"}
+                fontWeight="600"
                 text={item.startName}
                 style={{ textAlign: "center" }}
                 size={11}
@@ -184,7 +185,7 @@ const RewardProgress = ({
             </View>
 
             <CustomText
-              fontFam={"ClashDisplay-Semibold"}
+              fontFam={"ClashDisplaySemibold"}
               fontWeight="bold"
               text={item.min.toLocaleString()}
               label=" ELO"
@@ -236,7 +237,8 @@ const RewardProgress = ({
               }}
             >
               <CustomText
-                fontFam={"ClashDisplay-Medium"}
+                fontFam={"ClashDisplayMedium"}
+                fontWeight="600"
                 text={item.nextName}
                 style={{ textAlign: "center" }}
                 size={11}
@@ -268,8 +270,9 @@ const RewardProgress = ({
             </View>
 
             <CustomText
-              fontFam={"ClashDisplay-Medium"}
-              fontWeight="bold"
+              fontFam={"ClashDisplayMedium"}
+              
+              fontWeight="600"
               text={item.max.toLocaleString()}
               label=" ELO"
               style={{ textAlign: "center", marginTop: verticalScale(3) }}

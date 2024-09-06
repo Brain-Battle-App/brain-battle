@@ -55,6 +55,10 @@ import medal from "../assets/images/medal.png";
 import rank2 from "../assets/images/rank2.png";
 import rank1 from "../assets/images/rank1.png";
 import rank3 from "../assets/images/rank3.png";
+import add from "../assets/icons/add.png";
+import verified from "../assets/icons/verified.png";
+
+
 
 
 
@@ -114,6 +118,8 @@ export default {
   medal,
   rank2,
   rank1,
-  rank3
+  rank3,
+  add,
+  verified
   
 };

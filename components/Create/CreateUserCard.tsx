@@ -75,6 +75,7 @@ const CreateUserCard = ({
           <View style={{ ...appStyles.row, gap: horizontalScale(5) }}>
             <CustomText
               size={14}
+              fontFam={selectedLeaderBoardUser == index?"ClashDisplayMedium":"ClashDisplayRegular"}
               fontWeight={selectedLeaderBoardUser == index?"600":"500"}
               color={colors.black}
               text={item.name}
@@ -107,7 +108,6 @@ const CreateUserCard = ({
             />
             <CustomText
               size={15}
-              fontFam={fonts.regular}
               fontWeight="400"
               color={colors.black}
               text={"share"}

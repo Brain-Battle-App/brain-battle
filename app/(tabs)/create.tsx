@@ -84,6 +84,7 @@ const create = ({ navigation }: any) => {
             {leaderBoardData.map((item, index) => {
               return (
                 <View
+                key={index.toString()}
                   style={{
                     width: moderateScale(90),
                     height:
@@ -135,6 +136,10 @@ const create = ({ navigation }: any) => {
                   <CustomText
                  
                     label={item?.name}
+                    fontWeight="600"
+                    fontFam={
+                      seletedLeaderboard == index ?"ClashDisplayMedium" : "ClashDisplayRegular"
+                    }
                     style={{ textAlign: "center" }}
                     size={14}
                     color={

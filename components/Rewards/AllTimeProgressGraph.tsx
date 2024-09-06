@@ -1,19 +1,13 @@
 import {
-  FlatList,
-  Image,
   StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useState } from "react";
-import Modal from "react-native-modal";
-import { windowHeight, windowWidth } from "@/utils/Dimensions";
-import { moderateScale, verticalScale } from "@/utils/Mertics";
+import { windowWidth } from "@/utils/Dimensions";
+import {  verticalScale } from "@/utils/Mertics";
 import { isiPad } from "@/utils/CommonFun";
 import { LineChart, yAxisSides } from "react-native-gifted-charts";
-import { AllTimeGraphData, MonthlyGraphdata } from "@/utils/Data";
+import { AllTimeGraphData, } from "@/utils/Data";
 
 const AllTimeProgressGraph = ({}: any) => {
   return (

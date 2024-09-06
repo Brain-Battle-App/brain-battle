@@ -68,6 +68,7 @@ const CreateUserRakingCard = ({
        
           label={name}
           style={{ textAlign: "center" }}
+          fontFam="ClashDisplayMedium"
           size={14}
           color={colors.black}
         />
@@ -85,6 +86,7 @@ const CreateUserRakingCard = ({
         >
           <CustomText
             label={points}
+            fontFam="ClashDisplayMedium"
             style={{ textAlign: "center" }}
             size={12}
             color={colors.black}

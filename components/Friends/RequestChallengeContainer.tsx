@@ -7,10 +7,8 @@ import {
 } from "react-native";
 import { appStyles } from "@/utils/appStyles";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
-// import { images } from "../../src/assets";
 import tests from "@/constants/tests";
 import CustomText from "../CustomText";
-import { fonts } from "@/utils/fonts";
 import { colors } from "@/utils/colors";
 import { deviceType, DeviceType } from "expo-device";
 
@@ -51,17 +49,13 @@ const RequestChallengeContainer = ({ navigation, item }: any) => {
       <View style={{ gap: verticalScale(10),  }}>
         <CustomText
           size={17}
-          // fontFam={fonts.medium}
-          font="font-clashmedium"
+          fontFam={"ClashDisplayMedium"}
           fontWeight="500"
           color={colors.gray}
           text={"Zakerrrr"}
         />
         <CustomText
           size={15}
-          // fontFam={fonts.regular}
-          font="font-clashregular"
-          fontWeight="400"
           color={colors.gray}
           text={"@zakerr"}
         />
@@ -75,8 +69,7 @@ const RequestChallengeContainer = ({ navigation, item }: any) => {
         <View style={{paddingHorizontal:scale(22),backgroundColor:"#E5E5E5",paddingVertical:verticalScale(10),borderRadius:moderateScale(30)}}>
         <CustomText
           size={17}
-          // fontFam={fonts.medium}
-          font="font-clashmedium"
+          fontFam={"ClashDisplayMedium"}
           fontWeight="600"
           color={colors.black}
           text={"VS"}
@@ -88,19 +81,15 @@ const RequestChallengeContainer = ({ navigation, item }: any) => {
           style={{
             paddingVertical: scale(1),
             backgroundColor: "#E5E5E5",
-            // paddingHorizontal:scale(-20),
             width: moderateScale(60),
-            // zIndex: 999,
             borderRadius: scale(30),
             alignItems:"center",
-            // justifyContent:"center"
-            // paddingHorizontal:moderateScale(20)
+          
           }}
         >
           <CustomText
             size={13}
-            // fontFam={fonts.medium}
-            font="font-clashmedium"
+            fontFam={"ClashDisplayMedium"}
             fontWeight="600"
             color={colors.black}
             text={"4-2"}
