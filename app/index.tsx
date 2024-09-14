@@ -12,12 +12,12 @@ const App = () => {
 
 	useEffect(() => {
 		const checkForAndRemoveSessions = async () => {
-            console.log('checking')
+            // console.log('checking')
 			const currentSessions = checkForCurrentSession()
 				.then((response) => {
-					console.log('current sessions', response);
+					// console.log('current sessions', response);
 					if (response.length > 0) {
-						console.log('removing sessions')
+						// console.log('removing sessions')
 						removeCurrentSessions();
 					}
 				})

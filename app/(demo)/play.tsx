@@ -83,15 +83,17 @@ const Play = () => {
 						<Text className='font-clashmedium' style={{fontSize: moderateScale(24)}}>You are on the clock!</Text>
 					</View>
 				): <FaceOffHeader />}
-				{questionsResponse.map((question) => (
-					<>
+				{questionsResponse.map((question, index) => (
+					<React.Fragment key={index}>
 						<View style={{paddingHorizontal: scale(25)}}>
 							<Text key={question.id} numberOfLines={5} className='font-clashmedium text-xl p-2 mt-4' style={{fontSize: moderateScale(18), lineHeight: moderateVerticalScale(25)}}>
-								{question.questionText.map((part) =>
+								{question.questionText.map((part, index) =>
 									typeof part === 'string' ? (
-										part
+										<Text key={index}>
+											{part}
+										</Text>
 									) : (
-										<Text className='font-clashsemibold' style={{textDecorationLine: 'underline'}}>
+										<Text key={index} className='font-clashsemibold' style={{textDecorationLine: 'underline'}}>
 											{part.text}
 										</Text>
 									)
@@ -128,7 +130,7 @@ const Play = () => {
 								</TouchableOpacity>
 							))}
 						</View>
-					</>
+					</React.Fragment>
 				))}
 				<Text className='font-clashsemibold' style={{fontSize: moderateScale(14)}}> {"First to 4!"} </Text>
 				<View className='flex flex-row justify-between items-center' style={{gap: scale(25)}}>

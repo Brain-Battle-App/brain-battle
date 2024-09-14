@@ -14,7 +14,7 @@ const PlayerAvatar = ({ picture, elo }: PlayerAvatarProps) => {
 	
 	// const avatarSource = tests[picture];
     
-	console.log('picture prop', picture)
+	// console.log('picture prop', picture)
     const imageSource = images[picture];
 	
 	return (

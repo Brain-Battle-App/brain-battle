@@ -26,17 +26,18 @@ const Ready = () => {
     const handleSearch = () => {
         setSearching(true)
         setTimeout(() => {
-            console.log('searching')
+            // console.log('searching')
 
             // Implement actual searching logic here
 
 			const result = findRoom()
 				.then((response) => {
-					console.log(response);
+					console.log("DAAA");
+					console.log(typeof(response));
 				})
 				.catch((exception) => (console.error(exception)));
 			
-            router.replace('/(demo)/play')
+            router.push('/(demo)/play')
         }, 2000);
     }
 
