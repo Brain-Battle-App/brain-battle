@@ -89,7 +89,7 @@ const CustomSearch = ({
         }}
       >
         <View style={{ flex: 1 }}>
-          <TextInput
+          <TextInput className="font-clashregular"
             value={value}
             editable={editable}
             style={{
