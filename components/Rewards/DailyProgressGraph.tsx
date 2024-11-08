@@ -1,18 +1,14 @@
 import {
-  FlatList,
-  Image,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { windowHeight, windowWidth } from "@/utils/Dimensions";
+import {  windowWidth } from "@/utils/Dimensions";
 import { moderateScale, verticalScale } from "@/utils/Mertics";
 import { isiPad } from "@/utils/CommonFun";
 import { BarChart, yAxisSides } from "react-native-gifted-charts";
-import { DailyGraphdata, MonthlyGraphdata } from "@/utils/Data";
+import { DailyGraphdata, } from "@/utils/Data";
 import { LineDataItem } from "@/types";
 const DailyProgressGraph = ({}: any) => {
   return (

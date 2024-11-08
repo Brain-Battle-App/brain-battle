@@ -85,7 +85,8 @@ const CustomModal = ({
             <CustomText
               text={`${selectectedRewarsRank?.name} Reward Box`}
               size={16}
-              fontFam={"ClashDisplay-Bold"}
+              fontWeight="700"
+              fontFam={"ClashDisplayBold"}
               color={"#737373"}
             />
 
@@ -108,7 +109,8 @@ const CustomModal = ({
             <CustomText
               label="In each reward box you are guaranteed a badge or title to add to your collection!"
               size={13}
-              fontFam={"ClashDisplay-Medium"}
+              fontFam={"ClashDisplayMedium"}
+              fontWeight="600"
               style={{ textAlign: "center" }}
               lineHeight={isiPad ? 30 : 20}
               color={"#737373"}
@@ -118,8 +120,9 @@ const CustomModal = ({
           <CustomText
             label="Odds"
             size={16}
+            fontWeight="600"
             style={{ alignSelf: "flex-end", marginVertical: verticalScale(20) }}
-            fontFam={"ClashDisplay-Medium"}
+            fontFam={"ClashDisplayMedium"}
             color={"#8E8E8E"}
           />
 
@@ -164,11 +167,12 @@ const CustomModal = ({
                   <CustomText
                     label={item.name}
                     size={13}
+                    fontWeight="600"
                     style={{
                       marginTop: verticalScale(5),
                       marginLeft: moderateScale(item?.isTitle ? 5 : 0),
                     }}
-                    fontFam={"ClashDisplay-Medium"}
+                    fontFam={"ClashDisplayMedium"}
                     color={item.nameColor}
                   />
                 </View>
@@ -176,10 +180,11 @@ const CustomModal = ({
                 <CustomText
                   label={item.value}
                   size={13}
+                  fontWeight="600"
                   style={{
                     marginTop: verticalScale(-5),
                   }}
-                  fontFam={"ClashDisplay-Medium"}
+                  fontFam={"ClashDisplayMedium"}
                   color={colors.black}
                 />
               </View>

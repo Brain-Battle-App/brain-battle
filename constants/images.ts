@@ -49,13 +49,29 @@ import blueMap from "../assets/images/blueMap.png";
 import rankBack from "../assets/images/rankBack.png";
 import rank2Back from "../assets/images/rank2Back.png";
 import rank3Back from "../assets/images/rank3Back.png";
-import rank from "../assets/images/rank.png";
+// import rank from "../assets/images/rank.png";
 import rank2 from "../assets/images/rank2.png";
 import rank3 from "../assets/images/rank3.png";
 import map2 from "../assets/images/map2.png";
 import rank1 from "../assets/images/rank1.svg";
 import highSchoolMedal from "../assets/images/highSchoolMedal.png";
 import medal from "../assets/images/medal.png";
+import send from "../assets/images/send.png";
+import demoLogo from "../assets/images/demo-logo.png";
+// import map2 from "../assets/images/map2.png";
+
+import ukFlagCircle from "../assets/images/uk-flag-circle.png";
+// import highSchoolMedal from "../assets/images/highSchoolMedal.png";
+// import medal from "../assets/images/medal.png";
+// import rank2 from "../assets/images/rank2.png";
+// import rank1 from "../assets/images/rank1.png";
+// import rank3 from "../assets/images/rank3.png";
+import add from "../assets/icons/add.png";
+import verified from "../assets/icons/verified.png";
+
+
+
+
 
 export default {
   rankBack,
@@ -64,7 +80,7 @@ export default {
   medal,
   rank2Back,
   rank3Back,
-  rank,
+  // rank,
   rank2,
   rank3,
   map2,
@@ -116,4 +132,15 @@ export default {
   map,
   brainJester,
   uzbekistan,
+  send,
+  ukFlagCircle,
+  // map2,
+  // highSchoolMedal,
+  // medal,
+  // rank2,
+  // rank1,
+  // rank3,
+  add,
+  verified
+  
 };

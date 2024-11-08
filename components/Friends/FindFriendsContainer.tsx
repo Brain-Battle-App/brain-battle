@@ -13,7 +13,7 @@ import CustomText from "../CustomText";
 import { fonts } from "@/utils/fonts";
 import { colors } from "@/utils/colors";
 import { deviceType, DeviceType } from "expo-device";
-import { ShadowedView } from 'react-native-fast-shadow';
+import images from "@/constants/images";
 
 const FindFriendsContainer = ({ navigation, item }: any) => {
   const isTablet = (deviceType == DeviceType.TABLET);
@@ -53,18 +53,7 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
             />
           </View>
           {item.monsterBadge && (
-            <ShadowedView
-            style={{
-              shadowOpacity: 0.5,
-              shadowRadius: 10,
-              elevation:5,
-              shadowColor:"#530182",
-              shadowOffset: {
-                width: 5,
-                height: 5,
-              },
-            }}
-          >
+           
                       <Image
               style={{
                 width: moderateScale(35),
@@ -78,7 +67,6 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
               resizeMode="contain"
               source={item.monsterBadge}
             />
-            </ShadowedView>
             // <View
             // style={{
             //     elevation: 5,
@@ -129,8 +117,7 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
               >
                 <CustomText
                   size={7}
-                  // fontFam={fonts.regular}
-                  font="font-clashregular"
+                  fontFam="ClashDisplayRegular"
                   fontWeight="400"
                   color={colors.black}
                   text={"#52"}
@@ -155,8 +142,8 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
           <View style={{ ...appStyles.row, gap: scale(5) }}>
             <CustomText
               size={14}
-              // fontFam={fonts.semiBold}
-              font="font-clashsemibold"
+              fontFam={"ClashDisplaySemibold"}
+              // font="font-clashsemibold"
               fontWeight="600"
               color={colors.black}
               text={"Community Name here"}
@@ -164,14 +151,12 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
             <Image
               style={{ width: moderateScale(15), height: moderateScale(15) }}
               resizeMode="contain"
-              source={icons.verified}
+              source={images.verified}
             />
           </View>
 
           <CustomText
             size={15}
-            // fontFam={fonts.regular}
-            font="font-clashregular"
             fontWeight="400"
             color={colors.black}
             text={"1.1M followers"}
@@ -181,7 +166,7 @@ const FindFriendsContainer = ({ navigation, item }: any) => {
       <Image
         style={{ width: moderateScale(15), height: moderateScale(15) }}
         resizeMode="contain"
-        source={icons.add}
+        source={images.add}
       />
     </View>
   );

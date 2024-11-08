@@ -2,7 +2,6 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
 import { colors } from "@/utils/colors";
 import { windowWidth } from "@/utils/Dimensions";
-import { fonts } from "@/utils/fonts";
 // import { images } from "../../src/assets";
 import icons from "@/constants/icons";
 type Props = {
@@ -98,7 +97,7 @@ const CustomSearch = ({
               width: windowWidth / 1.2,
               alignItems: "center",
               // paddingTop:20,
-              fontFamily: fonts.regular,
+              fontFamily: "ClashDisplayRegular",
               fontWeight: fontWeight,
               color: color || colors.black,
               ...(isCenter && { alignSelf: "center" }),

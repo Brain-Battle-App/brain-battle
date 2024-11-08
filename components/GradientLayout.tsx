@@ -68,8 +68,8 @@ const GradientLayout = ({ children, color }: any) => {
             />
             <CustomText
               size={29}
-              // fontFam={fonts.medium}
-              font="font-clashmedium"
+              fontWeight="600"
+              fontFam="ClashDisplayMedium"
               color="#3D3131"
               text={"Friends"}
             />
@@ -112,8 +112,8 @@ const GradientLayout = ({ children, color }: any) => {
             />
             <CustomText
               size={18}
-              // fontFam={fonts.medium}
-              font="font-clashmedium"
+              fontFam={"ClashDisplayMedium"}
+              fontWeight="600"
               color={colors.black}
               text={"1235"}
             />

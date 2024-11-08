@@ -24,8 +24,6 @@ import GradientLayout from "@/components/GradientLayout";
 import { appStyles } from "../../utils/appStyles";
 import { colors } from "../../utils/colors";
 import CustomText from "@/components/CustomText";
-import { fonts } from "../../utils/fonts";
-// import DeviceInfo from "react-native-device-info";
 import { deviceType, DeviceType } from "expo-device";
 import { useState } from "react";
 import FriendContainer from "@/components/Friends/FriendContainer";
@@ -51,6 +49,7 @@ const Friends = ({ navigation }: any) => {
 
   return (
     <GradientLayout>
+    
       <View style={{ flex: 1, paddingLeft: scale(20) }}>
         <View
           style={{
@@ -86,8 +85,8 @@ const Friends = ({ navigation }: any) => {
             }
           >
             <CustomText
-              // fontFam={fonts.medium}
-              font="font-clashmedium"
+  
+              fontFam="ClashDisplayMedium"
               fontWeight="600"
               label="All"
               size={16}
@@ -112,8 +111,7 @@ const Friends = ({ navigation }: any) => {
             }
           >
             <CustomText
-              // fontFam={fonts.medium}
-              font="font-clashmedium"
+              fontFam="ClashDisplayMedium"
               fontWeight="600"
               label="Find Friends"
               size={16}
@@ -132,10 +130,12 @@ const Friends = ({ navigation }: any) => {
           }}
         >
           {selectedTab == "All" && (
-            <View style={{ paddingTop: verticalScale(20) }}>
+            <ScrollView
+            showsVerticalScrollIndicator={false}
+            >
+                <View style={{ paddingTop: verticalScale(20) }}>
               <CustomText
-                // fontFam={fonts.medium}
-                font="font-clashmedium"
+                fontFam="ClashDisplayMedium"
                 fontWeight="600"
                 label="Online (2)"
                 size={18}
@@ -147,8 +147,7 @@ const Friends = ({ navigation }: any) => {
               })}
 
               <CustomText
-                // fontFam={fonts.medium}
-                font="font-clashmedium"
+                fontFam="ClashDisplayMedium"
                 fontWeight="600"
                 label="Group Parties"
                 size={18}
@@ -160,8 +159,7 @@ const Friends = ({ navigation }: any) => {
               })}
 
               <CustomText
-                // fontFam={fonts.medium}
-                font="font-clashmedium"
+                fontFam="ClashDisplayMedium"
                 fontWeight="600"
                 label="Request Challenge"
                 size={18}
@@ -173,6 +171,9 @@ const Friends = ({ navigation }: any) => {
               />
               <RequestChallengeContainer />
             </View>
+
+            </ScrollView>
+          
           )}
 
           {selectedTab == "Find Friends" && (
@@ -196,6 +197,8 @@ const Friends = ({ navigation }: any) => {
           )}
         </View>
       </View>
+
+     
     </GradientLayout>
   );
 };

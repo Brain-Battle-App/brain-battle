@@ -55,17 +55,14 @@ const FrinedContainer = ({ navigation, item }: any) => {
             paddingVertical: scale(1),
             backgroundColor: "#E5E5E5",
             width: moderateScale(53),
-            // zIndex: 999,
             borderRadius: scale(30),
             alignItems:"center",
-            // justifyContent:"center"
-            // paddingHorizontal:moderateScale(20)
+          
           }}
         >
           <CustomText
             size={11}
-            // fontFam={fonts.bold}
-            font="font-clashbold"
+            fontFam={"ClashDisplayBold"}
             fontWeight="bold"
             color={colors.black}
             text={item?.friend}
@@ -78,16 +75,11 @@ const FrinedContainer = ({ navigation, item }: any) => {
         <View style={{gap:verticalScale(10),marginTop:verticalScale(-5)}}>
         <CustomText
             size={17}
-            // fontFam={fonts.regular}
-            font="font-clashregular"
-            fontWeight="500"
             color={colors.gray}
             text={item?.name}
           />
            <CustomText
             size={15}
-            // fontFam={fonts.regular}
-            font="font-clashregular"
             fontWeight="500"
             color={colors.gray}
             text={item?.des}

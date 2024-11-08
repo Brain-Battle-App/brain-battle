@@ -1,17 +1,12 @@
 import {
   Image,
-  SafeAreaView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
+
   View,
 } from "react-native";
 import { appStyles } from "@/utils/appStyles";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
-// import { images } from "../../src/assets";
-import icons from "@/constants/icons";
 import CustomText from "../CustomText";
-import { fonts } from "@/utils/fonts";
 import { colors } from "@/utils/colors";
 import { deviceType, DeviceType } from "expo-device";
 
@@ -24,7 +19,6 @@ const GroupPartiesContainer = ({ navigation, item }: any) => {
         ...appStyles.row,
         gap: isTablet ? scale(20) : scale(30),
         marginVertical: verticalScale(10),
-        // backgroundColor:"red",
         alignSelf: "flex-start",
         alignItems: "flex-start",
       }}
@@ -45,9 +39,8 @@ const GroupPartiesContainer = ({ navigation, item }: any) => {
 
 <CustomText
           size={15}
-          // fontFam={fonts.semiBold}
-          font="font-clashsemibold"
-          fontWeight="700"
+          fontFam={"ClashDisplaySemibold"}
+          fontWeight="600"
           style={{marginLeft:isTablet ?scale(20):scale(35),marginRight:scale(10)}}
           color={colors.white}
           text={"+5"}
@@ -58,17 +51,11 @@ const GroupPartiesContainer = ({ navigation, item }: any) => {
       <View style={{ gap: verticalScale(10), }}>
         <CustomText
           size={17}
-          // fontFam={fonts.regular}
-          font="font-clashregular"
-          fontWeight="500"
           color={colors.gray}
           text={item?.title}
         />
         <CustomText
           size={15}
-          // fontFam={fonts.regular}
-          font="font-clashregular"
-          fontWeight="500"
           color={colors.gray}
           text={item?.des}
         />

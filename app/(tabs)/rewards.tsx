@@ -57,7 +57,7 @@ const Rewards = ({ navigation }: any) => {
 								<CustomText
 									label='April 21, Friday'
 									size={17}
-									fontFam={'ClashDisplay-Medium'}
+									fontFam={'ClashDisplayMedium'}
 									fontWeight='600'
 									style={{ marginTop: verticalScale(25) }}
 									color={'#87777780'}
@@ -98,7 +98,7 @@ const Rewards = ({ navigation }: any) => {
 										/>
 										<CustomText
 											size={18}
-											fontFam={'ClashDisplay-Medium'}
+											fontFam={'ClashDisplayMedium'}
 											color={colors.black}
 											text={'1235'}
 										/>
@@ -166,21 +166,21 @@ const Rewards = ({ navigation }: any) => {
 									<CustomText
 										label='You’re almost'
 										size={21}
-										fontFam={'ClashDisplay-Medium'}
+										fontFam={'ClashDisplayMedium'}
 										fontWeight='600'
 										color={'#321C1C'}
 									/>
 									<CustomText
 										label='there!'
 										size={21}
-										fontFam={'ClashDisplay-Medium'}
+										fontFam={'ClashDisplayMedium'}
 										fontWeight='600'
 										color={'#321C1C'}
 									/>
 									<CustomText
 										text='14'
 										size={19}
-										fontFam={'ClashDisplay-Semibold'}
+										fontFam={'ClashDisplaySemibold'}
 										fontWeight='bold'
 										style={{ marginTop: verticalScale(10) }}
 										color={'#15A000'}
@@ -190,8 +190,7 @@ const Rewards = ({ navigation }: any) => {
 											label='ELO left for ELITE rank and a reward box upgrade!'
 											size={15}
 											style={{ marginRight: isiPad ? '40%' : '30%' }}
-											fontFam={'ClashDisplay-Medium'}
-											// fontWeight="600"
+											fontFam={'ClashDisplaySemibold'}
 											lineHeight={isiPad ? 45 : 23}
 											color={'#877777'}
 										/>
@@ -226,7 +225,8 @@ const Rewards = ({ navigation }: any) => {
 								}}
 							>
 								<CustomText
-									fontFam={'ClashDisplay-Semibold'}
+									fontFam={'ClashDisplaySemibold'}
+									fontWeight='600'
 									label={'Your Progress'}
 									style={{ textAlign: 'center' }}
 									size={16}
@@ -273,10 +273,11 @@ const Rewards = ({ navigation }: any) => {
 												}
 											>
 												<CustomText
+												fontWeight='600'
 													fontFam={
 														selectedProgressTab == item
-															? 'ClashDisplay-Semibold'
-															: 'ClashDisplay-Medium'
+															? 'ClashDisplaySemibold'
+															: 'ClashDisplayMedium'
 													}
 													label={item}
 													size={16}
@@ -296,7 +297,8 @@ const Rewards = ({ navigation }: any) => {
 								>
 									<View style={{ width: '50%', gap: verticalScale(10) }}>
 										<CustomText
-											fontFam={'ClashDisplay-Medium'}
+											fontFam={'ClashDisplayMedium'}
+											fontWeight='600'
 											label={'Average Daily Changes'}
 											size={13}
 											color={colors.gray300}
@@ -305,14 +307,16 @@ const Rewards = ({ navigation }: any) => {
 											style={{ flexDirection: 'row', alignItems: 'center' }}
 										>
 											<CustomText
-												fontFam={'ClashDisplay-Medium'}
+												fontFam={'ClashDisplayMedium'}
+												fontWeight='600'
 												label={'+32'}
 												size={18}
 												color={colors.green}
 											/>
 
 											<CustomText
-												fontFam={'ClashDisplay-Medium'}
+												fontFam={'ClashDisplayMedium'}
+												fontWeight='600'
 												style={{
 													marginTop: verticalScale(10),
 													marginLeft: moderateScale(5),
@@ -339,7 +343,8 @@ const Rewards = ({ navigation }: any) => {
 										}}
 									>
 										<CustomText
-											fontFam={'ClashDisplay-Medium'}
+											fontFam={'ClashDisplayMedium'}
+											fontWeight='600'
 											label={'Highest Recorded ELO'}
 											size={13}
 											color={colors.gray300}
@@ -348,14 +353,15 @@ const Rewards = ({ navigation }: any) => {
 											style={{ flexDirection: 'row', alignItems: 'center' }}
 										>
 											<CustomText
-												fontFam={'ClashDisplay-Medium'}
+												fontFam={'ClashDisplayMedium'}
 												label={'1,248'}
+												fontWeight='600'
 												size={18}
 												color={colors.black}
 											/>
 
 											<CustomText
-												fontFam={'ClashDisplay-Medium'}
+												fontFam={'ClashDisplayMedium'}
 												style={{
 													marginTop: verticalScale(10),
 													marginLeft: moderateScale(5),
@@ -389,7 +395,7 @@ const Rewards = ({ navigation }: any) => {
 									</TouchableOpacity>
 
 									<CustomText
-										fontFam={'ClashDisplay-Medium'}
+										fontFam={'ClashDisplayMedium'}
 										label={'June , 2024'}
 										size={16}
 										color={colors.gray300}
