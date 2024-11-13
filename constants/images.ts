@@ -53,7 +53,7 @@ import rank3Back from "../assets/images/rank3Back.png";
 import rank2 from "../assets/images/rank2.png";
 import rank3 from "../assets/images/rank3.png";
 import map2 from "../assets/images/map2.png";
-import rank1 from "../assets/images/rank1.svg";
+import rank1 from "../assets/images/rank1.png";
 import highSchoolMedal from "../assets/images/highSchoolMedal.png";
 import medal from "../assets/images/medal.png";
 import send from "../assets/images/send.png";
@@ -220,6 +220,8 @@ import commanBadge75 from "../assets/images/commanBadge75.png";
 import commanBadge76 from "../assets/images/commanBadge76.png";
 import commanBadge77 from "../assets/images/commanBadge77.png";
 import commanBadge78 from "../assets/images/commanBadge78.png";
+
+import brainWizard from "../assets/images/brainWizard.png";
 import demoLogo from "../assets/images/demo-logo.png";
 import elephantRare from "../assets/images/elephantRare.png";
 
@@ -236,6 +238,7 @@ import ukFlagCircle from "../assets/images/uk-flag-circle.png";
 // import rank3 from "../assets/images/rank3.png";
 import add from "../assets/icons/add.png";
 import verified from "../assets/icons/verified.png";
+
 
 
 
@@ -453,6 +456,7 @@ export default {
   sashBadge,
   map,
   brainJester,
+  brainWizard,
   uzbekistan,
   send,
   ukFlagCircle,
