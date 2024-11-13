@@ -6,6 +6,13 @@ const ProfileLayout = () => {
             <Stack.Screen name="profile" />
             <Stack.Screen name="settings" />
             <Stack.Screen name="details" />
+            <Stack.Screen name="editProfile" />
+            <Stack.Screen name="preferences" />
+            <Stack.Screen name="chestRewards" />
+            <Stack.Screen name="membership" />
+
+            
+
         </Stack>
     )
 }

@@ -18,8 +18,28 @@ import send from "../assets/icons/send.png";
 import verified from "../assets/icons/verified.png";
 import leaderboard from "../assets/icons/leaderboard.png";
 import dropdown from "../assets/icons/dropdown.png";
+import share from "../assets/icons/share.png";
+import download from "../assets/icons/download.png";
+
+
+import pencil from "../assets/icons/pencil.png";
+import feedback from "../assets/icons/feedback.png";
+import help from "../assets/icons/help.png";
+import logout from "../assets/icons/logout.png";
+import policy from "../assets/icons/policy.png";
+import preferences from "../assets/icons/preferences.png";
+import terms from "../assets/icons/terms.png";
 
 export default {
+  terms,
+  preferences,
+  policy,
+  logout,
+  help,
+  feedback,
+  pencil,
+  download,
+  share,
   dropdown,
   leaderboard,
   back,

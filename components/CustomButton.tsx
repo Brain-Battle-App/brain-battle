@@ -8,9 +8,9 @@ import Icon from "@/components/Icon";
 type Icon = keyof typeof icons;
 
 interface CustomButtonProps {
-  title: string;
+  title?: string;
   fontFamily?: string;
-  handlePress: () => void;
+  handlePress?: () => void;
   containerStyles?: string;
   textStyles?: string;
   isLoading?: boolean;

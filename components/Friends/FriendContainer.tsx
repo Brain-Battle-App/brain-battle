@@ -12,6 +12,8 @@ import icons from "@/constants/tests";
 import CustomText from "../CustomText";
 import { fonts } from "@/utils/fonts";
 import { colors } from "@/utils/colors";
+import { Link, } from "expo-router";
+
 import { deviceType, DeviceType } from "expo-device";
 
 const FrinedContainer = ({ navigation, item }: any) => {
@@ -23,13 +25,15 @@ const FrinedContainer = ({ navigation, item }: any) => {
         ...appStyles.row,
         gap: isTablet?  scale(20):scale(30),
         marginVertical: verticalScale(15),
-        // backgroundColor:"red",
         alignSelf:"flex-start",
         alignItems:"flex-start"
       }}
     >
       <View>
 
+<Link
+href={"/profile"}
+>
 
       <View
           style={{
@@ -45,6 +49,7 @@ const FrinedContainer = ({ navigation, item }: any) => {
           />
 
         </View>
+        </Link>
         <View style={{width:moderateScale(17),height:moderateScale(17),backgroundColor:"#49D65B",borderRadius:moderateScale(15),position:"absolute",bottom:verticalScale(5),right:scale(-3),zIndex:999}}/>
 
 
