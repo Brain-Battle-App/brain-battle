@@ -1,31 +1,11 @@
-// import { View, Text } from 'react-native'
-// import React from 'react'
-
-// const Friends = () => {
-//   return (
-//     <View>
-//       <Text>Friends</Text>
-//     </View>
-//   )
-// }
-
-// export default Friends
-
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
-import { ScrollView } from 'react-native'
+import React, { useState, useRef } from "react";
+import { View, Text, TouchableOpacity, ScrollView, Animated, FlatList, Platform, Image, StyleSheet } from "react-native";
+import { scale, verticalScale, moderateScale } from "react-native-size-matters";
 import GradientLayout from "@/components/GradientLayout";
-import { appStyles } from "../../utils/appStyles";
 import { colors } from "../../utils/colors";
 import CustomText from "@/components/CustomText";
 import { deviceType, DeviceType } from "expo-device";
-import { useState } from "react";
+import images from "@/constants/images";
 import FriendContainer from "@/components/Friends/FriendContainer";
 import GroupPartiesContainer from "@/components/Friends/GroupPartiesContainer";
 import RequestChallengeContainer from "@/components/Friends/RequestChallengeContainer";
@@ -33,190 +13,152 @@ import CustomSearch from "../../components/CustomSearch";
 import FindFriendsContainer from "../../components/Friends/FindFriendsContainer";
 import { FindFriends, groupParties, onlineFriends } from "../../utils/Data";
 
+
+import New_FriendContainer from "@/components/New Friends Components/New_FriendContainer";
+import New_GroupPartiesContainer from "@/components/New Friends Components/New_GroupPartiesContainer";
+import New_RequestChallengeContainer from "@/components/New Friends Components/New_RequestChallengeContainer";
+import New_CustomSearch from "../../components/New Friends Components/New_Custom_Search";
+
 const Friends = ({ navigation }: any) => {
-  const isTablet = (deviceType == DeviceType.TABLET);
+  const isTablet = deviceType === DeviceType.TABLET;
   const [selectedTab, setSelected] = useState("All");
+  const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderFindFriendsList = ({ item, index }: any) => {
-    return (
-      <>
-        <View>
-          <FindFriendsContainer item={item} />
-        </View>
-      </>
-    );
+    return <FindFriendsContainer item={item} />;
   };
 
   return (
     <GradientLayout>
-    
-      <View style={{ flex: 1, paddingLeft: scale(20) }}>
-        <View
-          style={{
-            ...appStyles.row,
-            marginVertical: isTablet
-              ? verticalScale(20)
-              : Platform.OS == "ios"
-              ? verticalScale(17)
-              : verticalScale(20),
-            gap: scale(10),
-            paddingTop: isTablet
-              ? verticalScale(10)
-              : Platform.OS == "android"
-              ? verticalScale(10)
-              : 0,
-          }}
-        >
+      <View className="flex-1 pl-[20px]">
+        <View className="flex-row gap-[10px] my-[20px] pt-[10px]">
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setSelected("All")}
-            style={
-              isTablet
-                ? {
-                    ...styles.isPadTabContainer,
-                    backgroundColor:
-                      selectedTab == "All" ? "#51B5FD" : "transparent",
-                  }
-                : {
-                    ...styles.tabContainer,
-                    backgroundColor:
-                      selectedTab == "All" ? "#51B5FD" : "transparent",
-                  }
-            }
+            className={`px-[15px] py-[5px] rounded-[10px] flex items-center justify-center ${selectedTab === "All" ? "bg-[#51B5FD]" : ""}`}
           >
             <CustomText
-  
               fontFam="ClashDisplayMedium"
               fontWeight="600"
               label="All"
               size={16}
-              color={selectedTab == "All" ? colors.white : colors.black}
+              color={selectedTab === "All" ? colors.white : colors.black}
             />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setSelected("Find Friends")}
-            style={
-              isTablet
-                ? {
-                    ...styles.isPadTabContainer,
-                    backgroundColor:
-                      selectedTab == "Find Friends" ? "#51B5FD" : "transparent",
-                  }
-                : {
-                    ...styles.tabContainer,
-                    backgroundColor:
-                      selectedTab == "Find Friends" ? "#51B5FD" : "transparent",
-                  }
-            }
+            className={`px-[15px] py-[5px] rounded-[10px] flex items-center justify-center ${selectedTab === "Find Friends" ? "bg-[#51B5FD]" : ""}`}
           >
             <CustomText
               fontFam="ClashDisplayMedium"
               fontWeight="600"
               label="Find Friends"
               size={16}
-              color={
-                selectedTab == "Find Friends" ? colors.white : colors.black
-              }
+              color={selectedTab === "Find Friends" ? colors.white : colors.black}
             />
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.white,
-            borderTopLeftRadius: 25,
-            paddingHorizontal: scale(15),
-          }}
-        >
-          {selectedTab == "All" && (
-            <ScrollView
-            showsVerticalScrollIndicator={false}
-            >
-                <View style={{ paddingTop: verticalScale(20) }}>
-              <CustomText
-                fontFam="ClashDisplayMedium"
-                fontWeight="600"
-                label="Online (2)"
-                size={18}
-                style={{ marginBottom: verticalScale(15) }}
-                color={colors.gray}
-              />
-              {onlineFriends.map((item: any, index: any) => {
-                return <FriendContainer key={index} item={item} />;
-              })}
 
-              <CustomText
-                fontFam="ClashDisplayMedium"
-                fontWeight="600"
-                label="Group Parties"
-                size={18}
-                style={{ marginBottom: verticalScale(10) }}
-                color={colors.gray}
-              />
-              {groupParties.map((item: any, index: any) => {
-                return <GroupPartiesContainer key={index} item={item} />;
-              })}
+        <View className="flex-1 bg-white rounded-tl-[25px] px-[15px] relative">
+          {selectedTab === "All" && (
+            <>
+              <Animated.View className="absolute top-[-60px] right-0 w-[170px] h-[170px] z-10 overflow-hidden">
+                <Animated.Image
+                  resizeMode="contain"
+                  style={styles.animatedImage(scrollY)}
+                  source={images.brainWizard}
+                />
+              </Animated.View>
 
-              <CustomText
-                fontFam="ClashDisplayMedium"
-                fontWeight="600"
-                label="Request Challenge"
-                size={18}
-                style={{
-                  marginBottom: verticalScale(5),
-                  marginTop: verticalScale(15),
-                }}
-                color={colors.gray}
-              />
-              <RequestChallengeContainer />
-            </View>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                  { useNativeDriver: false }
+                )}
+              >
+                <View className="pt-[20px]">
+                  <CustomText
+                    fontFam="ClashDisplayMedium"
+                    fontWeight="600"
+                    label="Online (2)"
+                    size={18}
+                    style={styles.sectionTitle}
+                    color={colors.gray}
+                  />
+                  {onlineFriends.map((item, index) => (
+                    <New_FriendContainer key={index} item={item} />
+                  ))}
+                </View>
 
-            </ScrollView>
-          
+                <View className="pt-[20px]">
+                  <CustomText
+                    fontFam="ClashDisplayMedium"
+                    fontWeight="600"
+                    label="Group Parties"
+                    size={18}
+                    style={styles.sectionTitle}
+                    color={colors.gray}
+                  />
+                  {groupParties.map((item, index) => (
+                    <New_GroupPartiesContainer key={index} item={item} />
+                  ))}
+                </View>
+
+                <View className="pt-[20px]">
+                  <CustomText
+                    fontFam="ClashDisplayMedium"
+                    fontWeight="600"
+                    label="Request Challenge"
+                    size={18}
+                    style={styles.sectionTitle}
+                    color={colors.gray}
+                  />
+                  <New_RequestChallengeContainer />
+                </View>
+              </ScrollView>
+            </>
           )}
 
-          {selectedTab == "Find Friends" && (
-            <View
-              style={{
-                flex: 1,
-                paddingHorizontal: scale(20),
-                paddingTop: verticalScale(15),
-              }}
-            >
-              <CustomSearch placeholder="search" />
-
+          {selectedTab === "Find Friends" && (
+            <View className="flex-1 px-[20px] pt-[15px]">
+              <New_CustomSearch placeholder="Search" />
               <FlatList
                 data={FindFriends}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{ gap: 10 }}
+                contentContainerStyle={styles.findFriendsList}
                 renderItem={renderFindFriendsList}
               />
             </View>
           )}
         </View>
       </View>
-
-     
     </GradientLayout>
   );
 };
+
 export default Friends;
 
 const styles = StyleSheet.create({
-  isPadTabContainer: {
-    paddingHorizontal: scale(10),
-    paddingVertical: verticalScale(5),
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
+  sectionTitle: {
+    marginBottom: verticalScale(15),
   },
-  tabContainer: {
-    paddingHorizontal: scale(15),
-    paddingVertical: verticalScale(5),
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
+  findFriendsList: {
+    gap: 10,
   },
+  animatedImage: (scrollY: Animated.Value) => ({
+    width: "100%",
+    height: "100%",
+    transform: [
+      {
+        translateY: scrollY.interpolate({
+          inputRange: [0, 150],
+          outputRange: [0, -150],
+          extrapolate: "clamp",
+        }),
+      },
+    ],
+  }),
 });

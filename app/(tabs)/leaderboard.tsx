@@ -24,11 +24,12 @@ import CustomButton from "@/components/CustomButton";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { isiPad } from "@/utils/CommonFun";
 import { windowHeight, windowWidth } from "@/utils/Dimensions";
-import { FindFriends, leaderBoardUserData } from "@/utils/Data";
+import { FindFriends, createUserData } from "@/utils/Data";
 import FindFriendsContainer from "@/components/Friends/FindFriendsContainer";
 import LeaderBoadUserCard from "@/components/Leaderboard/LeaderBoardUserCard";
 import CountryDropDown from "@/components/CountryDropDown";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
+import CreateUserRakingCard from "@/components/Create/CreateUserRakingCard";
 
 const Leaderboard = ({ navigation }: any) => {
   const [seletedLeaderboard, setSeletedLeaderboard] = useState(1);
@@ -68,96 +69,7 @@ const Leaderboard = ({ navigation }: any) => {
     },
   ];
 
-  const LeaderUserRakingCard = ({
-    image,
-    name,
-    points,
-    madel,
-    rightImage,
-  }: any) => {
-    return (
-      <View
-        style={{
-          gap: verticalScale(10),
-          width: "100%",
-          alignSelf: "center",
-        }}
-      >
-        <View>
-          <View
-            style={{
-              width: moderateScale(60),
-              height: moderateScale(60),
-              borderRadius: moderateScale(65),
-
-              overflow: "hidden",
-              alignSelf: "center",
-            }}
-          >
-            <Image
-              style={{ width: "100%", height: "100%" }}
-              resizeMode="contain"
-              source={image}
-            />
-          </View>
-
-          <Image
-            style={{
-              width: moderateScale(30),
-              height: moderateScale(30),
-              position: "absolute",
-              top: horizontalScale(isiPad ? -15 : -20),
-              left: horizontalScale(isiPad ? 25 : 35),
-            }}
-            resizeMode="contain"
-            source={madel}
-          />
-
-          <Image
-            style={{
-              width: moderateScale(30),
-              height: moderateScale(30),
-              position: "absolute",
-              right: horizontalScale(10),
-              bottom: verticalScale(-2),
-            }}
-            resizeMode="contain"
-            source={rightImage}
-          />
-        </View>
-
-        <CustomText
-          fontFam={"ClashDisplay-Semibold"}
-          fontWeight="bold"
-          label={name}
-          style={{ textAlign: "center" }}
-          size={15}
-          color={colors.black}
-        />
-        <View
-          style={{
-            width: "80%",
-            alignSelf: "center",
-
-            paddingVertical: verticalScale(10),
-            backgroundColor: "#F0F0F0",
-            borderRadius: moderateScale(10),
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CustomText
-            fontFam={"ClashDisplay-Semibold"}
-            fontWeight="600"
-            label={points}
-            style={{ textAlign: "center" }}
-            size={12}
-            color={colors.black}
-          />
-        </View>
-      </View>
-    );
-  };
+  
 
   const renderFindFriendsList = ({ item, index }: any) => {
     return (
@@ -479,82 +391,80 @@ const Leaderboard = ({ navigation }: any) => {
                       </View>
                     )}
 
-                    <View style={{ marginTop: verticalScale(40) }}>
-                      <View
-                        style={{
-                          marginHorizontal: moderateScale(20),
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <View
-                          style={{
-                            marginRight: moderateScale(-4),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Clare Rich"
-                            points="1,469 ELO"
-                            image={images.user18}
-                            rightImage={images.athletics}
-                          />
+<View style={{ marginTop: verticalScale(40) }}>
+              <View
+                style={{
+                  marginHorizontal: moderateScale(20),
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View
+                  style={{
+                    marginRight: moderateScale(-4),
+                    height: verticalScale(300),
+                    alignItems: "center",
+                  }}
+                >
+                  <CreateUserRakingCard
+                    name="Clare Rich"
+                    points="1,469 ELO"
+                    image={images.user18}
+                    // madel={images.medal}
+                    rightImage={images.athletics}
+                  />
+                   <Image
+                  style={{width:moderateScale(100),height:verticalScale(isiPad ? 190 : 180)}}
+                  source={images.rank2}
+                  />
 
-                          {/* <Rank2
-                            width={moderateScale(110).toString()}
-                            height={verticalScale(
-                              isiPad ? 230 : 200,
-                            ).toString()}
-                          /> */}
-                        </View>
-                        <View
-                          style={{
-                            marginBottom: verticalScale(50),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Jon Garcia"
-                            points="2,569 ELO"
-                            image={images.user19}
-                            rightImage={images.highSchoolMedal}
-                            medal={images.medal}
-                          />
+                </View>
+                <View
+                  style={{
+                    marginBottom: verticalScale(50),
+                    height: verticalScale(300),
+                    alignItems: "center",
+                  }}
+                >
+                  <CreateUserRakingCard
+                    name="Jon Garcia"
+                    points="2,569 ELO"
+                    image={images.user19}
+                    
+                    rightImage={images.highSchoolMedal}
+                    madel={images.medal}
+                  />
+                     <Image
+                  style={{width:moderateScale(120),height:verticalScale(isiPad ? 190 : 200),marginHorizontal:moderateScale( -19)}}
+                  source={images.rank1}
+                  resizeMode="contain"
+                  />
+                 
 
-                          {/* <Rank1
-                            width={moderateScale(100).toString()}
-                            height={verticalScale(
-                              isiPad ? 190 : 170,
-                            ).toString()}
-                          /> */}
-                        </View>
-                        <View
-                          style={{
-                            marginTop: verticalScale(50),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Craig Gouse"
-                            points="1,053 ELO"
-                            image={images.user20}
-                            rightImage={images.roosevelt}
-                          />
+                </View>
+                <View
+                  style={{
+                    marginTop: verticalScale(50),
+                    height: verticalScale(300),
+                    alignItems: "center",
+                  }}
+                >
+                  <CreateUserRakingCard
+                    name="Craig Gouse"
+                    points="1,053 ELO"
+                    image={images.user20}
+                    // madel={images.medal}
+                    rightImage={images.roosevelt}
+                  />
+                     <Image
+                  style={{width:moderateScale(100),height:verticalScale(isiPad ? 190 : 180)}}
+                  source={images.rank3}
+                  />
 
-                          {/* <Rank3
-                            width={moderateScale(100).toString()}
-                            height={verticalScale(
-                              isiPad ? 210 : 180,
-                            ).toString()}
-                          /> */}
-                        </View>
-
-                        <View></View>
-                      </View>
+                
+                </View>
+              </View>
                       <View
                         style={{
                           position: "absolute",
@@ -571,7 +481,7 @@ const Leaderboard = ({ navigation }: any) => {
                           source={item.rankingBackground}
                         >
                           <FlatList
-                            data={leaderBoardUserData}
+                            data={createUserData}
                             style={{
                               paddingTop: verticalScale(isiPad ? 30 : 20),
                               marginTop: verticalScale(isiPad ? 30 : 20),

@@ -1,9 +1,9 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
+import { Image, TextInput, View } from "react-native";
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import { colors } from "@/utils/colors";
 import { windowWidth } from "@/utils/Dimensions";
-// import { images } from "../../src/assets";
 import icons from "@/constants/icons";
+
 type Props = {
   label?: string;
   placeholder?: string;
@@ -30,7 +30,6 @@ type Props = {
   setItems?: any;
   dropdownValue?: any;
   setDropdownValue?: any;
-  open?: any;
   setOpen?: any;
   zIndex?: any;
   onOpen?: any;
@@ -76,31 +75,24 @@ const CustomSearch = ({
   return (
     <View style={{ ...props }}>
       <View
+        className="flex-row justify-between px-3.5 h-16 items-center rounded-lg border border-lightBlue54"
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingHorizontal: scale(10),
-          height: verticalScale(55),
-
-          alignItems: "center",
           borderRadius: moderateScale(8),
           borderWidth: moderateScale(1.2),
           borderColor: colors.lightBlue54,
         }}
       >
-        <View style={{ flex: 1 }}>
-          <TextInput className="font-clashmedium"
+        <View className="flex-1">
+          <TextInput
+            className={`font-clashregular ${isCenter ? 'self-center' : ''}`}
             value={value}
             editable={editable}
             style={{
               fontSize: moderateScale(17),
               width: windowWidth / 1.2,
-              alignItems: "center",
-              // paddingTop:20,
               fontFamily: "ClashDisplayRegular",
               fontWeight: fontWeight,
               color: color || colors.black,
-              ...(isCenter && { alignSelf: "center" }),
             }}
             placeholder={placeholder}
             multiline={multiline}
@@ -115,11 +107,7 @@ const CustomSearch = ({
         </View>
 
         <Image
-          style={{
-            width: moderateScale(20),
-            height: moderateScale(20),
-            paddingRight: scale(40),
-          }}
+          className="w-5 h-5 pr-10"
           source={icons.search}
           resizeMode="center"
         />
@@ -127,4 +115,5 @@ const CustomSearch = ({
     </View>
   );
 };
+
 export default CustomSearch;
