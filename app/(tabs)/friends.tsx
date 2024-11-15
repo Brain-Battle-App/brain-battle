@@ -63,20 +63,20 @@ const Friends = ({ navigation }: any) => {
         <View className="flex-1 bg-white rounded-tl-[25px] px-[15px] relative">
           {selectedTab === "All" && (
             <>
-              <Animated.View className="absolute top-[-60px] right-0 w-[170px] h-[170px] z-10 overflow-hidden">
+              {/* <Animated.View className="absolute top-[-60px] right-0 w-[170px] h-[170px] z-10 overflow-hidden">
                 <Animated.Image
                   resizeMode="contain"
                   style={styles.animatedImage(scrollY)}
                   source={images.brainWizard}
                 />
-              </Animated.View>
+              </Animated.View> */}
 
               <ScrollView
-                showsVerticalScrollIndicator={false}
-                onScroll={Animated.event(
-                  [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                  { useNativeDriver: false }
-                )}
+                // showsVerticalScrollIndicator={false}
+                // onScroll={Animated.event(
+                //   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                //   { useNativeDriver: false }
+                // )}
               >
                 <View className="pt-[20px]">
                   <CustomText
@@ -148,17 +148,17 @@ const styles = StyleSheet.create({
   findFriendsList: {
     gap: 10,
   },
-  animatedImage: (scrollY: Animated.Value) => ({
-    width: "100%",
-    height: "100%",
-    transform: [
-      {
-        translateY: scrollY.interpolate({
-          inputRange: [0, 150],
-          outputRange: [0, -150],
-          extrapolate: "clamp",
-        }),
-      },
-    ],
-  }),
+  // animatedImage: (scrollY: Animated.Value) => ({
+  //   width: "100%",
+  //   height: "100%",
+  //   transform: [
+  //     {
+  //       translateY: scrollY.interpolate({
+  //         inputRange: [0, 150],
+  //         outputRange: [0, -150],
+  //         extrapolate: "clamp",
+  //       }),
+  //     },
+  //   ],
+  // }),
 });
