@@ -10,9 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Rank1 from "@/assets/images/rank1.svg";
-import Rank2 from "@/assets/images/rank2.svg";
-import Rank3 from "@/assets/images/rank3.svg";
 import { appStyles } from "@/utils/appStyles";
 import { colors } from "@/utils/colors";
 import { horizontalScale, moderateScale, verticalScale } from "@/utils/Mertics";
@@ -29,7 +26,7 @@ import FindFriendsContainer from "@/components/Friends/FindFriendsContainer";
 import LeaderBoadUserCard from "@/components/Leaderboard/LeaderBoardUserCard";
 import CountryDropDown from "@/components/CountryDropDown";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
-import CreateUserRakingCard from "@/components/Create/CreateUserRakingCard";
+import LeaderboardUserRakingCard from "@/components/Leaderboard/LeaderBoardUserRakingCard";
 
 const Leaderboard = ({ navigation }: any) => {
   const [seletedLeaderboard, setSeletedLeaderboard] = useState(1);
@@ -407,7 +404,7 @@ const Leaderboard = ({ navigation }: any) => {
                     alignItems: "center",
                   }}
                 >
-                  <CreateUserRakingCard
+                  <LeaderboardUserRakingCard
                     name="Clare Rich"
                     points="1,469 ELO"
                     image={images.user18}
@@ -427,7 +424,7 @@ const Leaderboard = ({ navigation }: any) => {
                     alignItems: "center",
                   }}
                 >
-                  <CreateUserRakingCard
+                  <LeaderboardUserRakingCard
                     name="Jon Garcia"
                     points="2,569 ELO"
                     image={images.user19}
@@ -450,7 +447,7 @@ const Leaderboard = ({ navigation }: any) => {
                     alignItems: "center",
                   }}
                 >
-                  <CreateUserRakingCard
+                  <LeaderboardUserRakingCard
                     name="Craig Gouse"
                     points="1,053 ELO"
                     image={images.user20}

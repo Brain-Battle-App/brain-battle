@@ -1,19 +1,30 @@
 import React, { useState, useRef } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Animated, FlatList, Platform, Image, StyleSheet } from "react-native";
-import { scale, verticalScale, moderateScale } from "react-native-size-matters";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Animated,
+  FlatList,
+  Platform,
+  Image,
+  StyleSheet,
+} from "react-native";
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+} from "react-native-size-matters";
 import GradientLayout from "@/components/GradientLayout";
 import { colors } from "../../utils/colors";
 import CustomText from "@/components/CustomText";
 import { deviceType, DeviceType } from "expo-device";
-import images from "@/constants/images";
-import FriendContainer from "@/components/Friends/FriendContainer";
-import GroupPartiesContainer from "@/components/Friends/GroupPartiesContainer";
-import RequestChallengeContainer from "@/components/Friends/RequestChallengeContainer";
-import CustomSearch from "../../components/CustomSearch";
 import FindFriendsContainer from "../../components/Friends/FindFriendsContainer";
-import { FindFriends, groupParties, onlineFriends } from "../../utils/Data";
-
-
+import {
+  FindFriends,
+  groupParties,
+  onlineFriends,
+} from "../../utils/Data";
 import New_FriendContainer from "@/components/New Friends Components/New_FriendContainer";
 import New_GroupPartiesContainer from "@/components/New Friends Components/New_GroupPartiesContainer";
 import New_RequestChallengeContainer from "@/components/New Friends Components/New_RequestChallengeContainer";
@@ -30,12 +41,15 @@ const Friends = ({ navigation }: any) => {
 
   return (
     <GradientLayout>
-      <View className="flex-1 pl-[20px]">
-        <View className="flex-row gap-[10px] my-[20px] pt-[10px]">
+      <View style={styles.container}>
+        <View style={styles.tabContainer}>
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setSelected("All")}
-            className={`px-[15px] py-[5px] rounded-[10px] flex items-center justify-center ${selectedTab === "All" ? "bg-[#51B5FD]" : ""}`}
+            style={[
+              styles.tabButton,
+              selectedTab === "All" && styles.selectedTabButton,
+            ]}
           >
             <CustomText
               fontFam="ClashDisplayMedium"
@@ -48,7 +62,10 @@ const Friends = ({ navigation }: any) => {
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={() => setSelected("Find Friends")}
-            className={`px-[15px] py-[5px] rounded-[10px] flex items-center justify-center ${selectedTab === "Find Friends" ? "bg-[#51B5FD]" : ""}`}
+            style={[
+              styles.tabButton,
+              selectedTab === "Find Friends" && styles.selectedTabButton,
+            ]}
           >
             <CustomText
               fontFam="ClashDisplayMedium"
@@ -60,25 +77,11 @@ const Friends = ({ navigation }: any) => {
           </TouchableOpacity>
         </View>
 
-        <View className="flex-1 bg-white rounded-tl-[25px] px-[15px] relative">
+        <View style={styles.contentContainer}>
           {selectedTab === "All" && (
             <>
-              {/* <Animated.View className="absolute top-[-60px] right-0 w-[170px] h-[170px] z-10 overflow-hidden">
-                <Animated.Image
-                  resizeMode="contain"
-                  style={styles.animatedImage(scrollY)}
-                  source={images.brainWizard}
-                />
-              </Animated.View> */}
-
-              <ScrollView
-                // showsVerticalScrollIndicator={false}
-                // onScroll={Animated.event(
-                //   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                //   { useNativeDriver: false }
-                // )}
-              >
-                <View className="pt-[20px]">
+              <ScrollView>
+                <View style={styles.section}>
                   <CustomText
                     fontFam="ClashDisplayMedium"
                     fontWeight="600"
@@ -92,7 +95,7 @@ const Friends = ({ navigation }: any) => {
                   ))}
                 </View>
 
-                <View className="pt-[20px]">
+                <View style={styles.section}>
                   <CustomText
                     fontFam="ClashDisplayMedium"
                     fontWeight="600"
@@ -106,7 +109,7 @@ const Friends = ({ navigation }: any) => {
                   ))}
                 </View>
 
-                <View className="pt-[20px]">
+                <View style={styles.section}>
                   <CustomText
                     fontFam="ClashDisplayMedium"
                     fontWeight="600"
@@ -122,7 +125,7 @@ const Friends = ({ navigation }: any) => {
           )}
 
           {selectedTab === "Find Friends" && (
-            <View className="flex-1 px-[20px] pt-[15px]">
+            <View style={styles.findFriendsContainer}>
               <New_CustomSearch placeholder="Search" />
               <FlatList
                 data={FindFriends}
@@ -142,23 +145,45 @@ const Friends = ({ navigation }: any) => {
 export default Friends;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingLeft: scale(20),
+  },
+  tabContainer: {
+    flexDirection: "row",
+    gap: scale(10),
+    marginVertical: verticalScale(20),
+    paddingTop: verticalScale(10),
+  },
+  tabButton: {
+    paddingHorizontal: scale(15),
+    paddingVertical: verticalScale(5),
+    borderRadius: moderateScale(10),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectedTabButton: {
+    backgroundColor: "#51B5FD",
+  },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: "white",
+    borderTopLeftRadius: moderateScale(25),
+    paddingHorizontal: scale(15),
+    position: "relative",
+  },
+  section: {
+    paddingTop: verticalScale(20),
+  },
   sectionTitle: {
     marginBottom: verticalScale(15),
   },
-  findFriendsList: {
-    gap: 10,
+  findFriendsContainer: {
+    flex: 1,
+    paddingHorizontal: scale(20),
+    paddingTop: verticalScale(15),
   },
-  // animatedImage: (scrollY: Animated.Value) => ({
-  //   width: "100%",
-  //   height: "100%",
-  //   transform: [
-  //     {
-  //       translateY: scrollY.interpolate({
-  //         inputRange: [0, 150],
-  //         outputRange: [0, -150],
-  //         extrapolate: "clamp",
-  //       }),
-  //     },
-  //   ],
-  // }),
+  findFriendsList: {
+    gap: moderateScale(10),
+  },
 });
