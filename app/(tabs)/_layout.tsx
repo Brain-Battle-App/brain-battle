@@ -11,14 +11,14 @@ interface TabIconProps {
 
 const TabIcon: React.FC<TabIconProps> = ({ icon, name, focused }) => {
   return (
-    // Changing the opacity of the unfocused icons
-
     <View
-      className={`items-center justify-center gap-2 mt-4 ${!focused ? "opacity-50" : ""}`}
+      className={`items-center justify-center gap-2 mt-6 ${!focused ? "opacity-50" : ""}`}
+      // style={{ alignItems: "center", justifyContent: "center", marginTop: 27, opacity: !focused?0.5:1}}
     >
       <Image source={icon} resizeMode="contain" className="w-10 h-10" />
       <Text
         className={`${focused ? "font-clashsemibold" : "font-clashregular"} text-xs`}
+        style={{ flexWrap: "wrap", textAlign: "center", width: "100%" }}
       >
         {name}
       </Text>
