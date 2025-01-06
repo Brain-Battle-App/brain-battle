@@ -4,11 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import { Icon, SignUpFormProps } from '../../types'; 
 import { Link, router } from 'expo-router';
-
+import {useFirebase} from '@/common/hooks/context/useFirebase'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-
-import {createUser} from '../../lib/appwrite'
 
 interface FormState {
 	email: string;
@@ -23,7 +21,8 @@ const SignUp = () => {
 		password: '',
 	});
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+  const {auth, createUserWithEmailAndPassword} = useFirebase()
+  console.log('auth in sign up', auth)
   const platformSignUpOptions: {title: string; icon: Icon}[] = [
     {
       title: 'Apple',
@@ -37,21 +36,23 @@ const SignUp = () => {
 
 	const handleSignUp = async () => {
 		console.log('signing up');
-    if (!form.username || !form.email || !form.password) {
+    if (!form.email || !form.password) {
       Alert.alert('Error', 'Please fill in all the fields')
     }
     setIsSubmitting(true)
 
     try {
 
-      const result = await createUser(form.email, form.password, form.username)
+    //   const result = await createUser(form.email, form.password, form.username)
 
       // set to global state using context  
-
-      router.replace('/home')
-
+	const response = await createUserWithEmailAndPassword(auth, form.email, form.password)
+	console.log('create user response', response)
+    Alert.alert('Success', 'Please check your email.')
+	router.replace('/sign-in')
     } catch(error:any) {
       Alert.alert('Error', error.message)
+	  console.log('Error', error)
     } finally {
       setIsSubmitting(false)
     }

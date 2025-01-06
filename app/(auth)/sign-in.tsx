@@ -4,11 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import { Icon } from '../../types'; 
 import { Link, router } from 'expo-router';
-
+import {useFirebase} from '@/common/hooks/context/useFirebase'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-
-import {signIn} from '../../lib/appwrite'
 
 interface FormState {
 	email: string;
@@ -21,6 +19,7 @@ const SignIn = () => {
 		password: '',
 	});
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const {auth, signInWithEmailAndPassword} = useFirebase()
 
   const platformSignInOptions: {title: string; icon: Icon}[] = [
     {
@@ -42,14 +41,17 @@ const SignIn = () => {
 
     try {
 
-       await signIn(form.email, form.password)
+    //    await signIn(form.email, form.password)
 
       // set to global state using context  
+	const response = await signInWithEmailAndPassword(auth, form.email, form.password)
+	console.log('auth response', response)
 
-      router.replace('/home')
+    router.replace('/home')
 
     } catch(error:any) {
       Alert.alert('Error', error.message)
+	  console.log('Error', error)
     } finally {
       setIsSubmitting(false)
     }
