@@ -2,7 +2,8 @@
 import React, { createContext, useContext, ReactNode } from "react";
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics, Analytics } from "firebase/analytics";
-import {getAuth} from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+
 
 // Firebase configuration
 const firebaseConfig = {
@@ -23,6 +24,8 @@ const analytics: Analytics | null = typeof window !== "undefined" ? getAnalytics
 
 // Define the context value type
 interface FirebaseContext{
+  signInWithEmailAndPassword: typeof signInWithEmailAndPassword;
+  createUserWithEmailAndPassword: typeof createUserWithEmailAndPassword;
   app: FirebaseApp;
   analytics: Analytics | null;
   auth: any;
@@ -33,6 +36,6 @@ export const FirebaseContext = createContext<FirebaseContext | null>(null);
 
 // Provider component
 export const FirebaseProvider = ({ children }: {children: ReactNode}) => (
-  <FirebaseContext.Provider value={{ app, analytics, auth }}>{children}</FirebaseContext.Provider>
+  <FirebaseContext.Provider value={{ app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword }}>{children}</FirebaseContext.Provider>
 );
 

@@ -8,7 +8,6 @@
     "scheme": "brainbattle",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "jsEngine": "hermes",
     "splash": {
       "image": "./assets/images/splash-screen.png",
       "resizeMode": "contain",

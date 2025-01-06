@@ -19,7 +19,7 @@ const SignIn = () => {
 		password: '',
 	});
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const {auth} = useFirebase()
+  const {auth, signInWithEmailAndPassword} = useFirebase()
 
   const platformSignInOptions: {title: string; icon: Icon}[] = [
     {
@@ -44,9 +44,9 @@ const SignIn = () => {
     //    await signIn(form.email, form.password)
 
       // set to global state using context  
-	const response = await auth.signInWIthEmailAndPassword(auth, form.email, form.password)
+	const response = await signInWithEmailAndPassword(auth, form.email, form.password)
 	console.log('auth response', response)
-		
+
     router.replace('/home')
 
     } catch(error:any) {
