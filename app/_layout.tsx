@@ -2,8 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { Slot, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
+import "../global.css";
+import { FirebaseProvider } from "@/common/providers/FirebaseProvider";
 
-import { GlobalProvider } from "@/context/GlobalProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,24 +37,25 @@ const RootLayout = () => {
 
   if (!fontsLoaded && !error) return null;
   return (
-    <GlobalProvider>
-      <Stack>
-        {/* Stack screen for the entry point */}
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        {/* Stack screen for the authorization flow */}
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        {/* Stack screen for the main window */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        {/* Stack screen for the profile options */}
-        <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-        {/* Stack screen for the game options */}
-        <Stack.Screen name="(game)" options={{ headerShown: false }} />
-        {/* Stack screen for the rewards options */}
-        <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
-        {/* Stack screen for the leaderboard options */}
-        <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
-      </Stack>
-    </GlobalProvider>
+      <FirebaseProvider>
+        <Stack>
+          {/* Stack screen for the entry point */}
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          {/* Stack screen for the authorization flow */}
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          {/* Stack screen for the main window */}
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          {/* Stack screen for the profile options */}
+          <Stack.Screen name="(profile)" options={{ headerShown: false }} />
+          {/* Stack screen for the game options */}
+          <Stack.Screen name="(game)" options={{ headerShown: false }} />
+          {/* Stack screen for the rewards options */}
+          <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
+          {/* Stack screen for the leaderboard options */}
+          <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
+        </Stack>
+      </FirebaseProvider>
+
   );
 };
 
