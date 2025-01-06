@@ -11,7 +11,7 @@ import CustomButton from '@/components/CustomButton';
 interface FormState {
 	email: string;
 	password: string;
-  username: string;
+  	username: string;
 }
 
 const SignUp = () => {
