@@ -1,9 +1,14 @@
-// useFirebase.ts
-import React, { createContext, useContext, ReactNode } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { initializeApp, FirebaseApp } from "firebase/app";
-import { getAnalytics, Analytics } from "firebase/analytics";
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+  initializeAuth,
+  getReactNativePersistence,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -19,23 +24,43 @@ const firebaseConfig = {
 
 // Initialize Firebase services
 const app: FirebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const analytics: Analytics | null = typeof window !== "undefined" ? getAnalytics(app) : null;
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
+const db = getFirestore(app);
 
-// Define the context value type
-interface FirebaseContext{
+// Context value type
+interface FirebaseContextProps {
   signInWithEmailAndPassword: typeof signInWithEmailAndPassword;
   createUserWithEmailAndPassword: typeof createUserWithEmailAndPassword;
   app: FirebaseApp;
-  analytics: Analytics | null;
-  auth: any;
+  db: typeof db;
+  doc: typeof doc;
+  setDoc: typeof setDoc;
+  auth: typeof auth;
 }
 
 // Create the Firebase context
-export const FirebaseContext = createContext<FirebaseContext | null>(null);
+export const FirebaseContext = createContext<FirebaseContextProps | null>(null);
 
 // Provider component
-export const FirebaseProvider = ({ children }: {children: ReactNode}) => (
-  <FirebaseContext.Provider value={{ app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword }}>{children}</FirebaseContext.Provider>
-);
+export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
 
+
+
+  return (
+    <FirebaseContext.Provider
+      value={{
+        app,
+        auth,
+        doc,
+        db,
+        setDoc,
+        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
+      }}
+    >
+      {children}
+    </FirebaseContext.Provider>
+  );
+};

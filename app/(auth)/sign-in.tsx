@@ -36,6 +36,7 @@ const SignIn = () => {
 		console.log('signing in');
     if (!form.email || !form.password) {
       Alert.alert('Error', 'Please fill in all the fields')
+	  return
     }
     setIsSubmitting(true)
 
