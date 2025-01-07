@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { initializeApp, FirebaseApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, Firestore } from "firebase/firestore";
 import {
   initializeAuth,
   getReactNativePersistence,
@@ -27,7 +27,7 @@ const app: FirebaseApp = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
-const db = getFirestore(app);
+const db: Firestore = getFirestore(app);
 
 // Context value type
 interface FirebaseContextProps {

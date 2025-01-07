@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import { Icon, SignUpFormProps } from '../../types'; 
 import { Link, router } from 'expo-router';
-import {useFirebase} from '@/common/hooks/context/useFirebase'
+import {useFirebaseContext} from '@/common/hooks/context/useFirebaseContext'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 
@@ -15,7 +15,7 @@ interface FormState {
 }
 
 const SignUp = () => {
-	const {auth, createUserWithEmailAndPassword, db, doc, setDoc} = useFirebase()
+	const {auth, createUserWithEmailAndPassword, db, doc, setDoc} = useFirebaseContext()
 
 	const [form, setForm] = useState({
     	username: '',
