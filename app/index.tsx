@@ -45,17 +45,15 @@ export default function App() {
             </View>
           </View>
           <View className="w-full mt-7 flex justify-center items-center">
-            <Link href={"/sign-in"}>
-              <CustomButton
+
+          </View>
+          {/* Helper link for reaching the Home screen from the entry point */}
+          <CustomButton
                 title="Get Started"
-                handlePress={() => router.push("/sign-in")}
+                handlePress={() => router.push("/sign-up")}
                 containerStyles="w-[350px] mt-7"
                 textStyles="text-lg text-white font-clashsemibold"
               />
-            </Link>
-          </View>
-          {/* Helper link for reaching the Home screen from the entry point */}
-          <Link href="/(tabs)/home"> Go to home </Link>
           <View className="flex-row items-center mt-6">
             <View className="flex-1 h-px bg-gray-400"></View>
             <Text className="text-lg text-gray-400 font-clashsemibold px-2">

@@ -1,12 +1,13 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { initializeApp, FirebaseApp } from "firebase/app";
-import analytics, { FirebaseAnalyticsTypes } from '@react-native-firebase/analytics';
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import {
   initializeAuth,
   getReactNativePersistence,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 // Firebase configuration
@@ -26,13 +27,16 @@ const app: FirebaseApp = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
+const db = getFirestore(app);
 
 // Context value type
 interface FirebaseContextProps {
   signInWithEmailAndPassword: typeof signInWithEmailAndPassword;
   createUserWithEmailAndPassword: typeof createUserWithEmailAndPassword;
   app: FirebaseApp;
-  analytics: FirebaseAnalyticsTypes.Module | null;
+  db: typeof db;
+  doc: typeof doc;
+  setDoc: typeof setDoc;
   auth: typeof auth;
 }
 
@@ -41,27 +45,17 @@ export const FirebaseContext = createContext<FirebaseContextProps | null>(null);
 
 // Provider component
 export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
-  const [analyticsInstance, setAnalyticsInstance] = useState<FirebaseAnalyticsTypes.Module | null>(null);
 
-  useEffect(() => {
-    const initializeAnalytics = async () => {
-      try {
-        const instance = analytics();
-        setAnalyticsInstance(instance);
-      } catch (error) {
-        console.error("Failed to initialize Firebase Analytics:", error);
-      }
-    };
 
-    initializeAnalytics();
-  }, []);
 
   return (
     <FirebaseContext.Provider
       value={{
         app,
-        analytics: analyticsInstance,
         auth,
+        doc,
+        db,
+        setDoc,
         signInWithEmailAndPassword,
         createUserWithEmailAndPassword,
       }}

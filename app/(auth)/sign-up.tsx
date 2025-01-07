@@ -1,5 +1,5 @@
 import {Text, Image, View, ScrollView, Alert } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import { Icon, SignUpFormProps } from '../../types'; 
@@ -15,14 +15,16 @@ interface FormState {
 }
 
 const SignUp = () => {
+	const {auth, createUserWithEmailAndPassword, db, doc, setDoc} = useFirebase()
+
 	const [form, setForm] = useState({
-    username: '',
+    	username: '',
 		email: '',
 		password: '',
 	});
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const {auth, createUserWithEmailAndPassword} = useFirebase()
-  console.log('auth in sign up', auth)
+
+
   const platformSignUpOptions: {title: string; icon: Icon}[] = [
     {
       title: 'Apple',
@@ -46,9 +48,25 @@ const SignUp = () => {
     //   const result = await createUser(form.email, form.password, form.username)
 
       // set to global state using context  
-	const response = await createUserWithEmailAndPassword(auth, form.email, form.password)
-	console.log('create user response', response)
-    Alert.alert('Success', 'Please check your email.')
+	const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password)
+	console.log('create user response', userCredential)
+    Alert.alert('Success', 'User created successfully')
+	const user = userCredential.user;
+
+    // Step 2: Save additional user data to Firestore
+	const username = form.username;
+    const userData = {
+      username,
+      profilePicture: "", // Optional: Set a default or upload URL
+      rank: "Newbie",
+      score: 0,
+      win: 0,
+      loss: 0,
+      createdAt: new Date().toISOString(),
+    };
+
+    await setDoc(doc(db, "users", user.uid), userData);
+
 	router.replace('/sign-in')
     } catch(error:any) {
       Alert.alert('Error', error.message)
@@ -59,10 +77,13 @@ const SignUp = () => {
 	};
 
 
+	const handleInputChange = useCallback((field: keyof FormState, value: string) => {
+		setForm((prevForm) => ({
+		  ...prevForm,
+		  [field]: value,
+		}));
+	  }, []);
 
-	const handleInputChange = (field: keyof FormState, value: string) => {
-		setForm({ ...form, [field]: value });
-	};
 	return (
 		<SafeAreaView className='bg-light h-full'>
 			<ScrollView>
