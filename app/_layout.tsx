@@ -4,6 +4,9 @@ import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
 import "../global.css";
 import { FirebaseProvider } from "@/common/providers/FirebaseProvider";
+import { UserProvider } from "@/common/providers/UserProvider";
+import { PlayProvider } from "@/common/providers/PlayProvider";
+import Play from "./(tabs)/play";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -38,34 +41,28 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null;
   return (
       <FirebaseProvider>
-        <Stack>
-          {/* Stack screen for the entry point */}
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          {/* Stack screen for the authorization flow */}
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          {/* Stack screen for the main window */}
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          {/* Stack screen for the profile options */}
-          <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-          {/* Stack screen for the game options */}
-          <Stack.Screen name="(game)" options={{ headerShown: false }} />
-          {/* Stack screen for the rewards options */}
-          <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
-          {/* Stack screen for the leaderboard options */}
-          <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
-        </Stack>
+        <UserProvider>
+          <PlayProvider>
+            <Stack>
+              {/* Stack screen for the entry point */}
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              {/* Stack screen for the authorization flow */}
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              {/* Stack screen for the main window */}
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              {/* Stack screen for the profile options */}
+              <Stack.Screen name="(profile)" options={{ headerShown: false }} />
+              {/* Stack screen for the game options */}
+              <Stack.Screen name="(game)" options={{ headerShown: false }} />
+              {/* Stack screen for the rewards options */}
+              <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
+              {/* Stack screen for the leaderboard options */}
+              <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
+            </Stack>
+          </PlayProvider>
+        </UserProvider>
       </FirebaseProvider>
-
   );
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

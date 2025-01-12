@@ -7,7 +7,8 @@ import { Link, router } from 'expo-router';
 import {useFirebaseContext} from '@/common/hooks/context/useFirebaseContext'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-
+import { useFetchUserById } from '@/common/hooks/queries/useFetchUserById';
+import { useUserContext } from '@/common/hooks/context/useUserContext';
 interface FormState {
 	email: string;
 	password: string;
@@ -20,6 +21,8 @@ const SignIn = () => {
 	});
   const [isSubmitting, setIsSubmitting] = useState(false)
   const {auth, signInWithEmailAndPassword} = useFirebaseContext()
+  const {fetchUserById} = useFetchUserById()
+  const {setUser} = useUserContext()
 
   const platformSignInOptions: {title: string; icon: Icon}[] = [
     {
@@ -41,14 +44,18 @@ const SignIn = () => {
     setIsSubmitting(true)
 
     try {
-
-    //    await signIn(form.email, form.password)
-
-      // set to global state using context  
-	const response = await signInWithEmailAndPassword(auth, form.email, form.password)
-	console.log('auth response', response)
-
-    router.replace('/home')
+		const authResponse = await signInWithEmailAndPassword(auth, form.email, form.password);
+		const userId = authResponse.user.uid;
+		console.log('auth response', authResponse)
+		console.log('user id', userId)
+		const user = await fetchUserById(userId); // Fetch user data by ID
+		console.log('user being set to state', user)
+		if (user) {
+			setUser(user);
+			router.replace('/play'); // Redirect on success
+		  } else {
+			Alert.alert('Error', 'User document not found!');
+		  }
 
     } catch(error:any) {
       Alert.alert('Error', error.message)

@@ -50,7 +50,7 @@ export default function App() {
           {/* Helper link for reaching the Home screen from the entry point */}
           <CustomButton
                 title="Get Started"
-                handlePress={() => router.push("/sign-up")}
+                handlePress={() => router.push("/play")}
                 containerStyles="w-[350px] mt-7"
                 textStyles="text-lg text-white font-clashsemibold"
               />

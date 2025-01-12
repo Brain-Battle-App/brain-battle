@@ -1,11 +1,27 @@
-// @ts-check
+const { ESLint } = require('@eslint/js');
 
-import tsEslint from "typescript-eslint";
-
-import configNode from "./configs/eslint.config.node.js";
-
-// (https://typescript-eslint.io/packages/typescript-eslint/#config)
-export default tsEslint.config(
-  // Define configs and rules.
-  { extends: configNode },
-);
+module.exports = [
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      react: require('eslint-plugin-react'),
+      perfectionist: require('eslint-plugin-perfectionist'),
+    },
+    languageOptions: {
+      globals: require('globals'),
+    },
+    rules: {
+      'quotes': ['error', 'single'], // Enforce single quotes (change to 'double' for double quotes)
+      'jsx-quotes': ['error', 'prefer-single'], // Enforce single quotes in JSX
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          'groups': [['builtin', 'external', 'internal', 'sibling', 'index']],
+          'type': 'alphabetical',
+          'order': 'asc',
+          'internal-pattern': ['@/**'],
+        },
+      ],
+    },
+  },
+];

@@ -25,6 +25,7 @@ import RewardDetailModal from '@/components/Rewards/RewardDetailModal';
 import MonthlyProgressGraph from '@/components/Rewards//MonthlyProgressGraph';
 import AllTimeProgressGraph from '@/components/Rewards/AllTimeProgressGraph';
 import DailyProgressGraph from '@/components/Rewards/DailyProgressGraph';
+import React from 'react';
 
 const Rewards = ({ navigation }: any) => {
 	const [selectectedRedwardsRankIndex, setSelectectedRedwardsRankIndex] =
