@@ -1,5 +1,5 @@
-import { useFirebaseContext } from "../context/useFirebaseContext";
-import { doc, getDoc } from "firebase/firestore";
+import { useFirebaseContext } from '../context/useFirebaseContext';
+import { doc, getDoc } from 'firebase/firestore';
 
 interface User {
   userId: string;
@@ -16,7 +16,7 @@ export const useFetchUserById = () => {
   const { db } = useFirebaseContext();
 
   const fetchUserById = async (userId: string): Promise<User | null> => {
-    const userDocRef = doc(db, "users", userId);
+    const userDocRef = doc(db, 'users', userId);
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
@@ -27,7 +27,7 @@ export const useFetchUserById = () => {
         losses: data.loss,
         profilePicture: data.profilePicture,
         rank: data.rank,
-        totalScore: data.score,
+        totalScore: data.totalScore,
         username: data.username,
         wins: data.win,
       };

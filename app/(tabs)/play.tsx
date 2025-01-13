@@ -7,12 +7,9 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
-import React, { useState } from 'react';
-import { useFindAvailableGame } from '@/common/hooks/queries/useFindAvailableGame';
-import { useCreateGame } from '@/common/hooks/mutations/useCreateGame';
-import { useJoinGame } from '@/common/hooks/mutations/useJoinGame';
+import React, { useState, useEffect } from 'react';
+import { Link, router } from 'expo-router';
 import { useUserContext } from '@/common/hooks/context/useUserContext';
-import { useUpdateGame } from '@/common/hooks/mutations/useUpdateGame';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import images from '@/constants/images';
 import { moderateScale } from '@/utils/Mertics';
@@ -22,43 +19,13 @@ import SATLogo from '@/components/Images/SATLogo';
 import ACTLogo from '@/components/Images/ACTLogo';
 
 const Play = () => {
-  const [loading, setLoading] = useState(false);
-
-  const { currentGame, setCurrentGame } = usePlayContext();
-  const { findAvailableGame } = useFindAvailableGame();
-  const { createGame } = useCreateGame();
-  const { joinGame } = useJoinGame();
-  const { updateGame } = useUpdateGame();
   const { user } = useUserContext();
-  const { username, userId, rank, wins, losses } = user!;
+  const { setTestType, currentGame } = usePlayContext();
+  const { username, rank } = user!;
 
-  const handlePlay = async () => {
-    setLoading(true);
-
-    try {
-      // Try to find an available game
-      const availableGame = await findAvailableGame(userId);
-
-      if (availableGame) {
-        await joinGame(availableGame.id, userId);
-        Alert.alert('Joined Game', `You joined game: ${availableGame.id}`);
-        updateGame({ id: availableGame.id, status: 'lobby' });
-        setCurrentGame(availableGame);
-      } else {
-        // Create a new game if no game is available
-        const newGame = await createGame(userId);
-        Alert.alert(
-          'Game Created',
-          `You created a new game with ID: ${newGame.id}`
-        );
-        setCurrentGame(newGame);
-      }
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+  const handleChooseTestType = (testType: string) => {
+    setTestType(testType);
+    router.navigate('/(game)/race');
   };
 
   return (
@@ -114,34 +81,29 @@ const Play = () => {
           </View>
         </View>
       </View>
-      <View className='flex-row justify-between     items-center w-[90%] mt-4'>
-        <Text className='text-2xl font-semibold'>Head to Head</Text>
+      <View className='flex-row justify-between items-center w-[90%] mt-4'>
+        <Text className='text-2xl font-semibold'> Head to Head</Text>
       </View>
-      <View className='flex-row'>
-        <View className='flex-col justify-between items-center w-[48%] bg-white rounded-lg p-4 mt-4'>
+      <View className='flex-row gap-2 w-[90%]'>
+        <TouchableOpacity
+          className='flex-col justify-end items-center w-[48%] bg-white rounded-lg p-4 mt-4'
+          onPress={() => handleChooseTestType('SAT')}
+        >
           <SATLogo />
-          <View>
-            <Text>Play</Text>
-          </View>
-        </View>
-        <View className='flex-col justify-between items-center w-[48%] bg-white rounded-lg p-4 mt-4'>
-          <ACTLogo />
-          <View className='bg-primary px-4 py-2 rounded-md'>
+          <View className='bg-primary px-6 py-2 rounded-lg mt-8'>
             <Text className='text-white text-lg'>Play</Text>
           </View>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className='flex-col justify-end items-center w-[48%] bg-white rounded-lg p-4 mt-4'
+          onPress={() => handleChooseTestType('ACT')}
+        >
+          <ACTLogo />
+          <View className='bg-primary px-6 py-2 rounded-lg mt-8'>
+            <Text className='text-white text-lg'>Play</Text>
+          </View>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={handlePlay}
-        disabled={loading}
-        className='bg-blue-500 p-4 rounded-md'
-      >
-        {loading ? (
-          <ActivityIndicator size='small' color='#ffffff' />
-        ) : (
-          <Text className='text-white text-lg'>Play</Text>
-        )}
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
