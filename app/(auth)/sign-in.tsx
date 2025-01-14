@@ -20,7 +20,7 @@ const SignIn = () => {
     password: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { auth, signInWithEmailAndPassword, setUser } = useAuthContext();
+  const { auth, signInWithEmailAndPassword, setUser, db } = useAuthContext();
   const { fetchUserById } = useFetchUserById();
 
   const platformSignInOptions: { title: string; icon: Icon }[] = [
@@ -51,7 +51,7 @@ const SignIn = () => {
       const userId = authResponse.user.uid;
       console.log('auth response', authResponse);
       console.log('user id', userId);
-      const user = await fetchUserById(userId); // Fetch user data by ID
+      const user = await fetchUserById(userId, db); // Fetch user data by ID
       console.log('user being set to state', user);
       if (user) {
         setUser(user);

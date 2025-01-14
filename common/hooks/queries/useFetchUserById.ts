@@ -1,21 +1,10 @@
-import { useAuthContext } from '../context/useAuthContext';
-import { doc, getDoc } from 'firebase/firestore';
-
-interface User {
-  userId: string;
-  createdAt: string;
-  losses: number;
-  profilePicture: string;
-  rank: string;
-  totalScore: number;
-  username: string;
-  wins: number;
-}
+import { doc, getDoc, Firestore } from 'firebase/firestore';
 
 export const useFetchUserById = () => {
-  const { db } = useAuthContext();
-
-  const fetchUserById = async (userId: string): Promise<User | null> => {
+  const fetchUserById = async (
+    userId: string,
+    db: Firestore
+  ): Promise<User | null> => {
     const userDocRef = doc(db, 'users', userId);
     const userDoc = await getDoc(userDocRef);
 

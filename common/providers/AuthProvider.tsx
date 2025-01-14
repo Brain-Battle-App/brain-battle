@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getFirestore, Firestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, Firestore } from 'firebase/firestore';
 import {
   initializeAuth,
   getReactNativePersistence,
@@ -36,8 +36,6 @@ const db: Firestore = getFirestore(app);
 // Context value type
 interface AuthContextProps {
   user: User | null;
-  doc: typeof doc;
-  setDoc: typeof setDoc;
   signInWithEmailAndPassword: typeof signInWithEmailAndPassword;
   createUserWithEmailAndPassword: typeof createUserWithEmailAndPassword;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -58,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (firebaseUser) {
         const userId = firebaseUser.uid;
         try {
-          const firestoreUser = await fetchUserById(userId); // Fetch Firestore user data
+          const firestoreUser = await fetchUserById(userId, db); // Fetch Firestore user data
           if (firestoreUser) {
             setUser(firestoreUser); // Set user with complete data
           } else {
@@ -80,8 +78,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
-        doc,
-        setDoc,
         setUser,
         signInWithEmailAndPassword,
         createUserWithEmailAndPassword,

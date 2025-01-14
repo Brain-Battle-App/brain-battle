@@ -2,6 +2,7 @@ import { Text, Image, View, ScrollView, Alert } from 'react-native';
 import React, { useState, useCallback } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
+import { doc, setDoc } from 'firebase/firestore';
 import { Icon, SignUpFormProps } from '../../types';
 import { Link, router } from 'expo-router';
 import { useAuthContext } from '@/common/hooks/context/useAuthContext';
@@ -15,8 +16,7 @@ interface FormState {
 }
 
 const SignUp = () => {
-  const { auth, createUserWithEmailAndPassword, db, doc, setDoc } =
-    useAuthContext();
+  const { auth, createUserWithEmailAndPassword, db } = useAuthContext();
 
   const [form, setForm] = useState({
     username: '',

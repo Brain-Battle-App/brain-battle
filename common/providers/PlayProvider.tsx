@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { useFirebaseContext } from '../hooks/context/useAuthContext';
+import { useAuthContext } from '../hooks/context/useAuthContext';
 import Constants from 'expo-constants';
 
 interface PlayContextProps {
@@ -28,7 +28,7 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
   const [subject, setSubject] = useState<string>('');
   const [gameType, setGameType] = useState<string>('multiplayer');
 
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   // Firestore listener for currentGame
   useEffect(() => {
