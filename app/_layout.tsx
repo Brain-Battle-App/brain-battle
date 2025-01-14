@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import { Slot, SplashScreen, Stack } from "expo-router";
-import { useFonts } from "expo-font";
-import React, { useEffect } from "react";
-import "../global.css";
-import { FirebaseProvider } from "@/common/providers/FirebaseProvider";
-import { UserProvider } from "@/common/providers/UserProvider";
-import { PlayProvider } from "@/common/providers/PlayProvider";
-import Play from "./(tabs)/play";
-
+import { StyleSheet, Text, View } from 'react-native';
+import { Slot, SplashScreen, Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
+import React, { useEffect } from 'react';
+import '../global.css';
+import { AuthProvider } from '@/common/providers/AuthProvider';
+import { PlayProvider } from '@/common/providers/PlayProvider';
+import Play from './(tabs)/play';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,21 +13,21 @@ const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
     // Loading the Clash Display font files
 
-    ClashDisplayMedium: require("../assets/fonts/ClashDisplayMedium.otf"),
-    ClashDisplayRegular: require("../assets/fonts/ClashDisplayRegular.otf"),
-    ClashDisplayBold: require("../assets/fonts/ClashDisplayBold.otf"),
-    ClashDisplaySemibold: require("../assets/fonts/ClashDisplaySemibold.otf"),
-    ClashDisplayLight: require("../assets/fonts/ClashDisplayLight.otf"),
-    ClashDisplayExtralight: require("../assets/fonts/ClashDisplayExtralight.otf"),
+    ClashDisplayMedium: require('../assets/fonts/ClashDisplayMedium.otf'),
+    ClashDisplayRegular: require('../assets/fonts/ClashDisplayRegular.otf'),
+    ClashDisplayBold: require('../assets/fonts/ClashDisplayBold.otf'),
+    ClashDisplaySemibold: require('../assets/fonts/ClashDisplaySemibold.otf'),
+    ClashDisplayLight: require('../assets/fonts/ClashDisplayLight.otf'),
+    ClashDisplayExtralight: require('../assets/fonts/ClashDisplayExtralight.otf'),
 
     // Loading the Poppins font files
 
-    PoppinsMedium: require("../assets/fonts/Poppins-Medium.ttf"),
-    PoppinsRegular: require("../assets/fonts/Poppins-Regular.ttf"),
-    PoppinsBold: require("../assets/fonts/Poppins-Bold.ttf"),
-    PoppinsSemibold: require("../assets/fonts/Poppins-SemiBold.ttf"),
-    PoppinsLight: require("../assets/fonts/Poppins-Light.ttf"),
-    PoppinsExtralight: require("../assets/fonts/Poppins-ExtraLight.ttf"),
+    PoppinsMedium: require('../assets/fonts/Poppins-Medium.ttf'),
+    PoppinsRegular: require('../assets/fonts/Poppins-Regular.ttf'),
+    PoppinsBold: require('../assets/fonts/Poppins-Bold.ttf'),
+    PoppinsSemibold: require('../assets/fonts/Poppins-SemiBold.ttf'),
+    PoppinsLight: require('../assets/fonts/Poppins-Light.ttf'),
+    PoppinsExtralight: require('../assets/fonts/Poppins-ExtraLight.ttf'),
   });
 
   useEffect(() => {
@@ -40,28 +38,26 @@ const RootLayout = () => {
 
   if (!fontsLoaded && !error) return null;
   return (
-      <FirebaseProvider>
-        <UserProvider>
-          <PlayProvider>
-            <Stack>
-              {/* Stack screen for the entry point */}
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-              {/* Stack screen for the authorization flow */}
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              {/* Stack screen for the main window */}
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              {/* Stack screen for the profile options */}
-              <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-              {/* Stack screen for the game options */}
-              <Stack.Screen name="(game)" options={{ headerShown: false }} />
-              {/* Stack screen for the rewards options */}
-              <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
-              {/* Stack screen for the leaderboard options */}
-              <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
-            </Stack>
-          </PlayProvider>
-        </UserProvider>
-      </FirebaseProvider>
+    <AuthProvider>
+      <PlayProvider>
+        <Stack>
+          {/* Stack screen for the entry point */}
+          <Stack.Screen name='index' options={{ headerShown: false }} />
+          {/* Stack screen for the authorization flow */}
+          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+          {/* Stack screen for the main window */}
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          {/* Stack screen for the profile options */}
+          <Stack.Screen name='(profile)' options={{ headerShown: false }} />
+          {/* Stack screen for the game options */}
+          <Stack.Screen name='(game)' options={{ headerShown: false }} />
+          {/* Stack screen for the rewards options */}
+          <Stack.Screen name='(rewards)' options={{ headerShown: false }} />
+          {/* Stack screen for the leaderboard options */}
+          <Stack.Screen name='(leaderboard)' options={{ headerShown: false }} />
+        </Stack>
+      </PlayProvider>
+    </AuthProvider>
   );
 };
 

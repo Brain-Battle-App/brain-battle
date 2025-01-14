@@ -1,19 +1,17 @@
 import Constants from 'expo-constants';
-
 import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
 import PlayerCard from '@/components/Play/PlayerCard';
 import GameLoadingIndicator from '@/components/Play/GameLoadingIndicator';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import { useUpdateReadyState } from '@/common/hooks/mutations/useUpdateReadyState';
-import { useUserContext } from '@/common/hooks/context/useUserContext';
-import clsx from 'clsx';
+import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 
 const Lobby = () => {
   const { currentGame, subject, testType } = usePlayContext();
   const { updateReadyState } = useUpdateReadyState();
-  const { user } = useUserContext();
-
+  const { user } = useAuthContext();
   useEffect(() => {
     console.log('Current game updated in lobby:', currentGame);
 
@@ -24,6 +22,15 @@ const Lobby = () => {
       appOwnership: Constants.appOwnership, // 'expo' (Expo Go) or 'standalone'
       platform: Constants.platform, // Platform-specific info
     });
+
+    const bothPlayersReady = currentGame?.players.every(
+      (player) => player.ready
+    );
+
+    if (bothPlayersReady) {
+      console.log('Both players are ready, starting game...');
+      router.navigate('/(game)/loadingGame');
+    }
   }, [currentGame]);
 
   const gameStatus = currentGame?.status || 'searching';

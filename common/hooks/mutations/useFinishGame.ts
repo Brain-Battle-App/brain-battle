@@ -1,13 +1,13 @@
-import { useFirebaseContext } from "../context/useFirebaseContext";
-import { doc, updateDoc } from "firebase/firestore";
+import { useAuthContext } from '../context/useAuthContext';
+import { doc, updateDoc } from 'firebase/firestore';
 
 export const useFinishGame = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const finishGame = async (gameId: string) => {
-    const gameDoc = doc(db, "games", gameId);
+    const gameDoc = doc(db, 'games', gameId);
 
-    await updateDoc(gameDoc, { status: "finished" });
+    await updateDoc(gameDoc, { status: 'finished' });
   };
 
   return { finishGame };

@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { useFirebaseContext } from '../hooks/context/useFirebaseContext';
+import { useFirebaseContext } from '../hooks/context/useAuthContext';
 import Constants from 'expo-constants';
 
 interface PlayContextProps {

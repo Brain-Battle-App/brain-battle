@@ -1,11 +1,15 @@
-import { useFirebaseContext } from "../context/useFirebaseContext";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useAuthContext } from '../context/useAuthContext';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 export const useUpdateReadyState = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
-  const updateReadyState = async (gameId: string, userId: string, ready: boolean) => {
-    const gameDoc = doc(db, "games", gameId);
+  const updateReadyState = async (
+    gameId: string,
+    userId: string,
+    ready: boolean
+  ) => {
+    const gameDoc = doc(db, 'games', gameId);
     const gameSnapshot = await getDoc(gameDoc);
     const gameData = gameSnapshot.data();
 

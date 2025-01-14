@@ -1,10 +1,10 @@
-import { useFirebaseContext } from '../context/useFirebaseContext';
+import { useAuthContext } from '../context/useAuthContext';
 import { collection, addDoc } from 'firebase/firestore';
 
 type NewGame = Omit<Game, 'id'>;
 
 export const useCreateGame = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const createGame = async (user: User) => {
     const newGame: NewGame = {

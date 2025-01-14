@@ -5,7 +5,7 @@ interface IconProps {
 }
 
 interface User {
-  userId: string; // Corresponds to the Firestore document ID, tied to the Firebase Auth UID
+  userId: string; // Firestore document ID, tied to Firebase Auth UID
   createdAt: string;
   losses: number;
   profilePicture: string;

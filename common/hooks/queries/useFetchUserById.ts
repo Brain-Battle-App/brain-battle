@@ -1,4 +1,4 @@
-import { useFirebaseContext } from '../context/useFirebaseContext';
+import { useAuthContext } from '../context/useAuthContext';
 import { doc, getDoc } from 'firebase/firestore';
 
 interface User {
@@ -13,7 +13,7 @@ interface User {
 }
 
 export const useFetchUserById = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const fetchUserById = async (userId: string): Promise<User | null> => {
     const userDocRef = doc(db, 'users', userId);

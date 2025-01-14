@@ -1,5 +1,5 @@
-import { useFirebaseContext } from "../context/useFirebaseContext";
-import { doc, updateDoc } from "firebase/firestore";
+import { useAuthContext } from '../context/useAuthContext';
+import { doc, updateDoc } from 'firebase/firestore';
 
 interface UpdatedGame {
   id: string; // The document ID of the game to update
@@ -7,16 +7,16 @@ interface UpdatedGame {
 }
 
 export const useUpdateGame = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const updateGame = async (updatedGame: UpdatedGame) => {
     if (!updatedGame.id) {
-      throw new Error("Game ID is required to update the document.");
+      throw new Error('Game ID is required to update the document.');
     }
 
     try {
       // Reference the specific document to update
-      const gameDocRef = doc(db, "games", updatedGame.id);
+      const gameDocRef = doc(db, 'games', updatedGame.id);
 
       // Remove the `id` field from the data to avoid overwriting it in Firestore
       const { id, ...dataToUpdate } = updatedGame;
@@ -26,8 +26,8 @@ export const useUpdateGame = () => {
 
       return { id, ...dataToUpdate };
     } catch (error) {
-      console.error("Error updating game:", error);
-      throw new Error("Failed to update game.");
+      console.error('Error updating game:', error);
+      throw new Error('Failed to update game.');
     }
   };
 

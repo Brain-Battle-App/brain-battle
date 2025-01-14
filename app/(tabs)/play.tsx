@@ -2,14 +2,12 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
-  Alert,
   Image,
   SafeAreaView,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { Link, router } from 'expo-router';
-import { useUserContext } from '@/common/hooks/context/useUserContext';
+import React from 'react';
+import { router } from 'expo-router';
+import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import images from '@/constants/images';
 import { moderateScale } from '@/utils/Mertics';
@@ -19,7 +17,7 @@ import SATLogo from '@/components/Images/SATLogo';
 import ACTLogo from '@/components/Images/ACTLogo';
 
 const Play = () => {
-  const { user } = useUserContext();
+  const { user } = useAuthContext();
   const { setTestType, currentGame } = usePlayContext();
   const { username, rank } = user!;
 

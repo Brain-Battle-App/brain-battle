@@ -11,7 +11,7 @@ import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import { useFindAvailableGame } from '@/common/hooks/queries/useFindAvailableGame';
 import { useCreateGame } from '@/common/hooks/mutations/useCreateGame';
 import { useJoinGame } from '@/common/hooks/mutations/useJoinGame';
-import { useUserContext } from '@/common/hooks/context/useUserContext';
+import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { useUpdateGame } from '@/common/hooks/mutations/useUpdateGame';
 import SATLogo from '@/components/Images/SATLogo';
 import CloseButton from '@/components/CloseButton';
@@ -38,7 +38,7 @@ const Race = () => {
   const { createGame } = useCreateGame();
   const { joinGame } = useJoinGame();
   const { updateGame } = useUpdateGame();
-  const { user } = useUserContext();
+  const { user } = useAuthContext();
 
   const handlePlay = async () => {
     setLoading(true);

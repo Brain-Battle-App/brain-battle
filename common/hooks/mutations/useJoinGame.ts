@@ -1,8 +1,8 @@
-import { useFirebaseContext } from '../context/useFirebaseContext';
+import { useAuthContext } from '../context/useAuthContext';
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 export const useJoinGame = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const joinGame = async (gameId: string, user: User) => {
     const gameDoc = doc(db, 'games', gameId);
