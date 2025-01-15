@@ -10,6 +10,7 @@ interface PlayerCardProps {
   imageUri?: string; // Image URL for the profile picture
   isReady: boolean; // Indicates readiness
   bgColor: string; // Background color for the card
+  isUser?: boolean; // Indicates if the player is the user
 }
 
 const PlayerCard: React.FC<PlayerCardProps> = ({
@@ -18,12 +19,17 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   imageUri,
   isReady,
   bgColor,
+  isUser = false,
 }) => {
   return (
     <View
       className={`w-48 h-64 rounded-lg shadow-md flex flex-col items-center p-4 ${bgColor} relative`}
     >
-      <CheckCircleIcon className='mb-4' checked={isReady} />
+      <CheckCircleIcon
+        className={`absolute top-[-15] ${isUser ? 'right-[-15]' : 'left-[-15]'}`}
+        checked={isReady}
+        checkedClassName='border border-white bg-green-500'
+      />
 
       {/* Profile Picture */}
       <View className='w-20 h-20 rounded-full overflow-hidden mb-2'>

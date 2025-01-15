@@ -1,8 +1,8 @@
-import { useFirebaseContext } from '../context/useAuthContext';
+import { useAuthContext } from '../context/useAuthContext';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 export const useListenToGameUpdates = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const listenToGameUpdates = (
     gameId: string,

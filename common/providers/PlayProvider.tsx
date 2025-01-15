@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useAuthContext } from '../hooks/context/useAuthContext';
+import { useFetchUserById } from '../hooks/queries/useFetchUserById';
 import Constants from 'expo-constants';
 
 interface PlayContextProps {
@@ -18,6 +19,7 @@ interface PlayContextProps {
   setSubject: (subject: string) => void;
   gameType: string;
   setGameType: (gameType: string) => void;
+  opponentUser: User | null;
 }
 
 export const PlayContext = createContext<PlayContextProps | null>(null);
@@ -27,8 +29,10 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
   const [testType, setTestType] = useState<string>('');
   const [subject, setSubject] = useState<string>('');
   const [gameType, setGameType] = useState<string>('multiplayer');
+  const [opponentUser, setOpponentUser] = useState<User | null>(null);
 
-  const { db } = useAuthContext();
+  const { db, user } = useAuthContext();
+  const { fetchUserById } = useFetchUserById();
 
   // Firestore listener for currentGame
   useEffect(() => {
@@ -43,13 +47,22 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
 
     const unsubscribe = onSnapshot(
       gameRef,
-      (snapshot) => {
-        console.log(
-          `[${Constants.deviceName}] Firestore snapshot updated:`,
-          snapshot.data()
-        );
+      async (snapshot) => {
         if (snapshot.exists()) {
-          setCurrentGame({ ...snapshot.data(), id: snapshot.id } as Game);
+          const gameData = { ...snapshot.data(), id: snapshot.id } as Game;
+
+          // Fetch opponent data if needed
+          const opponentPlayer = gameData.players.find(
+            (player) => player.userId !== user?.userId
+          );
+
+          let opponentUser = null;
+          if (opponentPlayer?.userId) {
+            opponentUser = await fetchUserById(opponentPlayer.userId, db);
+          }
+          setOpponentUser(opponentUser);
+
+          setCurrentGame({ ...gameData });
         } else {
           console.warn(`[${Constants.deviceName}] Document does not exist.`);
           setCurrentGame(null);
@@ -70,6 +83,7 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
     <PlayContext.Provider
       value={{
         currentGame,
+        opponentUser,
         setCurrentGame,
         testType,
         setTestType,

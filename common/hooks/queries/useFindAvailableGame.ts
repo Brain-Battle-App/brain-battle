@@ -1,8 +1,8 @@
-import { useFirebaseContext } from '../context/useAuthContext';
+import { useAuthContext } from '../context/useAuthContext';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export const useFindAvailableGame = () => {
-  const { db } = useFirebaseContext();
+  const { db } = useAuthContext();
 
   const findAvailableGame = async (userId: string): Promise<Game | null> => {
     try {

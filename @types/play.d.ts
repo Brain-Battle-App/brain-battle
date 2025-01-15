@@ -1,8 +1,6 @@
-interface Player {
-  userId: string;
+interface Player extends User {
   ready: boolean;
   points: number;
-  totalScore: number;
 }
 
 interface Game {

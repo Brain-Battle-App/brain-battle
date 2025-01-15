@@ -6,17 +6,19 @@ interface CheckCircleIconProps {
   checked: boolean;
   size?: number; // Size of the circle
   className?: string; // Optional TailwindCSS class for customization
+  checkedClassName?: string; // Optional TailwindCSS class for customization when checked
 }
 
 const CheckCircleIcon: React.FC<CheckCircleIconProps> = ({
   className,
   checked,
   size = 32,
+  checkedClassName = 'border border-primary bg-primary',
 }) => {
   return (
     <View
       className={`items-center justify-center ${className} ${
-        checked ? 'bg-primary' : 'border border-primary'
+        checked ? checkedClassName : ''
       } rounded-full`}
       style={{ width: size, height: size }}
     >
