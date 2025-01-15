@@ -19,7 +19,10 @@ import verified from "../assets/icons/verified.png";
 import leaderboard from "../assets/icons/leaderboard.png";
 import dropdown from "../assets/icons/dropdown.png";
 import share from "../assets/icons/share.png";
+import security from "../assets/icons/security.png";
+import global from "../assets/icons/global.png";
 import download from "../assets/icons/download.png";
+import arrow_up_right from "../assets/icons/arrow_up_right.png";
 
 
 import pencil from "../assets/icons/pencil.png";
@@ -29,8 +32,13 @@ import logout from "../assets/icons/logout.png";
 import policy from "../assets/icons/policy.png";
 import preferences from "../assets/icons/preferences.png";
 import terms from "../assets/icons/terms.png";
+import edit from "../assets/icons/edit.png";
 
 export default {
+  edit,
+  arrow_up_right,
+  global,
+  security,
   terms,
   preferences,
   policy,

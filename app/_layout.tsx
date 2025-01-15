@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import React, { useEffect } from "react";
 
 import { GlobalProvider } from "@/context/GlobalProvider";
+import { ThemeProvider } from "@/Theme/ThemeProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,6 +38,7 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null;
   return (
     <GlobalProvider>
+      <ThemeProvider>
       <Stack>
         {/* Stack screen for the entry point */}
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -53,6 +55,9 @@ const RootLayout = () => {
         {/* Stack screen for the leaderboard options */}
         <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
       </Stack>
+
+      </ThemeProvider>
+    
     </GlobalProvider>
   );
 };

@@ -1,144 +1,152 @@
-import {
-    Image,
-    StyleSheet,
-    View,
-  } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { appStyles } from "@/utils/appStyles";
-import { verticalScale,horizontalScale,moderateScale } from "@/utils/Mertics";
+import { verticalScale, horizontalScale, moderateScale } from "@/utils/Mertics";
 import { colors } from "@/utils/colors";
 import { isiPad } from "@/utils/CommonFun";
 import images from "@/constants/images";
 import CustomText from "../CustomText";
 import { fonts } from "@/utils/fonts";
 import CustomButton from "../CustomButton";
-  const UsersHistoryContainer = ({ item }: any) => {
-    return (
-      <View
-        style={{
-            ...appStyles.rowjustify,
-            backgroundColor: item.win?  "#DCE8FF":colors.white+"30",
-            paddingHorizontal:moderateScale(isiPad?10:8),
-            paddingVertical:moderateScale(isiPad?7:5)
-    
+import { useTheme } from "@/Theme/ThemeProvider";
+import { scale } from "react-native-size-matters";
+import { router } from "expo-router";
+
+const UsersHistoryContainer = ({ item }: any) => {
+  const { theme, toggleTheme }: any = useTheme();
+
+  return (
+    <View
+      style={{
+        ...appStyles.rowjustify,
+        paddingHorizontal: moderateScale(isiPad ? 10 : 8),
+        paddingVertical: moderateScale(isiPad ? 7 : 5),
+      }}
+    >
+      <View style={{ ...appStyles.row, gap: moderateScale(isiPad ? 25 : 13) }}>
+        <View
+          style={{
+            ...styles.satContainer,
+            backgroundColor: theme.colors.black_Shade,
           }}
-      >
-        <View style={{ ...appStyles.row, gap: moderateScale(isiPad?25: 13) }}>
-          <View style={{ ...styles.satContainer }}>
-            <Image
-              style={{ width: "100%", height: "100%" }}
-              source={images.sat}
-            />
+        >
+          <Image
+            style={{
+              width: "70%",
+              height: "70%",
+              tintColor: theme.colors.text,
+            }}
+            source={item.icon}
+            resizeMode="contain"
+          />
+        </View>
+
+        <View style={{ ...appStyles.row, gap: scale(5) }}>
+          <View
+            style={{
+              alignItems: "center",
+              gap: verticalScale(2),
+              position: "absolute",
+              alignSelf: "center",
+              zIndex: 1,
+              backgroundColor: theme.colors.black_Shade,
+              padding: scale(4),
+              borderRadius: moderateScale(100),
+              right: "30%",
+              top: verticalScale(4),
+            }}
+          >
+            <CustomText text={"VS"} size={10} color={theme.colors.black_gray} />
+            <CustomText text={"(3-2)"} size={10} color={theme.colors.text} />
           </View>
-  
-          <View style={{ alignItems: "center", gap: verticalScale(7) }}>
-            <CustomText
-              fontFam={fonts.medium}
-              fontWeight="600"
-              text={"You"}
-              size={12}
-              color={ item?.win?"#007C0F": colors.red200}
-            />
+          <View style={{ alignItems: "center", gap: verticalScale(4) }}>
             <Image style={styles.profileImg} source={images.user12} />
+            <CustomText text={"You"} size={12} color={theme.colors.text} />
           </View>
-  
-          <View style={{ alignItems: "center", gap: verticalScale(7) }}>
-            <View style={appStyles.row}>
-              <CustomText
-                fontFam={fonts.medium}
-                fontWeight="600"
-                text={"(3-2)"}
-                size={15}
-                color={colors.black}
-              />
-            </View>
-            <CustomText
-              fontFam={fonts.medium}
-              fontWeight="600"
-              text={"VS"}
-              size={17}
-              color={colors.black}
-            />
-          </View>
-  
-          <View style={{ alignItems: "center", gap: verticalScale(7) }}>
-            <CustomText
-              fontFam={fonts.medium}
-              fontWeight="600"
-              text={"User 1"}
-              size={12}
-              color={ !item?.user1Online?"#5B5E63":item?.win?colors.red200:"#00A214"}
-            />
+
+          <View style={{ alignItems: "center", gap: verticalScale(4) }}>
             <View>
               <Image style={styles.profileImg} source={images.user14} />
-  
-              <View
-                style={{
-                  width: moderateScale(13),
-                  height: moderateScale(13),
-                  backgroundColor: "#49D65B",
-                  borderRadius: moderateScale(13),
-                  position: "absolute",
-                  bottom: verticalScale(5),
-                  right: horizontalScale(-3),
-                  zIndex: 999,
-                }}
-              />
             </View>
+            <CustomText text={"Vua"} size={12} color={theme.colors.text} />
           </View>
-  
-          <View style={{flexDirection:"row",gap:moderateScale(3)}}>
-              <CustomText
-                fontFam={fonts.medium}
-                fontWeight="600"
-                text={"win"}
-                size={14}
-                color={ !item?.win?colors.red200: colors.lightGreen}
-              />
-               <CustomText
-                fontFam={fonts.medium}
-                fontWeight="600"
-                text={item.points}
-                style={{marginTop:2}}
-                size={14}
-                color={ !item?.win?colors.red200: colors.lightGreen}
-              />
-            </View>
-  
-          
         </View>
-  
-        <CustomButton
-            containerStyles="bg-transparent text-base font-semibold rounded-full px-2 min-h-[14px] border"
-            textStyles="text-sm"
-            bgColor={"transparent"}
-            title="View Game"
-                
-              />
       </View>
-    );
-  };
-  export default UsersHistoryContainer;
-  
-  const styles = StyleSheet.create({
-    satContainer: {
-      height: moderateScale( isiPad? 45:40),
-      width: moderateScale(isiPad? 45:40),
-      backgroundColor: colors.white,
-      borderRadius: moderateScale(12),
-      elevation: 5,
-      shadowOffset: { width: 0, height: isiPad ? 4 : 2 },
-      shadowOpacity: 0.5,
-      shadowRadius: 5,
-      alignItems: "center",
-      justifyContent: "center",
-      shadowColor: colors.black,
-      overflow: "hidden",
-    },
-    profileImg: {
-      width: moderateScale(isiPad?38:30),
-      height: moderateScale(isiPad?38:30),
-      borderRadius: moderateScale(38),
-    },
-  });
-  
+      <View style={{ gap: verticalScale(4) }}>
+        <View
+          style={{
+            flexDirection: "row",
+            gap: moderateScale(3),
+            alignSelf: "flex-end",
+          }}
+        >
+          <CustomText
+            text={"win"}
+            size={14}
+            color={!item?.win ? colors.red200 : colors.lightGreen}
+          />
+          <CustomText
+            text={item.points}
+            style={{ marginTop: 2 }}
+            size={14}
+            color={!item?.win ? colors.red200 : colors.lightGreen}
+          />
+        </View>
+        <TouchableOpacity
+        activeOpacity={0.4}
+        onPress={()=>{
+          router.push("/GameReview");
+
+
+        }}
+          style={{
+            ...styles.viewGameContainer,
+            backgroundColor: theme.colors.primary + "20",
+          }}
+        >
+          <CustomText
+            label={"View Game"}
+            size={12}
+            color={theme.colors.primary}
+          />
+          <Image
+            style={{
+              width: moderateScale(12),
+              height: moderateScale(12),
+              tintColor: theme.colors.primary,
+            }}
+            source={images.next_arrow}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+export default UsersHistoryContainer;
+
+const styles = StyleSheet.create({
+  satContainer: {
+    height: moderateScale(isiPad ? 55 : 50),
+    width: moderateScale(isiPad ? 55 : 50),
+    backgroundColor: colors.white,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: colors.black,
+    overflow: "hidden",
+  },
+  profileImg: {
+    width: moderateScale(isiPad ? 55 : 45),
+    height: moderateScale(isiPad ? 55 : 45),
+    borderRadius: 999,
+  },
+  viewGameContainer: {
+    padding: moderateScale(10),
+    borderRadius: moderateScale(10),
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: scale(5),
+  },
+});

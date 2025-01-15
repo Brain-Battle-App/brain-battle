@@ -21,6 +21,8 @@ import user16 from "../assets/images/user16.png";
 import user17 from "../assets/images/user17.png";
 import user18 from "../assets/images/user18.png";
 import user19 from "../assets/images/user19.png";
+import visa from "../assets/images/visa.png";
+
 import user20 from "../assets/images/user20.png";
 import roosevelt from "../assets/images/roosevelt.png";
 import monsterBadge from "../assets/images/monsterBadge.png";
@@ -59,6 +61,7 @@ import medal from "../assets/images/medal.png";
 import send from "../assets/images/send.png";
 import setting from "../assets/images/setting.png";
 
+import heart from "../assets/images/heart.png";
 
 import uniqueApolloBadge from "../assets/images/uniqueApolloBadge.png";
 import raeCannonBadge from "../assets/images/raeCannonBadge.png";
@@ -82,6 +85,7 @@ import battleRare from "../assets/images/battleRare.png";
 import castleRare from "../assets/images/castleRare.png";
 import helmetRare from "../assets/images/helmetRare.png";
 import cannonRare from "../assets/images/cannonRare.png";
+import profile_back from "../assets/images/profile_back.png";
 
 
 import cobraRare from "../assets/images/cobraRare.png";
@@ -224,11 +228,18 @@ import commanBadge78 from "../assets/images/commanBadge78.png";
 import brainWizard from "../assets/images/brainWizard.png";
 import demoLogo from "../assets/images/demo-logo.png";
 import elephantRare from "../assets/images/elephantRare.png";
+import act_profile from "../assets/images/act_profile.png";
+import clock from "../assets/images/clock.png";
+import course from "../assets/images/course.png";
+import sat_profile from "../assets/images/sat_profile.png";
 
 import tick from "../assets/images/tick.png";
 import redCross from "../assets/images/red-cross.png";
 import soon from "../assets/images/soon.png";
+import cross from "../assets/images/cross.png";
 
+import next_arrow from "../assets/images/next_arrow.png";
+import vs from "../assets/images/vs.png";
 
 import ukFlagCircle from "../assets/images/uk-flag-circle.png";
 // import highSchoolMedal from "../assets/images/highSchoolMedal.png";
@@ -238,6 +249,75 @@ import ukFlagCircle from "../assets/images/uk-flag-circle.png";
 // import rank3 from "../assets/images/rank3.png";
 import add from "../assets/icons/add.png";
 import verified from "../assets/icons/verified.png";
+import checkmark_circle from "../assets/images/checkmark_circle.png";
+import battle_gold from "../assets/images/battle_gold.png";
+import membership_cross from "../assets/images/membership_cross.png";
+import avatar1 from "../assets/images/avatar1.png";
+import avatar2 from "../assets/images/avatar2.png";
+import avatar3 from "../assets/images/avatar3.png";
+import avatar4 from "../assets/images/avatar4.png";
+import avatar5 from "../assets/images/avatar5.png";
+import avatar6 from "../assets/images/avatar6.png";
+import avatar7 from "../assets/images/avatar7.png";
+import avatar8 from "../assets/images/avatar8.png";
+import avatar9 from "../assets/images/avatar9.png";
+import avatar10 from "../assets/images/avatar10.png";
+import avatar11 from "../assets/images/avatar11.png";
+import avatar12 from "../assets/images/avatar12.png";
+import avatar13 from "../assets/images/avatar13.png";
+import avatar14 from "../assets/images/avatar14.png";
+import avatar15 from "../assets/images/avatar15.png";
+import avatar16 from "../assets/images/avatar16.png";
+import avatar17 from "../assets/images/avatar17.png";
+import avatar18 from "../assets/images/avatar18.png";
+import avatar19 from "../assets/images/avatar19.png";
+import avatar20 from "../assets/images/avatar20.png";
+import avatar21 from "../assets/images/avatar21.png";
+import avatar22 from "../assets/images/avatar22.png";
+import avatar23 from "../assets/images/avatar23.png";
+import avatar24 from "../assets/images/avatar24.png";
+import avatar25 from "../assets/images/avatar25.png";
+import avatar26 from "../assets/images/avatar26.png";
+import avatar27 from "../assets/images/avatar27.png";
+import avatar28 from "../assets/images/avatar28.png";
+import avatar29 from "../assets/images/avatar29.png";
+import avatar30 from "../assets/images/avatar30.png";
+import avatar31 from "../assets/images/avatar31.png";
+import avatar32 from "../assets/images/avatar32.png";
+import avatar33 from "../assets/images/avatar33.png";
+import avatar34 from "../assets/images/avatar34.png";
+import avatar35 from "../assets/images/avatar35.png";
+import avatar36 from "../assets/images/avatar36.png";
+import avatar37 from "../assets/images/avatar37.png";
+import avatar38 from "../assets/images/avatar38.png";
+import avatar39 from "../assets/images/avatar39.png";
+import avatar40 from "../assets/images/avatar40.png";
+import avatar41 from "../assets/images/avatar41.png";
+import avatar42 from "../assets/images/avatar42.png";
+import avatar43 from "../assets/images/avatar43.png";
+import avatar44 from "../assets/images/avatar44.png";
+import avatar45 from "../assets/images/avatar45.png";
+import avatar46 from "../assets/images/avatar46.png";
+import avatar47 from "../assets/images/avatar47.png";
+import avatar48 from "../assets/images/avatar48.png";
+import avatar49 from "../assets/images/avatar49.png";
+import avatar50 from "../assets/images/avatar50.png";
+import avatar51 from "../assets/images/avatar51.png";
+import avatar52 from "../assets/images/avatar52.png";
+import avatar53 from "../assets/images/avatar53.png";
+import avatar54 from "../assets/images/avatar54.png";
+import avatar55 from "../assets/images/avatar55.png";
+import avatar56 from "../assets/images/avatar56.png";
+import avatar from "../assets/images/avatar.png";
+import gift from "../assets/images/gift.png";
+import info from "../assets/images/info.png";
+import copy from "../assets/images/copy.png";
+import logout from "../assets/images/logout.png";
+import group from "../assets/images/group.png";
+import ranking from "../assets/images/ranking.png";
+import play from "../assets/images/play.png";
+import reward from "../assets/images/reward.png";
+import notification from "../assets/images/notification.png";
 
 
 
@@ -245,6 +325,84 @@ import verified from "../assets/icons/verified.png";
 
 
 export default {
+  notification,
+  reward,
+  play,
+  group,
+  ranking,
+  logout,
+  copy,
+  info,
+  gift,
+  avatar,
+ avatar1,
+ avatar2,
+ avatar3,
+ avatar4,
+ avatar5,
+ avatar6,
+ avatar7 ,
+ avatar8,
+ avatar9,
+ avatar10,
+ avatar11,
+ avatar12,
+ avatar13,
+ avatar14,
+ avatar15,
+ avatar16,
+ avatar17,
+ avatar18,
+ avatar19,
+ avatar20,
+ avatar21,
+ avatar22,
+ avatar23,
+ avatar24,
+ avatar25,
+ avatar26,
+ avatar27,
+ avatar28,
+ avatar29,
+ avatar30,
+ avatar31,
+ avatar32,
+ avatar33,
+ avatar34,
+ avatar35,
+ avatar36,
+ avatar37,
+ avatar38,
+ avatar39,
+ avatar40,
+ avatar41,
+ avatar42,
+ avatar43,
+ avatar44,
+ avatar45,
+ avatar46,
+ avatar47,
+ avatar48,
+ avatar49,
+ avatar50,
+ avatar51,
+ avatar52,
+ avatar53,
+ avatar54,
+ avatar55,
+ avatar56,
+  vs,
+  membership_cross,
+  battle_gold,
+  checkmark_circle,
+  cross,
+  next_arrow,
+  sat_profile,
+  course,
+  clock,
+  act_profile,
+  heart,
+  profile_back,
   soon,
   redCross,
   tick,
@@ -459,6 +617,7 @@ export default {
   brainWizard,
   uzbekistan,
   send,
+  visa,
   ukFlagCircle,
   ukflag,
   // map2,

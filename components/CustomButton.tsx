@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, StyleProp, TextStyle,ViewStyle } from "react-native";
 import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import icons from "@/constants/icons";
@@ -19,6 +19,8 @@ interface CustomButtonProps {
   iconColor?: string;
   bgColor?: string;
   customIcon?: Icon;
+  textStyle?: StyleProp<TextStyle>; // Style for the screen container
+  containerStyle?:StyleProp<ViewStyle>
 }
 
 const CustomButton = ({
@@ -33,12 +35,15 @@ const CustomButton = ({
   iconSize,
   iconName,
   iconColor,
+  textStyle,
+  containerStyle
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
       className={`flex flex-row bg-primary rounded-xl min-h-[62px] justify-center items-center ${containerStyles}
       ${isLoading ? "opacity-50" : ""}`}
       activeOpacity={0.7}
+      style={containerStyle}
       onPress={handlePress}
       disabled={isLoading}
     >
@@ -46,7 +51,9 @@ const CustomButton = ({
         <AntDesign name={iconName as any} size={iconSize} color={iconColor} />
       )}
       {customIcon && <Icon name={customIcon} />}
-      <Text className={`text-lg ${textStyles}`}>{title}</Text>
+      <Text style={textStyle} className={`text-lg ${textStyles}`}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

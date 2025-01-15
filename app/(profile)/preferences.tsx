@@ -1,176 +1,105 @@
 import {
-    FlatList,
-    Platform,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    Image,
-    ScrollView,
-  } from "react-native";
+  FlatList,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 
-  import { useState } from "react";
-  import { SafeAreaView } from "react-native-safe-area-context";
-  import ToggleSwitch from "toggle-switch-react-native";
-import { moderateScale,verticalScale,horizontalScale } from "@/utils/Mertics";
-import { colors } from "@/utils/colors";
+import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ToggleSwitch from "toggle-switch-react-native";
+import { moderateScale, verticalScale, horizontalScale } from "@/utils/Mertics";
 import CustomText from "@/components/CustomText";
-import { fonts } from "@/utils/fonts";
-import { isiPad } from "@/utils/CommonFun";
 import icons from "@/constants/icons";
-import images from "@/constants/images";
-import { router } from "expo-router";
-  
-  
-  const Preferences = ({ navigation }: any) => {
-    const [preferencesData, setPreferencesData] = useState([
-      { txt: "Push Notifications", icon: icons.preferences, isActive: false },
-      { txt: "Music", icon: icons.help, isActive: true },
-      { txt: "Sound", icon: icons.feedback, isActive: false },
-      { txt: "Hide ELO from leaderboards", icon: icons.terms, isActive: true },
-    ]);
-  
-    const Header = () => {
-      return (
-        <View>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => router.back()}
-            style={{
-              width: moderateScale(25),
-              height: moderateScale(25),
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Image
-              style={{ width: "90%", height: "90%" }}
-              source={images.back_profile}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-          <View style={{ padding: moderateScale(20), gap: verticalScale(3) }}>
-            <CustomText
-              fontFam={fonts.medium}
-              fontWeight="600"
-              label="App"
-              size={18}
-              color={colors.bluelight}
-            />
-            <CustomText
-              fontFam={fonts.bold}
-              fontWeight="700"
-              label="Preference"
-              size={22}
-              color={colors.black}
-            />
-          </View>
-        </View>
-      );
-    };
-  
+import { useTheme } from "@/Theme/ThemeProvider";
+import Header from "@/components/Header";
+
+const Preferences = ({ navigation }: any) => {
+  const { theme, toggleTheme }: any = useTheme();
+  const [isPushNotification, setIsPushNotification] = useState(false);
+  const [isMusic, setIsMusic] = useState(true);
+  const [isSound, setIsSound] = useState(false);
+  const [isLeaderboards, setIsLeaderboards] = useState(true);
+  const [isBadge, setIsBadge] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const PreferencesContainer = ({ text, color, isToggle }: any) => {
     return (
-      <SafeAreaView
-        edges={["top"]}
-        style={{ flex: 1, backgroundColor: colors.white }}
+      <View
+        style={{
+          ...styles.boxContainer,
+
+          backgroundColor: theme.colors.white,
+        }}
       >
-        <ScrollView
-          style={{
-            flex: 1,
-            backgroundColor: colors.white,
-            marginBottom: verticalScale(20),
-          }}
-        >
-          <View
-            style={{
-              paddingTop: verticalScale(10),
-              paddingHorizontal: moderateScale(20),
-              gap: verticalScale(20),
-            }}
-          >
-            <Header />
-  
-            {preferencesData.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  activeOpacity={0.6}
-                  key={index.toString()}
-                  style={{
-                    ...styles.boxContainer,
-                    backgroundColor:
-                      item.txt == "Logout" ? "#51B5FD" : "#C4C4C420",
-                  }}
-                >
-                  <CustomText
-                    fontFam={fonts.medium}
-                    fontWeight="600"
-                    label={item.txt}
-                    size={18}
-                    color={colors.black}
-                  />
-  
-                  <ToggleSwitch
-                    isOn={item?.isActive}
-                    onColor={colors.bluelight}
-                    offColor={"#D9D9D9"}
-                    size="small"
-                    onToggle={() => {
-                      const data = [...preferencesData];
-  
-                      data[index].isActive = !item.isActive;
-  
-                      setPreferencesData(data);
-                    }}
-                    thumbOnStyle={{
-                      width: moderateScale(17),
-                      height: moderateScale(17),
-                      borderRadius: 9999,
-                      marginLeft: isiPad ? moderateScale(15) : moderateScale(5),
-                    }}
-                    thumbOffStyle={{
-                      width: moderateScale(17),
-                      height: moderateScale(17),
-                      borderRadius: 9999,
-                      marginLeft: moderateScale(5),
-                    }}
-                    trackOffStyle={{
-                      width: moderateScale(46),
-                      height: verticalScale(25),
-                    }}
-                    trackOnStyle={{
-                      width: moderateScale(46),
-                      height: verticalScale(25),
-                    }}
-                  />
-                  {/* <Image
-                      style={{
-                        width: moderateScale(32),
-                        height: moderateScale(32),
-                      }}
-                      source={item.icon}
-                    /> */}
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        <CustomText label={text} size={17} color={color || theme.colors.text} />
+        <ToggleSwitch
+          isOn={isToggle}
+          thumbOnStyle={{width:moderateScale(25),height:moderateScale(25),borderRadius:9999,backgroundColor:theme.colors.white}}
+          thumbOffStyle={{width:moderateScale(25),height:moderateScale(25),borderRadius:9999,backgroundColor:theme.colors.white}}
+          trackOffStyle={{width:horizontalScale(50),height:verticalScale(29)}}
+          trackOnStyle={{width:horizontalScale(50),height:verticalScale(29)}}
+
+          onColor={theme.colors.green}
+          
+          offColor={theme.colors.background}
+    
+          
+          labelStyle={{ color: "black", fontWeight: "900" }}
+          onToggle={(isOn) => console.log("Dark Mode: ", isToggle)}
+        />
+      </View>
     );
   };
-  export default Preferences;
-  
-  const styles = StyleSheet.create({
-    boxContainer: {
-      width: "100%",
-      padding: moderateScale(20),
-      shadowColor: colors.black + "50",
-      shadowOffset: { width: 2, height: isiPad ? 4 : 2 },
-      shadowOpacity: 0.5,
-      shadowRadius: 2,
-      alignItems: "center",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      gap: verticalScale(20),
-      borderRadius: moderateScale(15),
-    },
-  });
-  
+
+  return (
+    <SafeAreaView
+      edges={["top"]}
+      style={{ flex: 1, backgroundColor: theme.colors.background }}
+    >
+      <View
+        style={{
+          paddingTop: verticalScale(10),
+          paddingHorizontal: moderateScale(20),
+          gap: verticalScale(20),
+          flex: 1,
+        }}
+      >
+        <Header label="App Preferences" />
+
+        <View style={{ gap: verticalScale(10) }}>
+          <PreferencesContainer
+            isToggle={isPushNotification}
+            text="Push Notifications"
+          />
+
+          <PreferencesContainer text="Music" isToggle={isMusic} />
+          <PreferencesContainer text="Sound" isToggle={isSound} />
+          <PreferencesContainer
+            text="Hide ELO from leaderboards"
+            isToggle={isLeaderboards}
+          />
+          <PreferencesContainer text="Show Badge in Game" isToggle={isBadge} />
+          <PreferencesContainer text="Dark Mode" isToggle={isDarkMode} />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+export default Preferences;
+
+const styles = StyleSheet.create({
+  boxContainer: {
+    width: "100%",
+    paddingHorizontal: moderateScale(20),
+    paddingVertical:verticalScale(15),
+    gap: verticalScale(20),
+    borderRadius: moderateScale(20),
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});

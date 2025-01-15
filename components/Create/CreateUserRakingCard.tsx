@@ -4,6 +4,7 @@ import { colors } from "@/utils/colors";
 import { fonts } from "@/utils/fonts";
 import CustomText from "../CustomText";
 import { moderateScale,horizontalScale,verticalScale } from "@/utils/Mertics";
+import { useTheme } from "@/Theme/ThemeProvider";
 
 const CreateUserRakingCard = ({
     image,
@@ -12,6 +13,8 @@ const CreateUserRakingCard = ({
     madel,
     rightImage,
   }: any) => {
+    const { theme }:any = useTheme();
+
     return (
       <View
         style={{
@@ -68,17 +71,17 @@ const CreateUserRakingCard = ({
        
           label={name}
           style={{ textAlign: "center" }}
-          fontFam="ClashDisplayMedium"
           size={14}
-          color={colors.black}
+          color={theme.colors.text}
         />
         <View
           style={{
             width: "80%",
             alignSelf: "center",
 
-            paddingVertical: verticalScale(10),
-            backgroundColor: "#F0F0F0",
+            paddingVertical: verticalScale(5),
+            paddingHorizontal:moderateScale(2),
+            backgroundColor: theme.colors.black_gray+"20",
             borderRadius: moderateScale(10),
             alignItems: "center",
             justifyContent: "center",
@@ -86,11 +89,10 @@ const CreateUserRakingCard = ({
         >
           <CustomText
             label={points}
-            fontFam="ClashDisplayMedium"
             style={{ textAlign: "center" }}
-            size={12}
-            color={colors.black}
-          />
+            size={11}
+            color={theme.colors.text}
+            />
         </View>
       </View>
     );

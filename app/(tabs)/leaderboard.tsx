@@ -1,169 +1,117 @@
 import {
   FlatList,
   Image,
-  ImageBackground,
   Platform,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import Rank1 from "@/assets/images/rank1.svg";
-import Rank2 from "@/assets/images/rank2.svg";
-import Rank3 from "@/assets/images/rank3.svg";
-import { appStyles } from "@/utils/appStyles";
-import { colors } from "@/utils/colors";
-import { horizontalScale, moderateScale, verticalScale } from "@/utils/Mertics";
-import images from "@/constants/images";
-import icons from "@/constants/icons";
-import CustomText from "@/components/CustomText";
+
 import { useRef, useState } from "react";
-import CustomButton from "@/components/CustomButton";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CreateUserCard from "@/components/Create/CreateUserCard";
+import { colors } from "@/utils/colors";
+import { verticalScale, horizontalScale, moderateScale } from "@/utils/Mertics";
+import images from "@/constants/images";
+import CustomText from "@/components/CustomText";
 import { isiPad } from "@/utils/CommonFun";
-import { windowHeight, windowWidth } from "@/utils/Dimensions";
-import { FindFriends, leaderBoardUserData } from "@/utils/Data";
-import FindFriendsContainer from "@/components/Friends/FindFriendsContainer";
-import LeaderBoadUserCard from "@/components/Leaderboard/LeaderBoardUserCard";
-import CountryDropDown from "@/components/CountryDropDown";
-import { SwiperFlatList } from "react-native-swiper-flatlist";
+import { windowWidth, windowHeight } from "@/utils/Dimensions";
+import { createUserData } from "@/utils/Data";
+import CreateUserRakingCard from "@/components/Create/CreateUserRakingCard";
+import { useTheme } from "@/Theme/ThemeProvider";
+import { fonts } from "@/utils/fonts";
+import { appStyles } from "@/utils/appStyles";
 
-const Leaderboard = ({ navigation }: any) => {
+const leaderboard = ({ navigation }: any) => {
   const [seletedLeaderboard, setSeletedLeaderboard] = useState(1);
-  const [selectedRanking, setSelectedRanking] = useState("Country Rankings");
-  const [selectedLeaderBoardUser, setSelectedLeaderBoardUser] = useState(2);
-  const swiperRef = useRef<any>(null);
-  const [regionalRanking, setRegionalRanking] = useState("St. Louis");
-  const [countryRanking, setCountryRanking] = useState("USA");
-  const [highSchoolRanking, setHighSchoolRanking] = useState("Roosevelt HS");
+  const [selectedLeaderBoardUser, setSelectedLeaderBoardUser] = useState(4);
 
-  const [selectedCountry, setSelectedCountry] = useState({
-    name: "United States",
-    image: images.unitedStates,
-  });
-  const [isCountryDropDown, setIsCountryDropDown] = useState(false);
+  const { theme }: any = useTheme();
 
-  const rankingData = [
-    {
-      dayButtonColor: colors.blue200,
-      isMapRanking: true,
-      map: images.blueMap,
-      rankingBackground: images.rankBack,
-      ranking: "Country Rankings",
-    },
-    {
-      dayButtonColor: colors.purple100,
-      isMapRanking: true,
-      map: images.map2,
-      rankingBackground: images.rank2Back,
-      ranking: "Regional Rankings",
-    },
-    {
-      dayButtonColor: "#FF4F4F70",
-      isMapRanking: false,
-      rankingBackground: images.rank3Back,
-      ranking: "High School Rankings",
-    },
+  const leaderBoardData = [
+    { name: "Country", img: images.ukFlagCircle },
+    { name: "High School", img: images.roosevelt },
+
+    { name: "State", img: images.sashBadge },
   ];
 
-  const LeaderUserRakingCard = ({
-    image,
-    name,
-    points,
-    madel,
-    rightImage,
-  }: any) => {
-    return (
-      <View
-        style={{
-          gap: verticalScale(10),
-          width: "100%",
-          alignSelf: "center",
-        }}
-      >
-        <View>
-          <View
-            style={{
-              width: moderateScale(60),
-              height: moderateScale(60),
-              borderRadius: moderateScale(65),
+  const Header = ({ label }: any) => {
+    const { theme }: any = useTheme();
 
-              overflow: "hidden",
-              alignSelf: "center",
-            }}
-          >
+    return (
+      <>
+        <View
+          style={{
+            ...appStyles.rowjustify,
+            paddingHorizontal: moderateScale(20),
+          }}
+        >
+          <View style={{ ...appStyles.row, gap: horizontalScale(10) }}>
             <Image
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: moderateScale(25), height: moderateScale(25) }}
+              source={images.ranking}
               resizeMode="contain"
-              source={image}
+            />
+
+            <CustomText
+              label={"Leaderboards"}
+              size={20}
+              fontFam={fonts.medium}
+              fontWeight="600"
+              color={theme.colors.text}
             />
           </View>
 
-          <Image
-            style={{
-              width: moderateScale(30),
-              height: moderateScale(30),
-              position: "absolute",
-              top: horizontalScale(isiPad ? -15 : -20),
-              left: horizontalScale(isiPad ? 25 : 35),
-            }}
-            resizeMode="contain"
-            source={madel}
-          />
+          <View style={{ ...appStyles.row, gap: horizontalScale(13) }}>
+            <Image
+              style={{ width: moderateScale(30), height: moderateScale(30) }}
+              source={images.user1}
+              resizeMode="contain"
+            />
+            <View>
+              <Image
+                style={{
+                  width: moderateScale(30),
+                  height: moderateScale(30),
+                  tintColor: theme.colors.text,
+                }}
+                source={images.notification}
+                resizeMode="contain"
+              />
+              <View
+                style={{
+                  width: moderateScale(19),
+                  height: moderateScale(19),
+                  backgroundColor: theme.colors.red,
+                  borderRadius: moderateScale(999),
+                  borderWidth: moderateScale(2),
+                  borderColor: theme.colors.text,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                  top: verticalScale(-1),
+                  right: moderateScale(-2),
+                }}
+              >
+                <CustomText label={"4"} size={9} color={theme.colors.white} />
+              </View>
+            </View>
 
-          <Image
-            style={{
-              width: moderateScale(30),
-              height: moderateScale(30),
-              position: "absolute",
-              right: horizontalScale(10),
-              bottom: verticalScale(-2),
-            }}
-            resizeMode="contain"
-            source={rightImage}
-          />
+            {/* <CustomText label={"Leaderboards"} size={20}
+       fontFam={fonts.medium}
+       fontWeight="600"
+        color={theme.colors.text} /> */}
+          </View>
         </View>
-
-        <CustomText
-          fontFam={"ClashDisplay-Semibold"}
-          fontWeight="bold"
-          label={name}
-          style={{ textAlign: "center" }}
-          size={15}
-          color={colors.black}
-        />
-        <View
-          style={{
-            width: "80%",
-            alignSelf: "center",
-
-            paddingVertical: verticalScale(10),
-            backgroundColor: "#F0F0F0",
-            borderRadius: moderateScale(10),
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CustomText
-            fontFam={"ClashDisplay-Semibold"}
-            fontWeight="600"
-            label={points}
-            style={{ textAlign: "center" }}
-            size={12}
-            color={colors.black}
-          />
-        </View>
-      </View>
+      </>
     );
   };
-
   const renderFindFriendsList = ({ item, index }: any) => {
     return (
       <>
         <View>
-          <LeaderBoadUserCard
+          <CreateUserCard
             index={index}
             selectedLeaderBoardUser={selectedLeaderBoardUser}
             setSelectedLeaderBoardUser={setSelectedLeaderBoardUser}
@@ -174,434 +122,227 @@ const Leaderboard = ({ navigation }: any) => {
     );
   };
 
-  // Function to handle index change on swipe
-  const handleIndexChange = ({ item, index }: any) => {
-    console.log("Knkcndkcd", item);
-    setSeletedLeaderboard(index + 1);
-  };
   return (
     <>
-      <View
+      <SafeAreaView
+        edges={["top"]}
         style={{
-          backgroundColor: colors.white,
-          alignItems: "center",
           flex: 1,
+          backgroundColor: theme.colors.background,
+          paddingTop: verticalScale(5),
+          // gap:verticalScale(30)
         }}
       >
         <ScrollView
-          scrollEnabled={isCountryDropDown == false}
+          scrollEnabled={true}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingBottom: 0,
             width: "100%",
-            paddingTop: verticalScale(
-              isiPad ? 40 : Platform.OS == "ios" ? 60 : 10,
-            ),
+            gap: verticalScale(20),
+            
           }}
         >
+          <Header />
           <View
             style={{
-              ...appStyles.row,
-              width: "100%",
+              flexDirection: "row",
+              gap: moderateScale(30),
               justifyContent: "space-between",
-              paddingHorizontal: "15%",
+              borderBottomWidth: 1,
+              borderBottomColor: "white",
+              marginHorizontal: moderateScale(20),
+
             }}
           >
-            <TouchableOpacity
+            {leaderBoardData.map((item, index) => {
+              return (
+                <View
+                  key={index.toString()}
+                  style={{
+                    // width: moderateScale(30),
+                    // height:
+
+                    // moderateScale(30),
+                    alignItems: "center",
+                    paddingBottom: verticalScale(12),
+                  }}
+                >
+                  <TouchableOpacity
+                    key={index.toString()}
+                    onPress={() => {
+                      setSeletedLeaderboard(index);
+                    }}
+                    style={{
+                      alignItems: "center",
+                      flexDirection: "row",
+                      gap: horizontalScale(5),
+                    }}
+                  >
+                    <View
+                      style={{
+                        width: moderateScale(20),
+                        height: moderateScale(20),
+                        alignSelf: "center",
+                      }}
+                    >
+                      <Image
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                        resizeMode="contain"
+                        source={item.img}
+                      />
+                    </View>
+
+                    <CustomText
+                      label={item?.name}
+                      fontWeight={seletedLeaderboard == index ? "600" : "500"}
+                      fontFam={
+                        seletedLeaderboard == index
+                          ? fonts.medium
+                          : fonts.regular
+                      }
+                      style={{ textAlign: "center" }}
+                      size={14}
+                      color={theme.colors.text}
+                    />
+                  </TouchableOpacity>
+
+                  {seletedLeaderboard == index && (
+                    <View
+                      style={{
+                        width: "100%",
+                        position: "absolute",
+                        backgroundColor: "#51B5FD",
+                        alignSelf: "center",
+                        height: verticalScale(1),
+                        bottom: verticalScale(-1),
+                      }}
+                    />
+                  )}
+                </View>
+              );
+            })}
+          </View>
+
+          <View style={{ width: windowWidth, height: windowHeight }}>
+            {/* <View
               style={{
-                width: moderateScale(40),
-                height: moderateScale(40),
-                alignItems: "center",
-                justifyContent: "center",
+                width: "95%",
+                height: 1.5,
+                backgroundColor: "#E4E4E4",
+                alignSelf: "center",
               }}
-            >
-              <Image
-                style={{ width: moderateScale(20), height: moderateScale(20) }}
-                source={icons.back}
-              />
-            </TouchableOpacity>
-            <View style={{ ...appStyles.row, marginLeft: moderateScale(20) }}>
+            /> */}
+            <View style={{ marginTop: verticalScale(40) }}>
               <View
                 style={{
-                  gap: verticalScale(5),
-                  width:
-                    seletedLeaderboard == 1
-                      ? "55%"
-                      : seletedLeaderboard == 2
-                        ? "65%"
-                        : "55%",
-                  flexWrap: "wrap",
-                  // backgroundColor: "red",
-                  marginRight: moderateScale(10),
+                  marginHorizontal: moderateScale(20),
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
                 <View
                   style={{
-                    ...appStyles.row,
-                    gap: moderateScale(5),
-                    width: "90%",
-                    alignSelf: "center",
+                    marginRight: moderateScale(-4),
+                    height: verticalScale(300),
                     alignItems: "center",
-                    justifyContent: "center",
                   }}
                 >
-                  <CustomText
-                    fontFam={"ClashDisplay-Semibold"}
-                    label={
-                      seletedLeaderboard == 1
-                        ? countryRanking
-                        : seletedLeaderboard == 2
-                          ? regionalRanking
-                          : highSchoolRanking
-                    }
-                    size={18}
-                    fontWeight="700"
-                    color={colors.black}
+                  <CreateUserRakingCard
+                    name="Clare Rich"
+                    points="1,469 ELO"
+                    image={images.user18}
+                    madel={images.medal}
+                    rightImage={images.athletics}
                   />
-                  {seletedLeaderboard != 3 && (
-                    <CustomText
-                      // fontFam={"ClashDisplay-Medium"}
-                      // fontWeight="600"
-                      label="- SAT/ACT"
-                      size={18}
-                      color={colors.black}
-                    />
-                  )}
+                  <Image
+                    style={{
+                      width: moderateScale(100),
+                      height: verticalScale(isiPad ? 190 : 180),
+                    }}
+                    source={images.rank2}
+                  />
                 </View>
-
-                {seletedLeaderboard == 3 && (
-                  <CustomText
-                    fontFam={"ClashDisplay-Medium"}
-                    fontWeight="600"
-                    label="SAT/ACT"
-                    size={18}
-                    color={colors.black}
-                  />
-                )}
-                <CustomText
-                  fontFam={"ClashDisplay-Medium"}
-                  fontWeight="600"
-                  label="Leaderboard"
-                  size={18}
-                  color={colors.black}
-                />
-              </View>
-              <TouchableOpacity
-                style={{ ...appStyles.row, gap: moderateScale(10) }}
-                activeOpacity={0.5}
-                disabled={seletedLeaderboard != 1}
-                onPress={() => setIsCountryDropDown(!isCountryDropDown)}
-              >
                 <View
                   style={{
-                    width:
-                      seletedLeaderboard != 2
-                        ? moderateScale(50)
-                        : moderateScale(10),
-                    height: moderateScale(50),
+                    marginBottom: verticalScale(50),
+                    height: verticalScale(300),
+                    alignItems: "center",
                   }}
                 >
-                  {seletedLeaderboard != 2 && (
-                    <Image
-                      style={{
-                        width: moderateScale(50),
-                        height: moderateScale(50),
-                      }}
-                      source={
-                        seletedLeaderboard == 1
-                          ? selectedCountry.image
-                          : images.roosevelt
-                      }
-                    />
-                  )}
+                  <CreateUserRakingCard
+                    name="Jon Garcia"
+                    points="2,569 ELO"
+                    image={images.user19}
+                    rightImage={images.highSchoolMedal}
+                    madel={images.medal}
+                  />
+                  <Image
+                    style={{
+                      width: moderateScale(125),
+                      height: verticalScale(isiPad ? 190 : 200),
+                      marginHorizontal: moderateScale(-19),
+                    }}
+                    source={images.rank1}
+                    resizeMode="contain"
+                  />
                 </View>
-
-                <Image
-                  resizeMode="contain"
+                <View
                   style={{
-                    width: moderateScale(20),
-                    height: moderateScale(20),
+                    marginTop: verticalScale(50),
+                    height: verticalScale(300),
+                    alignItems: "center",
                   }}
-                  source={icons.dropdown}
+                >
+                  <CreateUserRakingCard
+                    name="Craig Gouse"
+                    points="1,053 ELO"
+                    image={images.user20}
+                    madel={images.medal}
+                    rightImage={images.roosevelt}
+                  />
+                  <Image
+                    style={{
+                      width: moderateScale(100),
+                      height: verticalScale(isiPad ? 190 : 180),
+                    }}
+                    source={images.rank3}
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  position: "absolute",
+                  top: verticalScale(isiPad ? 290 : 280),
+                }}
+              >
+                <FlatList
+                  data={createUserData}
+                  style={{
+                    // paddingTop: verticalScale(isiPad ? 30 : 20),
+                    // marginTop: verticalScale(isiPad ? 30 : 20),
+                    backgroundColor:  theme.colors.background,
+                  }}
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={(item, index) => index.toString()}
+                  contentContainerStyle={{
+                    marginHorizontal: moderateScale(20),
+                    gap:verticalScale(5)
+                  }}
+                  renderItem={renderFindFriendsList}
                 />
-              </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View
-            style={{
-              alignSelf: "center",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: moderateScale(10),
-              marginVertical: verticalScale(15),
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                swiperRef.current.scrollToIndex({ index: 1 - 1 });
-                setSeletedLeaderboard(1);
-              }}
-              style={{
-                width:
-                  seletedLeaderboard == 1
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                height:
-                  seletedLeaderboard == 1
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                borderRadius:
-                  seletedLeaderboard == 1
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                backgroundColor:
-                  seletedLeaderboard == 1 ? colors.blue100 : colors.gray100,
-              }}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                swiperRef.current.scrollToIndex({ index: 2 - 1 });
-                setSeletedLeaderboard(2);
-              }}
-              style={{
-                width:
-                  seletedLeaderboard == 2
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                height:
-                  seletedLeaderboard == 2
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                borderRadius:
-                  seletedLeaderboard == 2
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                backgroundColor:
-                  seletedLeaderboard == 2 ? colors.purple100 : colors.gray100,
-              }}
-            />
-
-            <TouchableOpacity
-              onPress={() => {
-                swiperRef.current.scrollToIndex({ index: 3 - 1 });
-                setSeletedLeaderboard(3);
-              }}
-              style={{
-                width:
-                  seletedLeaderboard == 3
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                height:
-                  seletedLeaderboard == 3
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                borderRadius:
-                  seletedLeaderboard == 3
-                    ? moderateScale(16)
-                    : moderateScale(14),
-                backgroundColor:
-                  seletedLeaderboard == 3 ? colors.red100 : colors.gray100,
-              }}
-            />
-          </View>
-          <SwiperFlatList
-            ref={swiperRef}
-            index={seletedLeaderboard}
-            data={rankingData}
-            onChangeIndex={handleIndexChange} // Callback when index changes
-            renderItem={({ item, index }) => {
-              return (
-                <>
-                  <View style={{ width: windowWidth, height: windowHeight }}>
-                    <View
-                      style={{
-                        width: "70%",
-                        alignSelf: "center",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        alignContent: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <CustomButton
-                        bgColor={item.dayButtonColor}
-                        fontFamily={"ClashDisplay-Medium"}
-                        textStyles={`font-semibold ${colors.black} bg-[${item.dayButtonColor}]`}
-                        containerStyles={`${item.dayButtonColor} w-[40%]`}
-                        title="Weekly"
-                        handlePress={() => console.log("Weekly")}
-                      />
-
-                      <CustomButton
-                        title="All Time"
-                        bgColor={colors.white}
-                        textStyles="#B9B4E4"
-                        containerStyles={`w-[48%] bg-${colors.white}`}
-                        handlePress={() => console.log("All Time")}
-                      />
-                    </View>
-
-                    {item.isMapRanking && (
-                      <View
-                        style={{
-                          width: "80%",
-                          borderRadius: moderateScale(15),
-                          backgroundColor: "#80BAFF15",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          padding: moderateScale(20),
-                          alignSelf: "center",
-                          marginTop: verticalScale(20),
-
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <View style={{ width: "60%" }}>
-                          <CustomText
-                            fontFam={"ClashDisplay-Medium"}
-                            fontWeight="600"
-                            lineHeight={isiPad ? 40 : 22}
-                            label="You are the 890th ranked player in the USA!"
-                            size={18}
-                            color={colors.black}
-                          />
-                        </View>
-
-                        <Image
-                          style={{
-                            width: moderateScale(110),
-                            height: moderateScale(80),
-                          }}
-                          source={item?.map}
-                          resizeMode="contain"
-                        />
-                      </View>
-                    )}
-
-                    <View style={{ marginTop: verticalScale(40) }}>
-                      <View
-                        style={{
-                          marginHorizontal: moderateScale(20),
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <View
-                          style={{
-                            marginRight: moderateScale(-4),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Clare Rich"
-                            points="1,469 ELO"
-                            image={images.user18}
-                            rightImage={images.athletics}
-                          />
-
-                          {/* <Rank2
-                            width={moderateScale(110).toString()}
-                            height={verticalScale(
-                              isiPad ? 230 : 200,
-                            ).toString()}
-                          /> */}
-                        </View>
-                        <View
-                          style={{
-                            marginBottom: verticalScale(50),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Jon Garcia"
-                            points="2,569 ELO"
-                            image={images.user19}
-                            rightImage={images.highSchoolMedal}
-                            medal={images.medal}
-                          />
-
-                          {/* <Rank1
-                            width={moderateScale(100).toString()}
-                            height={verticalScale(
-                              isiPad ? 190 : 170,
-                            ).toString()}
-                          /> */}
-                        </View>
-                        <View
-                          style={{
-                            marginTop: verticalScale(50),
-                            height: verticalScale(300),
-                            alignItems: "center",
-                          }}
-                        >
-                          <LeaderUserRakingCard
-                            name="Craig Gouse"
-                            points="1,053 ELO"
-                            image={images.user20}
-                            rightImage={images.roosevelt}
-                          />
-
-                          {/* <Rank3
-                            width={moderateScale(100).toString()}
-                            height={verticalScale(
-                              isiPad ? 210 : 180,
-                            ).toString()}
-                          /> */}
-                        </View>
-
-                        <View></View>
-                      </View>
-                      <View
-                        style={{
-                          position: "absolute",
-                          top: verticalScale(isiPad ? 290 : 260),
-                        }}
-                      >
-                        <ImageBackground
-                          resizeMode="cover"
-                          style={{
-                            width: windowWidth,
-                            height: windowHeight,
-                            paddingTop: verticalScale(10),
-                          }}
-                          source={item.rankingBackground}
-                        >
-                          <FlatList
-                            data={leaderBoardUserData}
-                            style={{
-                              paddingTop: verticalScale(isiPad ? 30 : 20),
-                              marginTop: verticalScale(isiPad ? 30 : 20),
-                            }}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item, index) => index.toString()}
-                            contentContainerStyle={{
-                              marginHorizontal: moderateScale(20),
-                            }}
-                            renderItem={renderFindFriendsList}
-                          />
-                        </ImageBackground>
-                      </View>
-                    </View>
-                  </View>
-                </>
-              );
-            }}
-          />
         </ScrollView>
-      </View>
-      {isCountryDropDown && (
-        <CountryDropDown
-          selectedCountry={selectedCountry}
-          setSelectedCountry={setSelectedCountry}
-        />
-      )}
+      </SafeAreaView>
     </>
   );
 };
-export default Leaderboard;
+export default leaderboard;
 
 const styles = StyleSheet.create({});

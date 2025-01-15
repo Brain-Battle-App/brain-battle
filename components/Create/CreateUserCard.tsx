@@ -3,9 +3,10 @@ import { isiPad } from "@/utils/CommonFun";
 import { colors } from "@/utils/colors";
 import { fonts } from "@/utils/fonts";
 import CustomText from "../CustomText";
-import { moderateScale,horizontalScale,verticalScale } from "@/utils/Mertics";
+import { moderateScale, horizontalScale, verticalScale } from "@/utils/Mertics";
 import images from "@/constants/images";
 import { appStyles } from "@/utils/appStyles";
+import { useTheme } from "@/Theme/ThemeProvider";
 
 const CreateUserCard = ({
   navigation,
@@ -15,6 +16,8 @@ const CreateUserCard = ({
   setSelectedLeaderBoardUser,
   index,
 }: any) => {
+  const { theme }: any = useTheme();
+
   return (
     <TouchableOpacity
       activeOpacity={0.5}
@@ -24,30 +27,25 @@ const CreateUserCard = ({
         ...styles.main,
 
         backgroundColor:
-          selectedLeaderBoardUser == index ? "#E4FFE2" : colors.white,
+          selectedLeaderBoardUser == index
+            ? theme.colors?.primary + "10"
+            : theme.colors.white,
       }}
     >
       <View
-        style={{...appStyles.row,
-            gap: isiPad ? horizontalScale(10) : horizontalScale(10),
-
+        style={{
+          ...appStyles.row,
+          gap: isiPad ? horizontalScale(10) : horizontalScale(10),
         }}
       >
         <View
           style={{
             ...styles.count,
-            borderWidth: selectedLeaderBoardUser == index ? 2 : 1.2,
-            borderColor:
-              selectedLeaderBoardUser == index ? colors.black : "#E6E6E6",
+            borderWidth: 1.2,
+            borderColor: "#1C1D20",
           }}
         >
-          <CustomText
-            size={10}
-            color={
-              selectedLeaderBoardUser == index ? colors.black : colors.gray200
-            }
-            text={item.count}
-          />
+          <CustomText size={10} color={theme.colors.text} text={item.count} />
         </View>
         <View>
           <View style={styles.img}>
@@ -57,27 +55,41 @@ const CreateUserCard = ({
               source={item.image}
             />
           </View>
-
-          <Image
+          <View
+           style={{
+            width: moderateScale(25),
+            height: moderateScale(25),
+            position: "absolute",
+            right: horizontalScale(-5),
+            bottom: verticalScale(-6),
+            alignItems:"center",
+            justifyContent:'center',
+            borderRadius:moderateScale(999),
+            backgroundColor:theme.colors?.background
+          }}
+          >
+              <Image
             style={{
-              width: moderateScale(25),
-              height: moderateScale(25),
-              position: "absolute",
-              right: horizontalScale(-5),
-              bottom: verticalScale(-6),
+              width: "80%",
+              height: "80%",
+            
             }}
             resizeMode="contain"
             source={item.rooseveltBadge}
           />
+
+          </View>
+
+        
         </View>
 
         <View style={{ gap: verticalScale(isiPad ? 17 : 8) }}>
           <View style={{ ...appStyles.row, gap: horizontalScale(5) }}>
             <CustomText
               size={14}
-              fontFam={selectedLeaderBoardUser == index?"ClashDisplayMedium":"ClashDisplayRegular"}
-              fontWeight={selectedLeaderBoardUser == index?"600":"500"}
-              color={colors.black}
+              fontFam={fonts.medium}
+              fontWeight={"600"}
+              color={theme.colors.text}
               text={item.name}
             />
           </View>
@@ -85,35 +97,43 @@ const CreateUserCard = ({
       </View>
       <View
         style={{
-          alignItems: "flex-end",
-          gap: verticalScale(5),
+          alignItems: "center",
+          gap: verticalScale(10),
           marginRight: moderateScale(10),
+          flexDirection: "row",
         }}
       >
-        <CustomText
-          size={13}
-          color={colors.black}
-          text={item.points}
-        />
         {selectedLeaderBoardUser == index && (
-          <View style={{ ...appStyles.row, gap: moderateScale(10) }}>
+          <View
+            style={{
+              ...appStyles.row,
+              gap: moderateScale(5),
+              paddingHorizontal: moderateScale(6),
+              paddingVertical: verticalScale(4),
+              backgroundColor: theme.colors.primary,
+              borderRadius: moderateScale(999),
+            }}
+          >
             <Image
               style={{
-                width: moderateScale(17),
-                height: moderateScale(17),
-                alignSelf: "flex-end",
+                width: moderateScale(15),
+                height: moderateScale(15),
+                tintColor: theme.colors.white,
               }}
               resizeMode="contain"
               source={images.send}
             />
-            <CustomText
-              size={15}
-              fontWeight="400"
-              color={colors.black}
-              text={"share"}
-            />
+            <CustomText size={14} color={theme.colors.white} text={"share"} />
           </View>
         )}
+
+        <CustomText
+          size={13}
+          color={theme.colors.text}
+          fontFam={fonts.medium}
+          fontWeight={"600"}
+          text={item.points}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -122,12 +142,11 @@ export default CreateUserCard;
 
 const styles = StyleSheet.create({
   main: {
-    marginBottom: verticalScale(20),
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
     paddingVertical: horizontalScale(10),
-    paddingHorizontal: moderateScale(5),
+    paddingHorizontal: moderateScale(10),
 
     borderRadius: moderateScale(13),
   },

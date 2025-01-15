@@ -46,7 +46,7 @@ const SignIn = () => {
 
       // set to global state using context  
 
-      router.replace('/home')
+      router.replace('/play')
 
     } catch(error:any) {
       Alert.alert('Error', error.message)
