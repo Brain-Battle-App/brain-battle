@@ -2,12 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import { View, Image, Text, Animated } from 'react-native';
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 import icons from '@/constants/icons';
+import images from '@/constants/images';
 
 interface GameLoadingIndicatorProps {
   size: number; // Size of the indicator
+  fullScreen?: boolean; // Whether the indicator should be fullscreen
 }
 
-const GameLoadingIndicator = ({ size }: GameLoadingIndicatorProps) => {
+const GameLoadingIndicator = ({
+  size,
+  fullScreen = false,
+}: GameLoadingIndicatorProps) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -26,6 +31,8 @@ const GameLoadingIndicator = ({ size }: GameLoadingIndicatorProps) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
+
+  const imageSource = fullScreen ? images.logo : icons.logo;
 
   return (
     <View className='relative items-center justify-center'>
@@ -75,7 +82,10 @@ const GameLoadingIndicator = ({ size }: GameLoadingIndicatorProps) => {
 
       {/* Logo */}
       <View className='absolute inset-0 items-center justify-center'>
-        <Image source={icons.logo} className='w-32 h-32' />
+        <Image
+          source={imageSource}
+          className={`${!fullScreen ? 'w-32 h-32' : 'w-72 h-36'}`}
+        />
       </View>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import PlayerCard from '@/components/Play/PlayerCard';
@@ -12,6 +12,8 @@ const Lobby = () => {
   const { updateReadyState } = useUpdateReadyState();
   const { user } = useAuthContext();
 
+  const [countdown, setCountdown] = useState<number | null>(null);
+
   const gameStatus = currentGame?.status || 'searching';
   const players = currentGame?.players || [];
 
@@ -21,10 +23,21 @@ const Lobby = () => {
     );
 
     if (bothPlayersReady && gameStatus === 'lobby') {
-      console.log('Both players are ready, starting game...');
-      router.navigate('/(game)/loadingGame');
+      setCountdown(3); // Start countdown when both players are ready
     }
   }, [currentGame, gameStatus]);
+
+  useEffect(() => {
+    if (countdown !== null && countdown > 0) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => (prev !== null ? prev - 1 : null));
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (countdown === 0) {
+      console.log('Countdown finished, starting game...');
+      router.navigate('/(game)/loadingGame');
+    }
+  }, [countdown]);
 
   const playersWithUserData = useMemo(() => {
     return players.map((player) => {
@@ -48,6 +61,16 @@ const Lobby = () => {
   const defaultProfilePicture =
     'https://fastly.picsum.photos/id/892/200/200.jpg?hmac=lMI1NzfAzgWlBV0lCCLYXsxRxsq5Mwr-RK9K6AId4X4';
 
+  const readyButtonText = useMemo(() => {
+    if (countdown !== null) {
+      return `Starting game in ${countdown}...`;
+    }
+    if (userPlayerData?.ready) {
+      return 'Waiting for opponent';
+    }
+    return 'Ready Up!';
+  }, [countdown, userPlayerData]);
+
   return (
     <SafeAreaView className='flex-col justify-between items-center w-full h-full'>
       <Text className='text-3xl font-bold mb-4'>Race</Text>
@@ -58,7 +81,7 @@ const Lobby = () => {
             score={userPlayerData?.totalScore || 0}
             isReady={userPlayerData?.ready || false}
             bgColor='bg-blue-500'
-            imageUri={user?.profilePicture || defaultProfilePicture}
+            imageUri={userPlayerData?.profilePicture || defaultProfilePicture}
             isUser
           />
         </View>
@@ -71,7 +94,9 @@ const Lobby = () => {
             score={opponentPlayerData?.totalScore || 0}
             isReady={opponentPlayerData?.ready || false}
             bgColor='bg-black'
-            imageUri={opponentUser?.profilePicture || defaultProfilePicture}
+            imageUri={
+              opponentPlayerData?.profilePicture || defaultProfilePicture
+            }
           />
         </View>
       </View>
@@ -111,7 +136,7 @@ const Lobby = () => {
               : 'text-white'
           }`}
         >
-          {!userPlayerData?.ready ? 'Ready Up!' : 'Waiting for opponent'}
+          {readyButtonText}
         </Text>
       </TouchableOpacity>
     </SafeAreaView>

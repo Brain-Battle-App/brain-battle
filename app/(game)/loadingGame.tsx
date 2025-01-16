@@ -17,9 +17,11 @@ const LoadingGame = () => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <GameLoadingIndicator size={200} />
-      <Text className='text-2xl mt-4'>Preparing the game for you</Text>
+    <SafeAreaView className='flex-col justify-center items-center h-full'>
+      <GameLoadingIndicator fullScreen size={400} />
+      <Text className='text-4xl font-semibold px-4 text-center mt-24'>
+        Preparing the game for you...
+      </Text>
     </SafeAreaView>
   );
 };
