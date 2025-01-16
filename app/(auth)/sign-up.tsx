@@ -124,7 +124,7 @@ const SignUp = () => {
           <CustomButton
 						title='Sign Up'
 						handlePress={handleSignUp}
-						containerStyles='mt-6 rounded-[50%] w-3/4'
+						containerStyles='mt-6 rounded-full w-3/4'
 						textStyles='text-xl font-clashsemibold text-light'
 					/>
           </View>

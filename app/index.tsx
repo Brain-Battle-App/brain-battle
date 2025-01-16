@@ -55,7 +55,7 @@ export default function App() {
             </Link>
           </View>
           {/* Helper link for reaching the Home screen from the entry point */}
-          <Link href="/(tabs)/home"> Go to home </Link>
+          <Link href="/play"> Go to home </Link>
           <View className="flex-row items-center mt-6">
             <View className="flex-1 h-px bg-gray-400"></View>
             <Text className="text-lg text-gray-400 font-clashsemibold px-2">

@@ -59,7 +59,7 @@ const LeaderBoadUserCard = ({
         >
           <CustomText
             size={12}
-            fontFam="ClashDisplay-Medium"
+            fontFam={fonts.bold}
             fontWeight="bold"
             color={
               selectedLeaderBoardUser == index ? colors.black : colors.gray200
@@ -103,8 +103,8 @@ const LeaderBoadUserCard = ({
               size={17}
               fontFam={
                 selectedLeaderBoardUser == index
-                  ? "ClashDisplay-Semibold"
-                  : "ClashDisplay-Medium"
+                  ? fonts.semiBold
+                  : fonts.medium
               }
               fontWeight="600"
               color={colors.black}
@@ -114,7 +114,7 @@ const LeaderBoadUserCard = ({
 
           <CustomText
             size={15}
-            fontFam={"ClashDisplay-Medium"}
+            fontFam={fonts.medium}
             fontWeight="600"
             color={colors.black}
             text={item.points}

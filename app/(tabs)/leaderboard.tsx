@@ -7,11 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CreateUserCard from "@/components/Create/CreateUserCard";
-import { colors } from "@/utils/colors";
 import { verticalScale, horizontalScale, moderateScale } from "@/utils/Mertics";
 import images from "@/constants/images";
 import CustomText from "@/components/CustomText";
@@ -22,11 +20,10 @@ import CreateUserRakingCard from "@/components/Create/CreateUserRakingCard";
 import { useTheme } from "@/Theme/ThemeProvider";
 import { fonts } from "@/utils/fonts";
 import { appStyles } from "@/utils/appStyles";
-
+import { router } from "expo-router";
 const leaderboard = ({ navigation }: any) => {
   const [seletedLeaderboard, setSeletedLeaderboard] = useState(1);
   const [selectedLeaderBoardUser, setSelectedLeaderBoardUser] = useState(4);
-
   const { theme }: any = useTheme();
 
   const leaderBoardData = [
@@ -45,6 +42,8 @@ const leaderboard = ({ navigation }: any) => {
           style={{
             ...appStyles.rowjustify,
             paddingHorizontal: moderateScale(20),
+            paddingTop: verticalScale(Platform.OS=="ios"?5: 20),
+
           }}
         >
           <View style={{ ...appStyles.row, gap: horizontalScale(10) }}>
@@ -62,13 +61,15 @@ const leaderboard = ({ navigation }: any) => {
               color={theme.colors.text}
             />
           </View>
-
           <View style={{ ...appStyles.row, gap: horizontalScale(13) }}>
-            <Image
+            <TouchableOpacity
+            onPress={()=>router.push("/profile")}>
+               <Image
               style={{ width: moderateScale(30), height: moderateScale(30) }}
               source={images.user1}
               resizeMode="contain"
             />
+            </TouchableOpacity>
             <View>
               <Image
                 style={{
@@ -97,11 +98,6 @@ const leaderboard = ({ navigation }: any) => {
                 <CustomText label={"4"} size={9} color={theme.colors.white} />
               </View>
             </View>
-
-            {/* <CustomText label={"Leaderboards"} size={20}
-       fontFam={fonts.medium}
-       fontWeight="600"
-        color={theme.colors.text} /> */}
           </View>
         </View>
       </>
@@ -129,7 +125,6 @@ const leaderboard = ({ navigation }: any) => {
         style={{
           flex: 1,
           backgroundColor: theme.colors.background,
-          paddingTop: verticalScale(5),
           // gap:verticalScale(30)
         }}
       >
@@ -160,10 +155,6 @@ const leaderboard = ({ navigation }: any) => {
                 <View
                   key={index.toString()}
                   style={{
-                    // width: moderateScale(30),
-                    // height:
-
-                    // moderateScale(30),
                     alignItems: "center",
                     paddingBottom: verticalScale(12),
                   }}
@@ -272,8 +263,7 @@ const leaderboard = ({ navigation }: any) => {
                     marginBottom: verticalScale(50),
                     height: verticalScale(300),
                     alignItems: "center",
-                  }}
-                >
+                  }}>
                   <CreateUserRakingCard
                     name="Jon Garcia"
                     points="2,569 ELO"

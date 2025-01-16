@@ -16,6 +16,7 @@
 	},
 	"dependencies": {
 		"@expo/vector-icons": "^14.0.0",
+		"@gorhom/bottom-sheet": "^5.0.6",
 		"@react-native-picker/picker": "^2.7.7",
 		"@react-navigation/native": "^6.0.2",
 		"@types/react-native-flip-card": "^3.5.7",
@@ -78,5 +79,6 @@
 		"typescript": "~5.3.3",
 		"typescript-eslint": "^8.0.1"
 	},
-	"private": true
+	"private": true,
+	"packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

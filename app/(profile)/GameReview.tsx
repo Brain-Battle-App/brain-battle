@@ -5,8 +5,9 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  Platform,
 } from "react-native";
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { horizontalScale, moderateScale, verticalScale } from "@/utils/Mertics";
 import { appStyles } from "@/utils/appStyles";
@@ -29,11 +30,14 @@ import { useTheme } from "@/Theme/ThemeProvider";
 import { scale } from "react-native-size-matters";
 import LivePopupModal from "@/components/Profile/LivePopupModal";
 import ViewQuestionsSheetModal from "@/components/Profile/ViewQuestionsSheetModal";
+import CustomBottomSheet from "@/components/CustomBottomSheet";
+import Header from "@/components/Header";
 
 const GameReview = ({ navigation }: any) => {
   const [selectedTab, setSelected] = useState("Courses");
   const [isViewQuestionModal, setIsViewQuestionModal] = useState(false);
   const [isLivePopupModal, setIsLivePopupModal] = useState(false);
+  const questionBottomSheetModalRef = useRef<any>(null);
 
   const { theme }: any = useTheme();
   const reviews = [
@@ -49,44 +53,7 @@ const GameReview = ({ navigation }: any) => {
     { name: "Algebra", time: "0:20s" },
     { name: "Algebra", time: "0:20s" },
     { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
-    { name: "Algebra", time: "0:20s" },
   ];
-
-  const Header = () => {
-    return (
-      <View style={{ ...appStyles.row, gap: scale(10) }}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => router.back()}
-          style={{
-            width: moderateScale(47),
-            height: moderateScale(47),
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: theme.colors.white,
-            borderRadius: moderateScale(19),
-          }}
-        >
-          <Image
-            style={{ width: "40%", height: "40%" }}
-            source={images.profile_back}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-
-        <CustomText
-          label="SAT -English and Reading"
-          size={20}
-          color={theme.colors.text}
-        />
-      </View>
-    );
-  };
 
   const ProfileInfoContainer = ({
     points,
@@ -126,7 +93,7 @@ const GameReview = ({ navigation }: any) => {
               source={pointIcon}
             />
             <CustomText
-              fontFam={fonts.medium}
+              fontFam={fonts.semiBold}
               fontWeight="600"
               label={points}
               size={12}
@@ -161,9 +128,8 @@ const GameReview = ({ navigation }: any) => {
         style={{
           flex: 1,
           backgroundColor: theme.colors.background,
-          paddingTop: verticalScale(5),
+          paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
           paddingHorizontal: moderateScale(20),
-          // gap:verticalScale(30)
         }}
       >
         <ScrollView
@@ -174,10 +140,9 @@ const GameReview = ({ navigation }: any) => {
             style={{
               flex: 1,
               gap: verticalScale(30),
-              // backgroundColor:"red"
             }}
           >
-            <Header />
+            <Header label="SAT -English and Reading" />
 
             <View style={{ alignItems: "center", gap: moderateScale(5) }}>
               <CustomText
@@ -239,9 +204,7 @@ const GameReview = ({ navigation }: any) => {
             >
               {reviews.map((item, index) => {
                 return (
-                  <View 
-                  key={index.toString()}
-                  style={appStyles.rowjustify}>
+                  <View key={index.toString()} style={appStyles.rowjustify}>
                     <View
                       style={{ alignItems: "center", gap: verticalScale(5) }}
                     >
@@ -283,6 +246,7 @@ const GameReview = ({ navigation }: any) => {
                           style={{
                             width: moderateScale(17),
                             height: moderateScale(17),
+                            tintColor: theme.colors?.text,
                           }}
                           source={images.clock}
                           resizeMode="contain"
@@ -311,7 +275,7 @@ const GameReview = ({ navigation }: any) => {
                       <TouchableOpacity
                         activeOpacity={0.4}
                         onPress={() => {
-                            setIsViewQuestionModal(true)
+                          questionBottomSheetModalRef.current.present();
                         }}
                         style={{
                           ...styles.viewQuesContainer,
@@ -376,6 +340,8 @@ const GameReview = ({ navigation }: any) => {
                           style={{
                             width: moderateScale(17),
                             height: moderateScale(17),
+                            tintColor: theme.colors?.text,
+
                           }}
                           source={images.clock}
                           resizeMode="contain"
@@ -396,14 +362,12 @@ const GameReview = ({ navigation }: any) => {
           </View>
         </ScrollView>
       </SafeAreaView>
-      <ViewQuestionsSheetModal
-        modalVisible={isViewQuestionModal}
-        setModalVisible={setIsViewQuestionModal}
-      />
-      <LivePopupModal
-        modalVisible={isLivePopupModal}
-        setModalVisible={setIsLivePopupModal}
-      />
+      <CustomBottomSheet bottomSheetModalRef={questionBottomSheetModalRef}>
+        <ViewQuestionsSheetModal
+          modalVisible={isViewQuestionModal}
+          setModalVisible={setIsViewQuestionModal}
+        />
+      </CustomBottomSheet>
     </>
   );
 };

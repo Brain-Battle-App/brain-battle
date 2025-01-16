@@ -21,11 +21,14 @@ import Header from "@/components/Header";
 import { useTheme } from "@/Theme/ThemeProvider";
 import { scale } from "react-native-size-matters";
 import LogoutSheetModal from "@/components/Profile/LogoutSheetModal";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import CustomBottomSheet from "@/components/CustomBottomSheet";
 
 const Settings = ({ navigation }: any) => {
   const { theme }: any = useTheme();
   const [isLogoutVisible,setIsLogoutVisible]=useState(false)
+  const isLogoutBottomSheetModalRef = useRef<any>(null);
+
 
   const settingData = [
     {
@@ -77,7 +80,7 @@ const Settings = ({ navigation }: any) => {
             label={text}
             fontFam={fonts.medium}
             fontWeight="600"
-            size={18}
+            size={16}
             color={color || theme.colors.text}
           />
         </View>
@@ -103,8 +106,8 @@ const Settings = ({ navigation }: any) => {
           {!desableArrow && (
             <Image
               style={{
-                width: moderateScale(25),
-                height: moderateScale(25),
+                width: moderateScale(22),
+                height: moderateScale(22),
                 tintColor: color || theme.colors.text,
               }}
               source={icons.arrow_up_right}
@@ -120,7 +123,10 @@ const Settings = ({ navigation }: any) => {
 
 <SafeAreaView
       edges={["top"]}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{ flex: 1, backgroundColor: theme.colors.background,
+        paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
+
+       }}
     >
       <ScrollView
         style={{
@@ -256,7 +262,7 @@ const Settings = ({ navigation }: any) => {
             <SettingContainer
               text="Logout"
               desableArrow={true}
-              onPress={()=>setIsLogoutVisible(true)}
+              onPress={()=>isLogoutBottomSheetModalRef.current.present()}
               color={theme.colors.red}
               icon={icons.logout}
             />
@@ -266,46 +272,24 @@ const Settings = ({ navigation }: any) => {
               color={theme.colors.text}
             />
           </View>
-          {/* {settingData.map((item, index) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.6}
-                onPress={item.onPress}
-                key={index.toString()}
-                style={{
-                  ...styles.boxContainer,
-                  alignItems: "center",
-                  flexDirection: "row",
-                  gap: verticalScale(20),
-                  borderRadius: moderateScale(20),
-                  backgroundColor:
-                    item.txt == "Logout" ? "#51B5FD" : "#C4C4C430",
-                }}
-              >
-                <Image
-                  style={{
-                    width: moderateScale(32),
-                    height: moderateScale(32),
-                  }}
-                  source={item.icon}
-                />
-                <CustomText
-                  fontFam={fonts.medium}
-                  fontWeight="600"
-                  label={item.txt}
-                  size={18}
-                  color={colors.black}
-                />
-              </TouchableOpacity>
-            );
-          })} */}
+         
         </View>
       </ScrollView>
     </SafeAreaView>
-    <LogoutSheetModal
+    <CustomBottomSheet
+    bottomSheetModalRef={isLogoutBottomSheetModalRef}
+
+    
+    >
+       <LogoutSheetModal
+       sheetRef={isLogoutBottomSheetModalRef}
     modalVisible={isLogoutVisible}
     setModalVisible={setIsLogoutVisible}
     />
+   
+
+    </CustomBottomSheet>
+   
     </>
     
   );

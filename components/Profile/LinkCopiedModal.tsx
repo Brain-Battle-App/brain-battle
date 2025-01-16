@@ -56,7 +56,9 @@ import {
 
 <CustomText
             label="Link copied!"
-            size={24}
+            size={22}
+            fontFam={fonts.medium}
+            fontWeight={"600"}
             color={theme.colors?.text}
           />
          

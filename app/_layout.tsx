@@ -5,6 +5,9 @@ import React, { useEffect } from "react";
 
 import { GlobalProvider } from "@/context/GlobalProvider";
 import { ThemeProvider } from "@/Theme/ThemeProvider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { StatusBar } from "expo-status-bar"; // ✅ Import StatusBar
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,28 +40,33 @@ const RootLayout = () => {
 
   if (!fontsLoaded && !error) return null;
   return (
-    <GlobalProvider>
-      <ThemeProvider>
-      <Stack>
-        {/* Stack screen for the entry point */}
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        {/* Stack screen for the authorization flow */}
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        {/* Stack screen for the main window */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        {/* Stack screen for the profile options */}
-        <Stack.Screen name="(profile)" options={{ headerShown: false }} />
-        {/* Stack screen for the game options */}
-        <Stack.Screen name="(game)" options={{ headerShown: false }} />
-        {/* Stack screen for the rewards options */}
-        <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
-        {/* Stack screen for the leaderboard options */}
-        <Stack.Screen name="(leaderboard)" options={{ headerShown: false }} />
-      </Stack>
-
-      </ThemeProvider>
-    
-    </GlobalProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <GlobalProvider>
+        <ThemeProvider>
+          <BottomSheetModalProvider>
+            <Stack>
+              {/* Stack screen for the entry point */}
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              {/* Stack screen for the authorization flow */}
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              {/* Stack screen for the main window */}
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              {/* Stack screen for the profile options */}
+              <Stack.Screen name="(profile)" options={{ headerShown: false }} />
+              {/* Stack screen for the game options */}
+              <Stack.Screen name="(game)" options={{ headerShown: false }} />
+              {/* Stack screen for the rewards options */}
+              <Stack.Screen name="(rewards)" options={{ headerShown: false }} />
+              {/* Stack screen for the leaderboard options */}
+              <Stack.Screen
+                name="(leaderboard)"
+                options={{ headerShown: false }}
+              />
+            </Stack>
+          </BottomSheetModalProvider>
+        </ThemeProvider>
+      </GlobalProvider>
+    </GestureHandlerRootView>
   );
 };
 

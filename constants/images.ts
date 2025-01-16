@@ -318,6 +318,9 @@ import ranking from "../assets/images/ranking.png";
 import play from "../assets/images/play.png";
 import reward from "../assets/images/reward.png";
 import notification from "../assets/images/notification.png";
+import arrow_down from "../assets/images/arrow_down.png";
+import search from "../assets/images/search.png";
+
 
 
 
@@ -325,6 +328,8 @@ import notification from "../assets/images/notification.png";
 
 
 export default {
+  search,
+  arrow_down,
   notification,
   reward,
   play,

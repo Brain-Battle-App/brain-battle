@@ -5,8 +5,9 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  Platform,
 } from "react-native";
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { horizontalScale, moderateScale, verticalScale } from "@/utils/Mertics";
 import { appStyles } from "@/utils/appStyles";
@@ -30,11 +31,15 @@ import { scale } from "react-native-size-matters";
 import LivePopupModal from "@/components/Profile/LivePopupModal";
 import { LinearGradient } from "expo-linear-gradient";
 import ConfirmPurcheaseModal from "@/components/Profile/ConfirmPurcheaseModal";
+import CustomBottomSheet from "@/components/CustomBottomSheet";
 const ConfirmPurchease = ({ navigation }: any) => {
   const [selectedTab, setSelected] = useState("Courses");
   const [isQrCodeModal, setIsQrCodeModal] = useState(false);
   const [isConfirmPurcheaseModal, setIsConfirmPurcheaseModal] = useState(false);
   const [selectedLives, setSelectedLive] = useState(1);
+  const confirmPurcheaseBottomSheetModalRef = useRef<any>(null);
+
+  const OrderSheetSnapPoints = useMemo(() => ["68%", "70%"], []);
 
   const { theme }: any = useTheme();
   const tab = [
@@ -88,8 +93,8 @@ const ConfirmPurchease = ({ navigation }: any) => {
         style={{
           flex: 1,
           backgroundColor: theme.colors.background,
-          paddingTop: verticalScale(5),
-          gap:verticalScale(20)
+          paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
+          gap: verticalScale(20),
         }}
       >
         <View
@@ -254,7 +259,13 @@ const ConfirmPurchease = ({ navigation }: any) => {
               />
             </LinearGradient>
           </View>
-          <View style={{ flex: 1,paddingHorizontal:moderateScale(20),gap:verticalScale(20) }}>
+          <View
+            style={{
+              flex: 1,
+              paddingHorizontal: moderateScale(20),
+              gap: verticalScale(20),
+            }}
+          >
             <View
               style={{
                 gap: verticalScale(10),
@@ -427,25 +438,30 @@ const ConfirmPurchease = ({ navigation }: any) => {
             }}
           >
             <CustomButton
-              textStyles={`font-semibold text-white`}
-              // textStyles="text-lg text-white font-clashsemibold"
-              containerStyles={`rounded-[50%] w-[100%]`}
+              textStyles={`font-semibold`}
+              textStyle={{ color: theme.colors.white }}
+              containerStyles={`rounded-full w-full`}
               title="Confirm Purchease"
               handlePress={() => {
-                setIsConfirmPurcheaseModal(true)
-              
+                confirmPurcheaseBottomSheetModalRef.current.present();
               }}
             />
           </View>
         </View>
       </SafeAreaView>
-      <QrCodeModal
+      {/* <QrCodeModal
         modalVisible={isQrCodeModal}
-      />
-      <ConfirmPurcheaseModal
-        modalVisible={isConfirmPurcheaseModal}
-        setModalVisible={setIsConfirmPurcheaseModal}
-      />
+      /> */}
+      <CustomBottomSheet
+        snapPoints={OrderSheetSnapPoints}
+        bottomSheetModalRef={confirmPurcheaseBottomSheetModalRef}
+      >
+        <ConfirmPurcheaseModal
+          sheetRef={confirmPurcheaseBottomSheetModalRef}
+          modalVisible={isConfirmPurcheaseModal}
+          setModalVisible={setIsConfirmPurcheaseModal}
+        />
+      </CustomBottomSheet>
     </>
   );
 };

@@ -4,6 +4,7 @@ import {
   View,
   Image,
   ScrollView,
+  Platform,
 } from "react-native";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -18,6 +19,7 @@ import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";
 import { useTheme } from "@/Theme/ThemeProvider";
 import { scale } from "react-native-size-matters";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Membership = ({ navigation }: any) => {
   const { theme }: any = useTheme();
@@ -74,7 +76,11 @@ const Membership = ({ navigation }: any) => {
   return (
     <SafeAreaView
       edges={["top"]}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{
+        flex: 1,
+        backgroundColor: theme.colors.background,
+        paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
+      }}
     >
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -229,12 +235,27 @@ const Membership = ({ navigation }: any) => {
               );
             })}
 
-            <CustomButton
-              containerStyles="bg-black rounded-full px-5  border border-white"
-              textStyles="text-light"
-              bgColor={colors.black}
-              title="Unlock"
-            />
+            <TouchableOpacity activeOpacity={0.5}>
+              <LinearGradient
+                colors={["#B4840E", "#000000"]} // Gradient colors
+                start={{ x: 0, y: 0 }} // Start at the top-left
+                end={{ x: 1, y: 1 }} // End at the bottom-right
+                style={{
+                  backgroundColor: theme.colors.white,
+                  borderRadius: moderateScale(999),
+                  alignItems: "center",
+                  padding: moderateScale(10),
+                  height: verticalScale(50),
+                  justifyContent: "center",
+                }}
+              >
+                <CustomText
+                  label="Unlock"
+                  size={18}
+                  color={theme.colors.white}
+                />
+              </LinearGradient>
+            </TouchableOpacity>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -264,7 +285,7 @@ const Membership = ({ navigation }: any) => {
                   fontWeight="600"
                   label={"Free"}
                   size={25}
-                  color={theme.colors?.black_gray}
+                  color={theme.colors?.text}
                 />
                 <Image
                   style={{
@@ -286,7 +307,7 @@ const Membership = ({ navigation }: any) => {
                   label={"$0"}
                   style={{ alignSelf: "flex-end" }}
                   size={32}
-                  color={theme.colors?.black_gray}
+                  color={theme.colors?.text}
                 />
                 <CustomText
                   label={"/ Month"}
@@ -344,10 +365,20 @@ const Membership = ({ navigation }: any) => {
             })}
 
             <CustomButton
+              textStyle={{ color: theme.colors.white }}
+              containerStyle={{ backgroundColor: "#1C1D20" }}
+              containerStyles={`rounded-full w-full`}
+              title="Continue"
+              handlePress={() => {
+                // setIsConfirmPurcheaseModal(true)
+              }}
+            />
+
+            {/* <CustomButton
               containerStyles="bg-white rounded-full px-5 min-h-[45px] border border-black"
               bgColor={colors.black}
               title="Continue"
-            />
+            /> */}
           </TouchableOpacity>
         </View>
       </ScrollView>

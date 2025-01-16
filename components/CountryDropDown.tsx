@@ -5,6 +5,7 @@ import { appStyles } from "@/utils/appStyles";
 import CustomText from "@/components/CustomText";
 import { colors } from "@/utils/colors";
 import { isiPad } from "@/utils/CommonFun";
+import { fonts } from "@/utils/fonts";
 
 const CountryDropDown = ({ selectedCountry, setSelectedCountry }: any) => {
   console.log("selectedCountry", selectedCountry);
@@ -49,7 +50,7 @@ const CountryDropDown = ({ selectedCountry, setSelectedCountry }: any) => {
               </View>
               <View style={{ width: "70%" }}>
                 <CustomText
-                  fontFam={"ClashDisplay-Medium"}
+                  fontFam={fonts.medium}
                   fontWeight="600"
                   numberOfLines={1}
                   label={item.name}

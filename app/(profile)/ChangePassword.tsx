@@ -60,12 +60,14 @@ const ChangePassword = ({ navigation }: any) => {
     <>
       <SafeAreaView
         edges={["top"]}
-        style={{ flex: 1, backgroundColor: theme.colors.background }}
+        style={{ flex: 1, backgroundColor: theme.colors.background,
+          paddingTop: verticalScale(Platform.OS=="ios"?5: 20),
+
+         }}
       >
         <View
           style={{
             flex: 1,
-            paddingTop: verticalScale(10),
             paddingHorizontal: moderateScale(20),
           }}
         >
@@ -149,13 +151,14 @@ const ChangePassword = ({ navigation }: any) => {
           flexDirection: "row",
           gap: verticalScale(15),
           borderRadius: moderateScale(20),
-          backgroundColor:"#312E29"
+          backgroundColor:"#312E2920"
         }}
       >
            <Image
              style={{
                width: moderateScale(20),
                height: moderateScale(20),
+               tintColor:theme.colors?.text
              }}
              source={images.info}
            />
@@ -172,7 +175,7 @@ const ChangePassword = ({ navigation }: any) => {
           <View style={{ paddingBottom: verticalScale(50) }}>
             <CustomButton
               textStyle={{ color: theme.colors.white }}
-              containerStyles={`rounded-[50%] w-[100%]`}
+              containerStyles={`rounded-full w-full`}
               title="Create Password"
               handlePress={() => {
                 // setIsConfirmPurcheaseModal(true)

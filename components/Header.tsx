@@ -43,7 +43,10 @@ const Header = ({label}:any) => {
           />
         </TouchableOpacity>
 
-        <CustomText label={label} size={20} color={theme.colors.text} />
+        <CustomText label={label} size={20} 
+        fontFam={fonts.medium}
+        fontWeight="600"
+        color={theme.colors.text} />
       </View>
     </>
   );

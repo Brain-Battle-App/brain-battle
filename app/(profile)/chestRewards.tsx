@@ -4,9 +4,9 @@ import {
   View,
   Image,
   ScrollView,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { colors } from "@/utils/colors";
 import { verticalScale, moderateScale, horizontalScale } from "@/utils/Mertics";
 import CustomText from "@/components/CustomText";
 import { fonts } from "@/utils/fonts";
@@ -26,6 +26,7 @@ import { router } from "expo-router";
 import { scale } from "react-native-size-matters";
 import { useTheme } from "@/Theme/ThemeProvider";
 import { useState } from "react";
+import Header from "@/components/Header";
 
 const ChestRewards = ({ navigation }: any) => {
   const { theme }: any = useTheme();
@@ -65,46 +66,17 @@ const ChestRewards = ({ navigation }: any) => {
     },
   ];
 
-  const Header = () => {
-    return (
-      <View
-        style={{
-          ...appStyles.row,
-          gap: horizontalScale(10),
-          paddingHorizontal: moderateScale(20),
-        }}
-      >
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => router.back()}
-          style={{
-            width: moderateScale(47),
-            height: moderateScale(47),
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: theme.colors.white,
-            borderRadius: moderateScale(19),
-          }}
-        >
-          <Image
-            style={{ width: "40%", height: "40%" }}
-            source={images.profile_back}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-
-        <CustomText label="Badges" size={20} color={theme.colors.text} />
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView
       edges={["top"]}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{
+        flex: 1,
+        backgroundColor: theme.colors.background,
+        paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
+      }}
     >
       <ScrollView
-      showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
           backgroundColor: theme.colors.background,
@@ -117,7 +89,10 @@ const ChestRewards = ({ navigation }: any) => {
             gap: verticalScale(20),
           }}
         >
-          <Header />
+          <View style={{ paddingHorizontal: moderateScale(20) }}>
+            <Header label={"Badges"} />
+          </View>
+
           <ScrollView
             contentContainerStyle={{ paddingHorizontal: horizontalScale(20) }}
             horizontal
@@ -136,7 +111,6 @@ const ChestRewards = ({ navigation }: any) => {
                   <View
                     style={{
                       paddingBottom: verticalScale(4),
-                      // backgroundColor:"red"
                     }}
                   >
                     <TouchableOpacity
@@ -158,20 +132,23 @@ const ChestRewards = ({ navigation }: any) => {
                     >
                       <Image
                         style={{
-                          width: moderateScale(22),
-                          height: moderateScale(22),
-                          // tintColor: theme.colors.text,
+                          width: moderateScale(25),
+                          height: moderateScale(25),
                         }}
                         source={item.icon}
                         // resizeMode="contain"
                       />
                       <CustomText
                         label={item.title}
-                        size={18}
-                        color={
+                        fontFam={
                           selectedTab == item.title
-                            ? item?.color
-                            : "#8F8F8F"
+                            ? fonts.medium
+                            : fonts.regular
+                        }
+                        fontWeight={selectedTab == item.title ? "600" : "500"}
+                        size={17}
+                        color={
+                          selectedTab == item.title ? item?.color : "#8F8F8F"
                         }
                       />
                     </TouchableOpacity>
@@ -197,9 +174,8 @@ const ChestRewards = ({ navigation }: any) => {
               activeOpacity={0.6}
               style={{
                 ...styles.boxContainer,
-                backgroundColor: colors.black,
+                backgroundColor: theme.colors.white,
                 gap: verticalScale(17),
-
               }}
             >
               <View
@@ -207,6 +183,7 @@ const ChestRewards = ({ navigation }: any) => {
                   ...appStyles.row,
                   flexWrap: "wrap",
                   gap: moderateScale(17),
+                  justifyContent: "space-between",
                 }}
               >
                 {Badges.map((item, index) => {
@@ -236,11 +213,9 @@ const ChestRewards = ({ navigation }: any) => {
                         </View>
 
                         <CustomText
-                          fontFam={fonts.medium}
-                          fontWeight="600"
                           text={item.name}
                           size={10}
-                          color={colors.white}
+                          color={theme.colors.text}
                         />
                       </View>
                     </View>
@@ -250,16 +225,16 @@ const ChestRewards = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity 
-  onPress={()=>router.push("/ReferralProgram")}
-  style={{paddingHorizontal:scale(20)}}
-          activeOpacity={0.5}>
+          <TouchableOpacity
+            onPress={() => router.push("/ReferralProgram")}
+            style={{ paddingHorizontal: scale(20) }}
+            activeOpacity={0.5}
+          >
             <LinearGradient
-              colors={["#8A00DF", "#5C287C","#150021"]} // Gradient colors
+              colors={["#8A00DF", "#5C287C", "#150021"]} // Gradient colors
               start={{ x: 0, y: 0 }} // Start at the top-left
               end={{ x: 1, y: 1 }} // End at the bottom-right
               style={{
-                backgroundColor: theme.colors.white,
                 borderRadius: moderateScale(999),
                 alignItems: "center",
                 padding: moderateScale(10),
@@ -267,7 +242,11 @@ const ChestRewards = ({ navigation }: any) => {
                 justifyContent: "center",
               }}
             >
-              <CustomText label="Get Free Unique Badge" size={18} color={theme.colors.text} />
+              <CustomText
+                label="Get Free Unique Badge"
+                size={18}
+                color={theme.colors.white}
+              />
             </LinearGradient>
           </TouchableOpacity>
 

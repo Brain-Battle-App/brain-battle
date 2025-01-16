@@ -105,7 +105,7 @@ const SignIn = () => {
           <CustomButton
 						title='Sign In'
 						handlePress={handleSignIn}
-						containerStyles='mt-6 rounded-[50%] w-3/4'
+						containerStyles='mt-6 rounded-full w-3/4'
 						textStyles='text-xl font-clashsemibold text-light'
 					/>
 					<View className='flex flex-row justify-end  '>

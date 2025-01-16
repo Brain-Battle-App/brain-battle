@@ -58,11 +58,13 @@ const Preferences = ({ navigation }: any) => {
   return (
     <SafeAreaView
       edges={["top"]}
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      style={{ flex: 1, backgroundColor: theme.colors.background,
+        paddingTop: verticalScale(Platform.OS == "ios" ? 5 : 20),
+
+       }}
     >
       <View
         style={{
-          paddingTop: verticalScale(10),
           paddingHorizontal: moderateScale(20),
           gap: verticalScale(20),
           flex: 1,
