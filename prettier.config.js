@@ -1,12 +1,8 @@
 module.exports = {
-  printWidth: 80,
-  tabWidth: 4,
-  trailingComma: "all",
-  singleQuote: true,
-  jsxBracketSameLine: true,
-  semi: true,
-  plugins: [require("./lib/src/index.js")],
-  importOrder: ["^[./]"],
-  importOrderSeparation: true,
-  importOrderSortSpecifiers: true,
+  singleQuote: true, // Use single quotes
+  jsxSingleQuote: true, // Use single quotes in JSX
+  trailingComma: 'es5', // Add trailing commas in ES5-compliant locations
+  tabWidth: 2, // Indent with 2 spaces
+  semi: true, // Add semicolons
+  printWidth: 80, // Wrap lines that exceed 80 characters
 };
