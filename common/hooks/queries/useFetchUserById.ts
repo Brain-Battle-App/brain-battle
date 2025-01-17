@@ -16,7 +16,7 @@ export const useFetchUserById = () => {
         losses: data.loss,
         profilePicture: data.profilePicture,
         rank: data.rank,
-        totalScore: data.totalScore,
+        elo: data.elo,
         username: data.username,
         wins: data.win,
       };

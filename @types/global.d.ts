@@ -10,7 +10,7 @@ interface User {
   losses: number;
   profilePicture: string;
   rank: string;
-  totalScore: number;
+  elo: number;
   username: string;
   wins: number;
 }

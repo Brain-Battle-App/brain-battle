@@ -13,7 +13,6 @@ export const useJoinGame = () => {
         userId: user.userId,
         ready: false,
         points: 0,
-        totalScore: user.totalScore,
       }),
     });
   };

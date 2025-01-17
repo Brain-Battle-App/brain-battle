@@ -1,15 +1,25 @@
 import { useAuthContext } from '../context/useAuthContext';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
+interface GameData {
+  testType: string;
+  subject: string;
+}
+
 export const useFindAvailableGame = () => {
   const { db } = useAuthContext();
 
-  const findAvailableGame = async (userId: string): Promise<Game | null> => {
+  const findAvailableGame = async (
+    userId: string,
+    gameData: GameData
+  ): Promise<Game | null> => {
     try {
       const gamesCollection = collection(db, 'games');
       const gamesQuery = query(
         gamesCollection,
-        where('status', 'in', ['searching'])
+        where('status', 'in', ['searching']),
+        where('testType', '==', gameData.testType), // Filter by testType
+        where('subject', '==', gameData.subject) // Filter by subject
       );
       const querySnapshot = await getDocs(gamesQuery);
 

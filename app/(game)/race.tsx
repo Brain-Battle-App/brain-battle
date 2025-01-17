@@ -23,8 +23,6 @@ import CheckCircleIcon from '@/components/Icons/CheckCircleIcon';
 import SubjectButton from '@/components/Play/SubjectButton'; // Import the new component
 
 const Race = () => {
-  const [loading, setLoading] = useState(false);
-
   const {
     currentGame,
     setCurrentGame,
@@ -41,23 +39,20 @@ const Race = () => {
   const { user } = useAuthContext();
 
   const handlePlay = async () => {
-    setLoading(true);
-
     try {
-      const availableGame = await findAvailableGame(user!.userId);
-
+      const gameData = { testType, subject };
+      const availableGame = await findAvailableGame(user!.userId, gameData);
       if (availableGame) {
         await joinGame(availableGame.id, user!);
         setCurrentGame(availableGame);
       } else {
-        const newGame = await createGame(user!);
+        const newGame = await createGame(user!, gameData);
         setCurrentGame(newGame);
       }
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Something went wrong. Please try again.');
     } finally {
-      setLoading(false);
       router.navigate('/(game)/lobby');
     }
   };
