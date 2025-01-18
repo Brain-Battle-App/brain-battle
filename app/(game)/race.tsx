@@ -70,26 +70,26 @@ const Race = () => {
       <SATLogo width={200} height={100} className='mt-6' />
       <View className='flex-row flex-wrap justify-start gap-2 w-[90%] mt-8'>
         <SubjectButton
-          subject='Math'
+          subject='math'
           testType={testType}
           currentSubject={subject}
-          onPress={() => setSubject('Math')}
+          onPress={() => setSubject('math')}
           IconComponent={CalculatorIcon}
         />
         <SubjectButton
           testType={testType}
-          subject='Reading'
+          subject='reading'
           currentSubject={subject}
-          onPress={() => setSubject('Reading')}
+          onPress={() => setSubject('reading')}
           IconComponent={BookIcon}
         />
-        <SubjectButton
+        {/* <SubjectButton
           testType={testType}
           subject='English & Reading'
           currentSubject={subject}
           onPress={() => setSubject('English & Reading')}
           IconComponent={PencilIcon}
-        />
+        /> */}
       </View>
       <View className='w-[90%] mt-8'>
         <Text className='text-xl'>Game playing type</Text>

@@ -20,6 +20,8 @@ interface PlayContextProps {
   gameType: string;
   setGameType: (gameType: string) => void;
   opponentUser: User | null;
+  questions: Question[] | null;
+  setQuestions: (questions: Question[]) => void;
 }
 
 export const PlayContext = createContext<PlayContextProps | null>(null);
@@ -30,6 +32,7 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
   const [subject, setSubject] = useState<string>('');
   const [gameType, setGameType] = useState<string>('multiplayer');
   const [opponentUser, setOpponentUser] = useState<User | null>(null);
+  const [questions, setQuestions] = useState<Question[] | null>(null);
 
   const { db, user } = useAuthContext();
   const { fetchUserById } = useFetchUserById();
@@ -39,11 +42,6 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
     if (!currentGame?.id) return;
 
     const gameRef = doc(db, 'games', currentGame.id);
-
-    console.log(
-      `[${Constants.deviceName}] Listening to Firestore document:`,
-      gameRef.path
-    );
 
     const unsubscribe = onSnapshot(
       gameRef,
@@ -64,7 +62,6 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
 
           setCurrentGame({ ...gameData });
         } else {
-          console.warn(`[${Constants.deviceName}] Document does not exist.`);
           setCurrentGame(null);
         }
       },
@@ -87,6 +84,8 @@ export const PlayProvider = ({ children }: { children: ReactNode }) => {
         setCurrentGame,
         testType,
         setTestType,
+        questions,
+        setQuestions,
         subject,
         setSubject,
         gameType,

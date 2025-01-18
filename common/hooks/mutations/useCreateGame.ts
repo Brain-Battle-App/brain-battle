@@ -23,10 +23,9 @@ export const useCreateGame = () => {
         },
       ],
     };
-    console.log('newGame in create', newGame);
+
     const gamesCollection = collection(db, 'games');
     const gameDoc = await addDoc(gamesCollection, newGame);
-    console.log('gameDoc in create', gameDoc);
 
     return { id: gameDoc.id, ...newGame };
   };

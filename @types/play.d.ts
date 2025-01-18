@@ -10,4 +10,13 @@ interface Game {
   testType: string;
   subject: string;
   players: Player[];
+  questions: Question[] | null;
+}
+
+interface Question {
+  answers: string[];
+  correctAnswer: string;
+  question: string;
+  contentArea: string;
+  explanation?: string;
 }
