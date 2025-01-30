@@ -20,6 +20,7 @@ export const useCreateGame = () => {
           userId: user.userId,
           ready: false,
           points: 0,
+          profilePicture: user.profilePicture,
         },
       ],
     };

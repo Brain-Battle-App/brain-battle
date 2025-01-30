@@ -22,23 +22,32 @@ const LoadingGame = () => {
   useEffect(() => {
     const loadQuestions = async () => {
       try {
-        const questions = await fetchGameQuestions(db, testType, subject); // Await the resolved value
-        console.log('Questions:', questions); // Log the actual data
-        setQuestions(questions); // Save the data to context or state
+        if (!currentGame?.id) {
+          throw new Error('Game ID is required to update the document.');
+        }
 
-        const updatedGame = { ...currentGame, questions: [...questions] };
-        // await updateGame(updatedGame); // Update the game with the new questions
+        // Fetch questions
+        const questions = await fetchGameQuestions(db, testType, subject);
+        console.log('Questions:', questions);
+        setQuestions(questions);
+
+        // Create the updated game object with a guaranteed ID
+        const updatedGame = { ...currentGame, questions };
+
+        // Update the game document in Firestore
+        await updateGame(updatedGame);
+
         setTimeout(() => {
           router.navigate('/(game)/game');
         }, 3000);
       } catch (error) {
-        console.error('Error fetching questions:', error);
-        Alert.alert('Error', 'Failed to load questions.');
+        console.error('Error fetching questions or updating game:', error);
+        Alert.alert('Error', 'Failed to load questions or update the game.');
       }
     };
 
-    loadQuestions(); // Call the async function
-  }, [testType, subject]);
+    loadQuestions();
+  }, [testType, subject, currentGame]);
 
   return (
     <SafeAreaView className='flex-col justify-center items-center h-full'>

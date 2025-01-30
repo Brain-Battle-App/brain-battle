@@ -20,7 +20,7 @@ export const useUpdateGame = () => {
 
       // Remove the `id` field from the data to avoid overwriting it in Firestore
       const { id, ...dataToUpdate } = updatedGame;
-
+      console.log('Data to update:', dataToUpdate);
       // Update the document in Firestore
       await updateDoc(gameDocRef, dataToUpdate);
 

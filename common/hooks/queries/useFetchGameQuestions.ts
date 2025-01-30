@@ -33,7 +33,6 @@ export const useFetchGameQuestions = () => {
           answers: data.answers,
           correctAnswer: data.correctAnswer,
           contentArea: data.contentArea, // Optional
-          difficulty: data.difficulty, // Optional
         } as Question; // Explicitly type each mapped object as Question
       });
     } catch (error) {

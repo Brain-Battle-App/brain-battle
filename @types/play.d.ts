@@ -2,6 +2,7 @@ interface Player {
   ready: boolean;
   points: number;
   userId: string;
+  profilePicture: string;
 }
 
 interface Game {
@@ -10,7 +11,7 @@ interface Game {
   testType: string;
   subject: string;
   players: Player[];
-  questions: Question[] | null;
+  questions?: Question[] | null;
 }
 
 interface Question {
