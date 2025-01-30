@@ -37,7 +37,6 @@ const SignUp = () => {
   ];
 
   const handleSignUp = async () => {
-    console.log('signing up');
     if (!form.email || !form.password) {
       Alert.alert('Error', 'Please fill in all the fields');
     }
@@ -52,7 +51,6 @@ const SignUp = () => {
         form.email,
         form.password
       );
-      console.log('create user response', userCredential);
       Alert.alert('Success', 'User created successfully');
       const user = userCredential.user;
 

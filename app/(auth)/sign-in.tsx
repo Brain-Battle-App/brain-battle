@@ -35,7 +35,6 @@ const SignIn = () => {
   ];
 
   const handleSignIn = async () => {
-    console.log('signing in');
     if (!form.email || !form.password) {
       Alert.alert('Error', 'Please fill in all the fields');
       return;
@@ -49,10 +48,8 @@ const SignIn = () => {
         form.password
       );
       const userId = authResponse.user.uid;
-      console.log('auth response', authResponse);
-      console.log('user id', userId);
       const user = await fetchUserById(userId, db); // Fetch user data by ID
-      console.log('user being set to state', user);
+
       if (user) {
         setUser(user);
         router.replace('/play'); // Redirect on success

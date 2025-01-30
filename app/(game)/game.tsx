@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const Game = () => {
   return (
     <SafeAreaView className='flex-col justify-center items-center'>
-      <Text> Game </Text>
+      <View className=''></View>
     </SafeAreaView>
   );
 };

@@ -78,7 +78,7 @@ const Lobby = () => {
         <View className='transform rotate-[-12deg]'>
           <PlayerCard
             name={userPlayerData?.username || 'You'}
-            score={userPlayerData?.totalScore || 0}
+            score={userPlayerData?.elo || 0}
             isReady={userPlayerData?.ready || false}
             bgColor='bg-blue-500'
             imageUri={userPlayerData?.profilePicture || defaultProfilePicture}
@@ -91,7 +91,7 @@ const Lobby = () => {
         <View className='transform rotate-[12deg]'>
           <PlayerCard
             name={opponentPlayerData?.username || 'Opponent'}
-            score={opponentPlayerData?.totalScore || 0}
+            score={opponentPlayerData?.elo || 0}
             isReady={opponentPlayerData?.ready || false}
             bgColor='bg-black'
             imageUri={

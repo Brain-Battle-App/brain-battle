@@ -23,8 +23,6 @@ import CheckCircleIcon from '@/components/Icons/CheckCircleIcon';
 import SubjectButton from '@/components/Play/SubjectButton'; // Import the new component
 
 const Race = () => {
-  const [loading, setLoading] = useState(false);
-
   const {
     currentGame,
     setCurrentGame,
@@ -41,23 +39,20 @@ const Race = () => {
   const { user } = useAuthContext();
 
   const handlePlay = async () => {
-    setLoading(true);
-
     try {
-      const availableGame = await findAvailableGame(user!.userId);
-
+      const gameData = { testType, subject };
+      const availableGame = await findAvailableGame(user!.userId, gameData);
       if (availableGame) {
         await joinGame(availableGame.id, user!);
         setCurrentGame(availableGame);
       } else {
-        const newGame = await createGame(user!);
+        const newGame = await createGame(user!, gameData);
         setCurrentGame(newGame);
       }
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'Something went wrong. Please try again.');
     } finally {
-      setLoading(false);
       router.navigate('/(game)/lobby');
     }
   };
@@ -75,26 +70,26 @@ const Race = () => {
       <SATLogo width={200} height={100} className='mt-6' />
       <View className='flex-row flex-wrap justify-start gap-2 w-[90%] mt-8'>
         <SubjectButton
-          subject='Math'
+          subject='math'
           testType={testType}
           currentSubject={subject}
-          onPress={() => setSubject('Math')}
+          onPress={() => setSubject('math')}
           IconComponent={CalculatorIcon}
         />
         <SubjectButton
           testType={testType}
-          subject='Reading'
+          subject='reading'
           currentSubject={subject}
-          onPress={() => setSubject('Reading')}
+          onPress={() => setSubject('reading')}
           IconComponent={BookIcon}
         />
-        <SubjectButton
+        {/* <SubjectButton
           testType={testType}
           subject='English & Reading'
           currentSubject={subject}
           onPress={() => setSubject('English & Reading')}
           IconComponent={PencilIcon}
-        />
+        /> */}
       </View>
       <View className='w-[90%] mt-8'>
         <Text className='text-xl'>Game playing type</Text>
