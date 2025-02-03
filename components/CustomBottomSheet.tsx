@@ -4,7 +4,6 @@ import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetModal,
 } from "@gorhom/bottom-sheet";
-import { useFocusEffect } from "@react-navigation/native";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -29,17 +28,17 @@ const CustomBottomSheet = (props: any) => {
 
   // const snapPoints = useMemo(() => ["55%", "55%"], []);
 
-  useFocusEffect(
-    useCallback(() => {
-      return () => {
-        if (onBackDrop) {
-          onBackDrop(); // Make sure onBackDrop is defined before calling it
-        }
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     return () => {
+  //       if (onBackDrop) {
+  //         onBackDrop(); // Make sure onBackDrop is defined before calling it
+  //       }
 
-        bottomSheetModalRef.current?.close();
-      };
-    }, [])
-  );
+  //       bottomSheetModalRef.current?.close();
+  //     };
+  //   }, [])
+  // );
 
   return (
     <BottomSheetModal
