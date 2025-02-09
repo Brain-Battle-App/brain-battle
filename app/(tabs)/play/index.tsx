@@ -11,10 +11,9 @@ import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import images from '@/constants/images';
 import { moderateScale } from '@/utils/Mertics';
-import HeartIcon from '@/components/Icons/HeartIcon';
-import NotificationIcon from '@/components/Icons/NotificationIcon';
 import SATLogo from '@/components/Images/SATLogo';
 import ACTLogo from '@/components/Images/ACTLogo';
+import Header from '@/components/Header';
 
 const Play = () => {
   const { user } = useAuthContext();
@@ -23,25 +22,12 @@ const Play = () => {
 
   const handleChooseTestType = (testType: string) => {
     setTestType(testType);
-    router.navigate('/(game)/race');
+    router.navigate('/play/race');
   };
 
   return (
     <SafeAreaView className='flex-1 justify-start items-center w-full'>
-      <View className='flex-row justify-between items-center w-[90%]'>
-        <Image
-          resizeMode='contain'
-          style={{
-            width: moderateScale(40),
-            height: moderateScale(40),
-          }}
-          source={images.user1}
-        />
-        <View className='flex-row justify-between items-center gap-4'>
-          <HeartIcon width={40} height={40} />
-          <NotificationIcon width={40} height={40} />
-        </View>
-      </View>
+      <Header />
       <View className='bg-white w-[90%] mt-8 rounded-lg p-4'>
         <View className='flex-row justify-center items-center '>
           <Image

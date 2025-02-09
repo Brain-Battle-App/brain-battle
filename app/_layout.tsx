@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import '../global.css';
 import { AuthProvider } from '@/common/providers/AuthProvider';
 import { PlayProvider } from '@/common/providers/PlayProvider';
+import { ThemeProvider } from '@/common/providers/ThemeProvider';
 import Play from './(tabs)/play';
 
 SplashScreen.preventAutoHideAsync();
@@ -39,24 +40,29 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null;
   return (
     <AuthProvider>
-      <PlayProvider>
-        <Stack>
-          {/* Stack screen for the entry point */}
-          <Stack.Screen name='index' options={{ headerShown: false }} />
-          {/* Stack screen for the authorization flow */}
-          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-          {/* Stack screen for the main window */}
-          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-          {/* Stack screen for the profile options */}
-          <Stack.Screen name='(profile)' options={{ headerShown: false }} />
-          {/* Stack screen for the game options */}
-          <Stack.Screen name='(game)' options={{ headerShown: false }} />
-          {/* Stack screen for the rewards options */}
-          <Stack.Screen name='(rewards)' options={{ headerShown: false }} />
-          {/* Stack screen for the leaderboard options */}
-          <Stack.Screen name='(leaderboard)' options={{ headerShown: false }} />
-        </Stack>
-      </PlayProvider>
+      <ThemeProvider>
+        <PlayProvider>
+          <Stack>
+            {/* Stack screen for the entry point */}
+            <Stack.Screen name='index' options={{ headerShown: false }} />
+            {/* Stack screen for the authorization flow */}
+            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+            {/* Stack screen for the main window */}
+            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+            {/* Stack screen for the profile options */}
+            <Stack.Screen name='(profile)' options={{ headerShown: false }} />
+            {/* Stack screen for the game options */}
+            <Stack.Screen name='(game)' options={{ headerShown: false }} />
+            {/* Stack screen for the rewards options */}
+            <Stack.Screen name='(rewards)' options={{ headerShown: false }} />
+            {/* Stack screen for the leaderboard options */}
+            <Stack.Screen
+              name='(leaderboard)'
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        </PlayProvider>
+      </ThemeProvider>
     </AuthProvider>
   );
 };

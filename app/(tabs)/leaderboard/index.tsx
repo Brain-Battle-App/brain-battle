@@ -1,3 +1,5 @@
+// Move the current leaderboard.tsx content here
+// This becomes the main screen for the leaderboard tab
 import {
   FlatList,
   Image,
@@ -16,6 +18,7 @@ import { colors } from '@/utils/colors';
 import { horizontalScale, moderateScale, verticalScale } from '@/utils/Mertics';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
+import Header from '@/components/Header';
 import CustomText from '@/components/CustomText';
 import { useRef, useState } from 'react';
 import CustomButton from '@/components/CustomButton';
@@ -87,7 +90,8 @@ const Leaderboard = ({ navigation }: any) => {
     setSeletedLeaderboard(index + 1);
   };
   return (
-    <>
+    <SafeAreaView className='flex-1 justify-start items-center w-full'>
+      <Header />
       <View
         style={{
           backgroundColor: colors.white,
@@ -508,7 +512,7 @@ const Leaderboard = ({ navigation }: any) => {
           setSelectedCountry={setSelectedCountry}
         />
       )}
-    </>
+    </SafeAreaView>
   );
 };
 export default Leaderboard;

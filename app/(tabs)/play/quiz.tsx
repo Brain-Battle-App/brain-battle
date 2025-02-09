@@ -3,15 +3,15 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import icons from '../../constants/icons';
-import tests from '../../constants/tests';
+import icons from '../../../constants/icons';
+import tests from '../../../constants/tests';
 
-const Results = () => {
+const Quiz = () => {
   return (
     <SafeAreaView className='bg-light' edges={['top', 'left', 'right']}>
-      <Text> Results </Text>
+      <Text> Quiz </Text>
     </SafeAreaView>
   );
 };
 
-export default Results;
+export default Quiz;
