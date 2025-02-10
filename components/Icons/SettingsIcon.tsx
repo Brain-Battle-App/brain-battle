@@ -11,13 +11,7 @@ export default function SettingsIcon({
   height = 24,
 }: SettingsIconProps) {
   return (
-    <Svg
-      xmlns='http://www.w3.org/2000/svg'
-      width={width}
-      height={height}
-      viewBox='0 0 30 28'
-      fill='none'
-    >
+    <Svg width={width} height={height} viewBox='0 0 30 28' fill='none'>
       <Path
         fillRule='evenodd'
         clipRule='evenodd'
