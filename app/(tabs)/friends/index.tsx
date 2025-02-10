@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import {
   View,
-  TouchableOpacity,
+  Pressable,
   ScrollView,
   Animated,
   FlatList,
@@ -34,8 +34,7 @@ const Friends = ({ navigation }: any) => {
       <Header />
       <View style={styles.container}>
         <View style={styles.tabContainer}>
-          <TouchableOpacity
-            activeOpacity={0.5}
+          <Pressable
             onPress={() => setSelected('All')}
             style={[
               styles.tabButton,
@@ -49,9 +48,8 @@ const Friends = ({ navigation }: any) => {
               size={16}
               color={selectedTab === 'All' ? colors.white : colors.black}
             />
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
+          </Pressable>
+          <Pressable
             onPress={() => setSelected('Find Friends')}
             style={[
               styles.tabButton,
@@ -67,7 +65,7 @@ const Friends = ({ navigation }: any) => {
                 selectedTab === 'Find Friends' ? colors.white : colors.black
               }
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <View style={styles.contentContainer}>

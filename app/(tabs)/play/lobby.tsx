@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, Pressable } from 'react-native';
 import { router } from 'expo-router';
 import PlayerCard from '@/components/Play/PlayerCard';
 import GameLoadingIndicator from '@/components/Play/GameLoadingIndicator';
@@ -35,7 +35,7 @@ const Lobby = () => {
       return () => clearInterval(interval);
     } else if (countdown === 0) {
       console.log('Countdown finished, starting game...');
-      router.navigate('/(game)/loadingGame');
+      router.navigate('/play/loadingGame');
     }
   }, [countdown]);
 
@@ -119,8 +119,7 @@ const Lobby = () => {
           </Text>
         </View>
       )}
-      <TouchableOpacity
-        activeOpacity={0.8}
+      <Pressable
         disabled={userPlayerData?.ready || gameStatus !== 'lobby'}
         className={`p-4 rounded-2xl mt-8 w-[90%] flex-row justify-center items-center ${
           userPlayerData?.ready || gameStatus !== 'lobby'
@@ -138,7 +137,7 @@ const Lobby = () => {
         >
           {readyButtonText}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     </SafeAreaView>
   );
 };

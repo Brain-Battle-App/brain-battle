@@ -3,7 +3,7 @@ import {
   Platform,
   SafeAreaView,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
   StyleSheet,
   ScrollView,
@@ -249,9 +249,8 @@ const Rewards = ({ navigation }: any) => {
                 >
                   {['Daily', 'Monthly', 'All time'].map((item, index) => {
                     return (
-                      <TouchableOpacity
+                      <Pressable
                         key={index}
-                        activeOpacity={0.5}
                         onPress={() => setSelectedProgressTab(item)}
                         style={
                           isiPad
@@ -282,7 +281,7 @@ const Rewards = ({ navigation }: any) => {
                           size={16}
                           color={colors.black}
                         />
-                      </TouchableOpacity>
+                      </Pressable>
                     );
                   })}
                 </View>
@@ -379,10 +378,7 @@ const Rewards = ({ navigation }: any) => {
                     marginBottom: verticalScale(10),
                   }}
                 >
-                  <TouchableOpacity
-                    activeOpacity={0.4}
-                    style={styles.bactActions}
-                  >
+                  <Pressable style={styles.bactActions}>
                     <Image
                       resizeMode='contain'
                       style={{
@@ -391,7 +387,7 @@ const Rewards = ({ navigation }: any) => {
                       }}
                       source={icons.backArrow}
                     />
-                  </TouchableOpacity>
+                  </Pressable>
 
                   <CustomText
                     fontFam={'ClashDisplayMedium'}
@@ -399,10 +395,7 @@ const Rewards = ({ navigation }: any) => {
                     size={16}
                     color={colors.gray300}
                   />
-                  <TouchableOpacity
-                    activeOpacity={0.4}
-                    style={styles.bactActions}
-                  >
+                  <Pressable style={styles.bactActions}>
                     <Image
                       resizeMode='contain'
                       style={{
@@ -411,7 +404,7 @@ const Rewards = ({ navigation }: any) => {
                       }}
                       source={icons.nextArrow}
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
                 {selectedProgressTab == 'Daily' && (
                   <>

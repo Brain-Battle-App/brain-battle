@@ -11,16 +11,19 @@ interface TabIconProps {
 
 const TabIcon: React.FC<TabIconProps> = ({ icon, name, focused }) => {
   return (
-    <View
-      className={`items-center justify-center gap-2 mt-6 ${!focused ? 'opacity-50' : ''}`}
-    >
-      <Image source={icon} resizeMode='contain' className='w-10 h-10' />
-      <Text
-        className={`${focused ? 'font-clashsemibold' : 'font-clashregular'} text-xs`}
-        style={{ flexWrap: 'wrap', textAlign: 'center', width: '100%' }}
+    <View className='h-full items-center justify-center'>
+      <View
+        className={`items-center justify-center ${!focused ? 'opacity-50' : ''}`}
       >
-        {name}
-      </Text>
+        <Image source={icon} resizeMode='contain' className='w-10 h-10' />
+        <Text
+          className={`${focused ? 'font-clashsemibold' : 'font-clashregular'} text-sm mt-1`}
+          numberOfLines={1}
+          style={{ textAlign: 'center', width: '100%' }}
+        >
+          {name}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -34,45 +37,54 @@ const TabsLayout = () => {
           height: 100,
           borderTopWidth: 2,
           borderTopColor: '#D8D6FF',
+          paddingTop: 15,
+        },
+        tabBarItemStyle: {
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
         },
       }}
     >
       <Tabs.Screen
-        name='play/index'
+        name='play'
         options={{
           title: 'play',
           headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabIcon icon={icons.play} name='Play' focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
-        name='rewards/index'
+        name='rewards'
         options={{
           title: 'rewards',
           headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
-            <TabIcon icon={icons.rewards} name='Rewards' focused={focused} />
-          ),
+          tabBarIcon: (props) => {
+            const { focused } = props;
+            return (
+              <TabIcon icon={icons.rewards} name='Rewards' focused={focused} />
+            );
+          },
         }}
       />
       <Tabs.Screen
-        name='friends/index'
+        name='friends'
         options={{
           title: 'friends',
           headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabIcon icon={icons.friends} name='Friends' focused={focused} />
           ),
         }}
       />
       <Tabs.Screen
-        name='leaderboard/index'
+        name='leaderboard'
         options={{
           title: 'leaderboard',
           headerShown: false,
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabIcon
               icon={icons.leaderboard}
               name='Leaderboard'

@@ -1,12 +1,13 @@
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   Image,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import { router } from 'expo-router';
+import { router, useRouter } from 'expo-router';
 import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import images from '@/constants/images';
@@ -19,6 +20,7 @@ const Play = () => {
   const { user } = useAuthContext();
   const { setTestType, currentGame } = usePlayContext();
   const { username, rank } = user!;
+  const router = useRouter();
 
   const handleChooseTestType = (testType: string) => {
     setTestType(testType);
@@ -27,7 +29,6 @@ const Play = () => {
 
   return (
     <SafeAreaView className='flex-1 justify-start items-center w-full'>
-      <Header />
       <View className='bg-white w-[90%] mt-8 rounded-lg p-4'>
         <View className='flex-row justify-center items-center '>
           <Image
@@ -69,7 +70,7 @@ const Play = () => {
         <Text className='text-2xl font-semibold'> Head to Head</Text>
       </View>
       <View className='flex-row gap-2 w-[90%]'>
-        <TouchableOpacity
+        <Pressable
           className='flex-col justify-end items-center w-[48%] bg-white rounded-lg p-4 mt-4'
           onPress={() => handleChooseTestType('SAT')}
         >
@@ -77,8 +78,8 @@ const Play = () => {
           <View className='bg-primary px-6 py-2 rounded-lg mt-8'>
             <Text className='text-white text-lg'>Play</Text>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           className='flex-col justify-end items-center w-[48%] bg-white rounded-lg p-4 mt-4'
           onPress={() => handleChooseTestType('ACT')}
         >
@@ -86,7 +87,10 @@ const Play = () => {
           <View className='bg-primary px-6 py-2 rounded-lg mt-8'>
             <Text className='text-white text-lg'>Play</Text>
           </View>
-        </TouchableOpacity>
+        </Pressable>
+      </View>
+      <View className='flex-row justify-between items-center w-[90%] mt-4'>
+        <Text className='text-2xl font-semibold'> Play Games</Text>
       </View>
     </SafeAreaView>
   );

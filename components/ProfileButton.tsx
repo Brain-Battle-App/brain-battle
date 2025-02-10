@@ -5,7 +5,7 @@ import images from '@/constants/images';
 
 export default function ProfileButton() {
   return (
-    <Link href='/(profile)/profile' asChild>
+    <Link href='/(profile)' asChild>
       <Pressable>
         <Image
           resizeMode='contain'

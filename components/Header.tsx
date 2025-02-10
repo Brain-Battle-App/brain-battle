@@ -1,21 +1,24 @@
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Pressable, Image, SafeAreaView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { moderateScale } from 'react-native-size-matters';
-import HeartIcon from './Icons/HeartIcon';
-import NotificationIcon from './Icons/NotificationIcon';
-import images from '../constants/images';
-import ProfileButton from './ProfileButton';
 
-export default function Header() {
+import { ReactNode } from 'react';
+
+interface HeaderProps {
+  left?: ReactNode;
+  center?: ReactNode;
+  right?: ReactNode;
+}
+
+export default function Header({ left, center, right }: HeaderProps) {
   const router = useRouter();
 
   return (
-    <View className='flex-row justify-between items-center w-[90%]'>
-      <ProfileButton />
-      <View className='flex-row justify-between items-center gap-4'>
-        <HeartIcon width={40} height={40} />
-        <NotificationIcon width={40} height={40} />
+    <SafeAreaView className='w-[100%] flex justify-center items-center'>
+      <View className='flex-row justify-between items-center w-[90%] my-4'>
+        <View>{left}</View>
+        <View>{center}</View>
+        <View className='flex-row items-center gap-4'>{right}</View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

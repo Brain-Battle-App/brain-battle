@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { View, Text, SafeAreaView, Pressable, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
 import { useFindAvailableGame } from '@/common/hooks/queries/useFindAvailableGame';
@@ -53,7 +47,7 @@ const Race = () => {
       console.error(error);
       Alert.alert('Error', 'Something went wrong. Please try again.');
     } finally {
-      router.navigate('/(game)/lobby');
+      router.navigate('/play/lobby');
     }
   };
 
@@ -95,7 +89,7 @@ const Race = () => {
         <Text className='text-xl'>Game playing type</Text>
       </View>
       <View className='flex-row w-[90%] justify-between mt-4'>
-        <TouchableOpacity
+        <Pressable
           onPress={() => setGameType('multiplayer')}
           className='bg-white p-4 rounded-2xl w-[48%]'
         >
@@ -107,8 +101,8 @@ const Race = () => {
           </View>
           <Text className='text-2xl font-semibold'>Multiplayer</Text>
           <Text className='text-lg font-thin'>Play with a friend</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           onPress={() => setGameType('singleplayer')}
           className='bg-white p-4 rounded-2xl w-[48%]'
         >
@@ -120,21 +114,17 @@ const Race = () => {
           </View>
           <Text className='text-2xl font-semibold'>Singleplayer</Text>
           <Text className='text-lg font-thin'>Play with a bot</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        className='bg-white p-4 rounded-2xl mt-8 w-[90%] flex-row justify-center items-center'
-      >
+      <Pressable className='bg-white p-4 rounded-2xl mt-8 w-[90%] flex-row justify-center items-center'>
         <Text className='text-primary text-2xl'>Invite a Friend</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        activeOpacity={0.8}
+      </Pressable>
+      <Pressable
         className='bg-primary p-4 rounded-2xl mt-8 w-[90%] flex-row justify-center items-center'
         onPress={handlePlay}
       >
         <Text className='text-white text-2xl'>Join Online Match</Text>
-      </TouchableOpacity>
+      </Pressable>
     </SafeAreaView>
   );
 };
