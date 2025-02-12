@@ -2,7 +2,7 @@ import {
   Image,
   SafeAreaView,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import { appStyles } from "@/utils/appStyles";

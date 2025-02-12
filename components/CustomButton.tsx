@@ -1,9 +1,9 @@
-import { TouchableOpacity, Text } from "react-native";
-import React from "react";
-import { AntDesign } from "@expo/vector-icons";
-import icons from "@/constants/icons";
+import { Pressable, Text } from 'react-native';
+import React from 'react';
+import { AntDesign } from '@expo/vector-icons';
+import icons from '@/constants/icons';
 
-import Icon from "@/components/Icon";
+import Icon from '@/components/Icon';
 
 type Icon = keyof typeof icons;
 
@@ -35,10 +35,10 @@ const CustomButton = ({
   iconColor,
 }: CustomButtonProps) => {
   return (
-    <TouchableOpacity
+    <Pressable
       className={`flex flex-row bg-primary rounded-xl min-h-[62px] justify-center items-center ${containerStyles}
-      ${isLoading ? "opacity-50" : ""}`}
-      activeOpacity={0.7}
+      ${isLoading ? 'opacity-50' : ''}`}
+      // activeOpacity={0.7}
       onPress={handlePress}
       disabled={isLoading}
     >
@@ -47,7 +47,7 @@ const CustomButton = ({
       )}
       {customIcon && <Icon name={customIcon} />}
       <Text className={`text-lg ${textStyles}`}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

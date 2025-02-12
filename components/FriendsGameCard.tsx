@@ -1,4 +1,4 @@
-import { Text, Image, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native'
+import { Text, Image, Pressable, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
 import React from 'react'
 import { router } from 'expo-router'
@@ -15,9 +15,9 @@ const FriendsGameCard = ({picture, style}: FriendsGameCardProps) => {
     // const gameCardSource = tests[picture];
 
     return (
-        <TouchableOpacity className="bg-light rounded-3xl shadow-sm shadow-gray-500" style={[style, styles.bevel]}>
+        <Pressable className="bg-light rounded-3xl shadow-sm shadow-gray-500" style={[style, styles.bevel]}>
             <Image source={{uri: picture}} className="w-full h-full rounded-3xl" resizeMode="contain" />
-        </TouchableOpacity>
+        </Pressable>
     )
 
 }

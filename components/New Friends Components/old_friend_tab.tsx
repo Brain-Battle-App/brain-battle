@@ -15,7 +15,7 @@ import {
   FlatList,
   Platform,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
@@ -67,7 +67,7 @@ const Friends = ({ navigation }: any) => {
               : 0,
           }}
         >
-          <TouchableOpacity
+          <Pressable
             activeOpacity={0.5}
             onPress={() => setSelected("All")}
             style={
@@ -92,8 +92,8 @@ const Friends = ({ navigation }: any) => {
               size={16}
               color={selectedTab == "All" ? colors.white : colors.black}
             />
-          </TouchableOpacity>
-          <TouchableOpacity
+          </Pressable>
+          <Pressable
             activeOpacity={0.5}
             onPress={() => setSelected("Find Friends")}
             style={
@@ -119,7 +119,7 @@ const Friends = ({ navigation }: any) => {
                 selectedTab == "Find Friends" ? colors.white : colors.black
               }
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View
           style={{

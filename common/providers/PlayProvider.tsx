@@ -24,7 +24,9 @@ interface PlayContextProps {
   setQuestions: (questions: Question[]) => void;
 }
 
-export const PlayContext = createContext<PlayContextProps | null>(null);
+export const PlayContext = createContext<PlayContextProps | undefined>(
+  undefined
+);
 
 export const PlayProvider = ({ children }: { children: ReactNode }) => {
   const [currentGame, setCurrentGame] = useState<Game | null>(null);

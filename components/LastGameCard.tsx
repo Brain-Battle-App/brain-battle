@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native'
+import { View, Text, Image, Pressable, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
 import React from 'react'
 import FlipCard from 'react-native-flip-card'
@@ -53,9 +53,9 @@ const LastGameCard = ({frontColor, backColor, lastGame, profilePicture, lastMatc
                     </View>
                 </View>
                 <View className="w-full flex flex-row justify-around items-center">
-                    <TouchableOpacity className="bg-light rounded-xl shadow-sm shadow-gray-500" style={styles.button}>
+                    <Pressable className="bg-light rounded-xl shadow-sm shadow-gray-500" style={styles.button}>
                         <Text className="font-clashsemibold" style={styles.buttonText}> Play </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                     <View className="flex items-center">
                         <Text className="font-clashmedium" style={styles.recentsText}> Recent Games </Text>
                         <View className="shadow-sm shadow-gray-500">
@@ -81,9 +81,9 @@ const LastGameCard = ({frontColor, backColor, lastGame, profilePicture, lastMatc
         <View className={`flex flex-row justify-between items-center ${color} rounded-3xl shadow-sm shadow-gray-500`} style={styles.bevel}>
             <View className="w-36 h-36 flex justify-between ml-4">
                 <Text className="font-clashregular text-3xl"> {title} </Text>
-                <TouchableOpacity className="w-32 p-3 bg-white rounded-xl">
+                <Pressable className="w-32 p-3 bg-white rounded-xl">
                     <Text className="font-poppinsmedium text-lg text-center"> Play Again </Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
             <View className="w-36 h-36 mr-4">
                 <Image source={gameCardSource} className="w-full h-full rounded-3xl" resizeMode="contain" />

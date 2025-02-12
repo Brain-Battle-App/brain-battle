@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Image, SafeAreaView, Text, Pressable, View, StyleSheet } from "react-native";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import { appStyles } from "@/utils/appStyles";
 import CustomText from "../CustomText";

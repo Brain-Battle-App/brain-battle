@@ -1,3 +1,5 @@
+// Move the current leaderboard.tsx content here
+// This becomes the main screen for the leaderboard tab
 import {
   FlatList,
   Image,
@@ -7,7 +9,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
 } from 'react-native';
 import React from 'react';
@@ -16,6 +18,7 @@ import { colors } from '@/utils/colors';
 import { horizontalScale, moderateScale, verticalScale } from '@/utils/Mertics';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
+import Header from '@/components/Header';
 import CustomText from '@/components/CustomText';
 import { useRef, useState } from 'react';
 import CustomButton from '@/components/CustomButton';
@@ -87,7 +90,8 @@ const Leaderboard = ({ navigation }: any) => {
     setSeletedLeaderboard(index + 1);
   };
   return (
-    <>
+    <SafeAreaView className='flex-1 justify-start items-center w-full'>
+      <Header />
       <View
         style={{
           backgroundColor: colors.white,
@@ -113,7 +117,7 @@ const Leaderboard = ({ navigation }: any) => {
               paddingHorizontal: '15%',
             }}
           >
-            <TouchableOpacity
+            <Pressable
               style={{
                 width: moderateScale(40),
                 height: moderateScale(40),
@@ -125,7 +129,7 @@ const Leaderboard = ({ navigation }: any) => {
                 style={{ width: moderateScale(20), height: moderateScale(20) }}
                 source={icons.back}
               />
-            </TouchableOpacity>
+            </Pressable>
             <View style={{ ...appStyles.row, marginLeft: moderateScale(20) }}>
               <View
                 style={{
@@ -194,9 +198,8 @@ const Leaderboard = ({ navigation }: any) => {
                   color={colors.black}
                 />
               </View>
-              <TouchableOpacity
+              <Pressable
                 style={{ ...appStyles.row, gap: moderateScale(10) }}
-                activeOpacity={0.5}
                 disabled={seletedLeaderboard != 1}
                 onPress={() => setIsCountryDropDown(!isCountryDropDown)}
               >
@@ -232,7 +235,7 @@ const Leaderboard = ({ navigation }: any) => {
                   }}
                   source={icons.dropdown}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
           <View
@@ -244,7 +247,7 @@ const Leaderboard = ({ navigation }: any) => {
               marginVertical: verticalScale(15),
             }}
           >
-            <TouchableOpacity
+            <Pressable
               onPress={() => {
                 swiperRef.current.scrollToIndex({ index: 1 - 1 });
                 setSeletedLeaderboard(1);
@@ -266,7 +269,7 @@ const Leaderboard = ({ navigation }: any) => {
                   seletedLeaderboard == 1 ? colors.blue100 : colors.gray100,
               }}
             />
-            <TouchableOpacity
+            <Pressable
               onPress={() => {
                 swiperRef.current.scrollToIndex({ index: 2 - 1 });
                 setSeletedLeaderboard(2);
@@ -289,7 +292,7 @@ const Leaderboard = ({ navigation }: any) => {
               }}
             />
 
-            <TouchableOpacity
+            <Pressable
               onPress={() => {
                 swiperRef.current.scrollToIndex({ index: 3 - 1 });
                 setSeletedLeaderboard(3);
@@ -508,7 +511,7 @@ const Leaderboard = ({ navigation }: any) => {
           setSelectedCountry={setSelectedCountry}
         />
       )}
-    </>
+    </SafeAreaView>
   );
 };
 export default Leaderboard;

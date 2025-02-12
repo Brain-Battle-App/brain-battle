@@ -1,8 +1,9 @@
-import { 
-  ViewProps as RNViewProps, 
-  TextProps as RNTextProps, 
-  TouchableOpacityProps as RNTouchableOpacityProps,
-  ImageProps as RNImageProps} from 'react-native';
+import {
+  ViewProps as RNViewProps,
+  TextProps as RNTextProps,
+  PressableProps as RNPressableProps,
+  ImageProps as RNImageProps,
+} from 'react-native';
 
 declare module 'react-native' {
   export interface ViewProps extends RNViewProps {
@@ -12,19 +13,16 @@ declare module 'react-native' {
     className?: string;
   }
 
-  export interface TouchableOpacityProps extends RNTouchableOpacityProps{
+  export interface PressableProps extends RNPressableProps {
     className?: string;
   }
 
-  export interface ImageProps extends RNImageProps{
+  export interface ImageProps extends RNImageProps {
     className?: string;
   }
 
   declare module '*.webp' {
     const content: any;
     export default content;
+  }
 }
-
-}
-
-

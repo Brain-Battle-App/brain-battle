@@ -2,7 +2,7 @@ import {
   Image,
   SafeAreaView,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import { appStyles } from "@/utils/appStyles";
@@ -22,7 +22,7 @@ const LeaderBoadUserCard = ({
   index,
 }: any) => {
   return (
-    <TouchableOpacity
+    <Pressable
       activeOpacity={0.5}
       onPress={() => setSelectedLeaderBoardUser(index)}
       style={{
@@ -148,7 +148,7 @@ const LeaderBoadUserCard = ({
           />
         </View>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 export default LeaderBoadUserCard;

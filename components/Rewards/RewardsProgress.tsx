@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import * as Progress from "react-native-progress";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
@@ -114,7 +114,7 @@ const RewardProgress = ({
   return (
     <View style={styles.container}>
       <View style={{ ...appStyles.row, gap: moderateScale(7) }}>
-        <TouchableOpacity
+        <Pressable
           activeOpacity={0.5}
           onPress={() => {
             setSelectectedRedwardsRankIndex(selectectedRedwardsRankIndex - 1);
@@ -125,10 +125,10 @@ const RewardProgress = ({
             resizeMode="cover"
             source={icons.backArrow}
           />
-        </TouchableOpacity>
+        </Pressable>
 
         <View>
-          <TouchableOpacity
+          <Pressable
             style={{ alignItems: "center" }}
             activeOpacity={0.4}
             onPress={() => {
@@ -193,7 +193,7 @@ const RewardProgress = ({
               size={12}
               color={"#007B23"}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <Progress.Bar
@@ -211,7 +211,7 @@ const RewardProgress = ({
           width={windowWidth / 1.8}
         />
         <View>
-          <TouchableOpacity
+          <Pressable
             activeOpacity={0.4}
             onPress={() => {
               setSelectectedRewarsRank({
@@ -279,9 +279,9 @@ const RewardProgress = ({
               size={13}
               color={"#877777"}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
-        <TouchableOpacity
+        <Pressable
           activeOpacity={0.5}
           onPress={() => {
             setSelectectedRedwardsRankIndex(selectectedRedwardsRankIndex + 1);
@@ -292,7 +292,7 @@ const RewardProgress = ({
             resizeMode="contain"
             source={icons.nextArrow}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

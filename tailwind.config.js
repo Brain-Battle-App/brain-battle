@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
-  presets: [require("nativewind/preset")],
+  darkMode: 'class',
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
+  presets: [require('nativewind/preset')],
   theme: {
     extend: {
       fontFamily: {
@@ -22,11 +23,37 @@ module.exports = {
         primary: '#33A6FF',
         secondary: '#FDB914',
         alert: '#FB493D',
-        dark: '#454D51',
-        light: '#FFFFFF',
-      }
+        background: {
+          DEFAULT: '#FFFFFF',
+          dark: '#1D1D1D',
+          elevated: {
+            DEFAULT: '#F3F4F6',
+            dark: '#000000',
+          },
+        },
+        text: {
+          DEFAULT: '#111827',
+          dark: '#F9FAFB',
+          secondary: {
+            DEFAULT: '#4B5563',
+            dark: '#9CA3AF',
+          },
+        },
+        border: {
+          DEFAULT: '#E5E7EB',
+          dark: '#374151',
+        },
+        input: {
+          DEFAULT: '#FFFFFF',
+          dark: '#374151',
+        },
+      },
+      borderRadius: {
+        '3xl': '2rem', // 32px
+        '4xl': '2.5rem', // 40px
+        '5xl': '3rem', // 48px
+      },
     },
   },
   plugins: [],
-}
-
+};

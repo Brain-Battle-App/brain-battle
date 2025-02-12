@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { View, Text, SafeAreaView, Pressable, Alert } from 'react-native';
 import { router } from 'expo-router';
 import GameLoadingIndicator from '@/components/Play/GameLoadingIndicator';
 import { useFetchGameQuestions } from '@/common/hooks/queries/useFetchGameQuestions';
@@ -38,7 +32,7 @@ const LoadingGame = () => {
         await updateGame(updatedGame);
 
         setTimeout(() => {
-          router.navigate('/(game)/game');
+          router.navigate('/play/game');
         }, 3000);
       } catch (error) {
         console.error('Error fetching questions or updating game:', error);

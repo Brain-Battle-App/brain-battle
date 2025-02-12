@@ -4,7 +4,7 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Link, Redirect, router } from 'expo-router';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import CloseIcon from './Icons/CloseIcon';
 
 interface CloseButtonProps {
@@ -14,7 +14,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({
   iconSize,
 }) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       className={`items-center justify-center p-2 ${className || ''}`}
       activeOpacity={0.8} // Adjust the opacity for better UX
@@ -23,7 +23,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({
         width={iconSize?.width || 16}
         height={iconSize?.height || 16}
       />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
