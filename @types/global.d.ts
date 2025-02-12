@@ -13,4 +13,5 @@ interface User {
   elo: number;
   username: string;
   wins: number;
+  lives: number;
 }

@@ -1,4 +1,11 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import { auth, db } from '../../lib/firebaseConfig';
 import {
   signInWithEmailAndPassword,
@@ -26,43 +33,51 @@ export const AuthContext = createContext<AuthContextProps | null>(null);
 // Provider component
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const { fetchUserById } = useFetchUserById(); // Hook to fetch user from Firestore
+  const { fetchUserById } = useFetchUserById();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+  // Memoize the auth state change handler
+  const handleAuthStateChange = useCallback(
+    async (firebaseUser: FirebaseUser | null) => {
       if (firebaseUser) {
         const userId = firebaseUser.uid;
         try {
-          const firestoreUser = await fetchUserById(userId, db); // Fetch Firestore user data
+          const firestoreUser = await fetchUserById(userId, db);
           if (firestoreUser) {
-            setUser(firestoreUser); // Set user with complete data
+            setUser(firestoreUser);
           } else {
             console.warn(`No user document found for userId: ${userId}`);
             setUser(null);
           }
         } catch (error) {
           console.error('Error fetching user document:', error);
+          setUser(null);
         }
       } else {
-        setUser(null); // No user signed in
+        setUser(null);
       }
-    });
+    },
+    [fetchUserById]
+  );
 
-    return () => unsubscribe(); // Cleanup listener on unmount
-  }, [fetchUserById]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, handleAuthStateChange);
+    return () => unsubscribe();
+  }, [handleAuthStateChange]);
+
+  // Memoize the context value
+  const contextValue = useMemo(
+    () => ({
+      user,
+      setUser,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      db,
+      auth,
+    }),
+    [user]
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        setUser,
-        signInWithEmailAndPassword,
-        createUserWithEmailAndPassword,
-        db,
-        auth,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };

@@ -2,7 +2,11 @@ import React from 'react';
 import { View, Image, ActivityIndicator, Text } from 'react-native';
 import useProfilePicture from '@/common/hooks/useProfilePicture';
 
-const ProfileImage = () => {
+interface ProfileImageProps {
+  size?: number;
+}
+
+const ProfileImage = ({ size = 40 }: ProfileImageProps) => {
   const { url, loading } = useProfilePicture();
 
   if (loading) return <ActivityIndicator size='large' color='#0000ff' />;
@@ -12,7 +16,7 @@ const ProfileImage = () => {
       {url ? (
         <Image
           source={{ uri: url }}
-          style={{ width: 100, height: 100, borderRadius: 50 }}
+          style={{ width: size, height: size, borderRadius: 50 }}
         />
       ) : (
         <Text>No profile picture found</Text>
