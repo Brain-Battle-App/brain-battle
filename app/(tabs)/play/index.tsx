@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { router, useRouter } from 'expo-router';
 import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { usePlayContext } from '@/common/hooks/context/usePlayContext';
@@ -19,6 +19,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '@/components/GradientText';
 import ProfileImage from '@/components/ProfileImage';
 import { useColorScheme } from 'nativewind';
+import StreakModal from '@/components/StreakModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Play = () => {
   const { user } = useAuthContext();
@@ -61,8 +63,39 @@ const Play = () => {
     },
   ];
 
+  const [streakModalVisible, setStreakModalVisible] = useState(true);
+  const streak = 19; // You might want to get this from your context or props
+
+  useEffect(() => {
+    const checkAndShowStreakModal = async () => {
+      try {
+        const today = new Date().toDateString();
+        const lastShownDate = await AsyncStorage.getItem('lastStreakModalDate');
+
+        // Show modal if we haven't shown it today
+        if (lastShownDate !== today) {
+          setStreakModalVisible(true);
+          // Save today's date as last shown
+          await AsyncStorage.setItem('lastStreakModalDate', today);
+        }
+      } catch (error) {
+        console.error('Error checking streak modal status:', error);
+      }
+    };
+
+    // Only check and show modal if user is logged in
+    if (user?.username && user.username !== 'Guest') {
+      checkAndShowStreakModal();
+    }
+  }, [user?.username]); // Depend on username to re-run when user logs in
+
   return (
     <SafeAreaView className='flex-1 justify-start items-center w-full dark:bg-background-dark'>
+      <StreakModal
+        visible={streakModalVisible}
+        onClose={() => setStreakModalVisible(false)}
+        streak={streak}
+      />
       <View className='bg-white dark:bg-background-elevated-dark w-[95%] mt-4 rounded-2xl p-4'>
         <View className='flex-row justify-center items-center'>
           <ProfileImage size={100} />
