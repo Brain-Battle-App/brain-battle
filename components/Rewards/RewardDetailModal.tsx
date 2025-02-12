@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import React, { useState } from "react";
@@ -46,7 +46,7 @@ const CustomModal = ({
           padding: moderateScale(20),
         }}
       >
-        <TouchableOpacity
+        <Pressable
           activeOpacity={0.4}
           onPress={() => setModalVisible(false)}
           style={{
@@ -57,7 +57,7 @@ const CustomModal = ({
           }}
         >
           <Image style={{ width: "70%", height: "70%" }} source={icons.cross} />
-        </TouchableOpacity>
+        </Pressable>
         <View
           style={{
             marginHorizontal: moderateScale(10),

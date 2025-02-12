@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import CheckCircleIcon from '@/components/Icons/CheckCircleIcon'; // Import the new component
 import { MaterialIcons } from '@expo/vector-icons'; // For checkmark icon
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Pressable } from 'react-native-gesture-handler';
 
 interface PlayerCardProps {
   name: string; // Player or opponent name

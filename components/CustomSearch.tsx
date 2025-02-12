@@ -1,4 +1,4 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, Text, TextInput, Pressable, View } from "react-native";
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
 import { colors } from "@/utils/colors";
 import { windowWidth } from "@/utils/Dimensions";

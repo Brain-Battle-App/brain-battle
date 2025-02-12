@@ -46,12 +46,7 @@ export default function Settings() {
   const router = useRouter();
 
   return (
-    <View className='flex-1 bg-gray-50'>
-      <Header
-        left={<BackButton onPress={() => router.back()} />}
-        center={<Text className='font-clashsemibold text-xl'>Settings</Text>}
-      />
-
+    <View className='flex-1 bg-gray-black dark:bg-gray-900'>
       <View className='p-4 gap-4'>
         {/* Profile Card */}
         <View className='bg-white p-4 rounded-xl'>
@@ -83,7 +78,7 @@ export default function Settings() {
           <SettingsItem
             icon={<Image source={icons.elements} className='w-6 h-6' />}
             label='App Preferences'
-            onPress={() => router.push('/(profile)/app-preferences')}
+            onPress={() => router.push('/(profile)/appPreferences')}
           />
 
           {/* <SettingsItem

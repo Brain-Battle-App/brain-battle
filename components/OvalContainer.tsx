@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native'
+import { View, Text, Image, Pressable, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters'
 import React from 'react'
 import { osName, deviceType, DeviceType } from 'expo-device';

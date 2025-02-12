@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 interface SubjectButtonProps {
   subject: string;
@@ -19,7 +19,7 @@ const SubjectButton: React.FC<SubjectButtonProps> = ({
   const isSelected = subject === currentSubject;
 
   return (
-    <TouchableOpacity
+    <Pressable
       activeOpacity={0.8}
       onPress={onPress}
       className={`flex-row justify-center items-center p-4 rounded-2xl ${
@@ -30,7 +30,7 @@ const SubjectButton: React.FC<SubjectButtonProps> = ({
       <Text className={`ml-3 ${isSelected ? 'text-white' : 'text-black'}`}>
         {testType} - {subject}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

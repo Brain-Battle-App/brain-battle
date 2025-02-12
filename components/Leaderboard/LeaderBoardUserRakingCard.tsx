@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, View, StyleSheet } from "react-native";
+import { Image, Pressable, View, StyleSheet } from "react-native";
 import { isiPad } from "@/utils/CommonFun";
 import { colors } from "@/utils/colors";
 import { fonts } from "@/utils/fonts";

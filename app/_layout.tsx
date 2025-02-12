@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import '../global.css';
 import { AuthProvider } from '@/common/providers/AuthProvider';
 import { PlayProvider } from '@/common/providers/PlayProvider';
-import { ThemeProvider } from '@/common/providers/ThemeProvider';
+import { SettingsProvider } from '@/common/providers/SettingsProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -39,7 +39,7 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null;
   return (
     <AuthProvider>
-      <ThemeProvider>
+      <SettingsProvider>
         <PlayProvider>
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name='index' />
@@ -47,7 +47,7 @@ const RootLayout = () => {
             <Stack.Screen name='(tabs)' />
           </Stack>
         </PlayProvider>
-      </ThemeProvider>
+      </SettingsProvider>
     </AuthProvider>
   );
 };
