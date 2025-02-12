@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Slot, SplashScreen, Stack } from 'expo-router';
+import { StyleSheet } from 'react-native';
+import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import React, { useEffect } from 'react';
 import '../global.css';
 import { AuthProvider } from '@/common/providers/AuthProvider';
 import { PlayProvider } from '@/common/providers/PlayProvider';
 import { SettingsProvider } from '@/common/providers/SettingsProvider';
-
-SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -32,19 +30,17 @@ const RootLayout = () => {
 
   useEffect(() => {
     if (error) throw error;
+  }, [error]);
 
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded, error]);
+  if (!fontsLoaded) return null;
 
-  if (!fontsLoaded && !error) return null;
   return (
     <AuthProvider>
       <SettingsProvider>
         <PlayProvider>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='index' />
-            <Stack.Screen name='(auth)' />
-            <Stack.Screen name='(tabs)' />
+          <Stack>
+            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+            <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
           </Stack>
         </PlayProvider>
       </SettingsProvider>

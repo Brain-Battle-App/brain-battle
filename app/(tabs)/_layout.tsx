@@ -50,13 +50,13 @@ const TabsLayout = () => {
           alignItems: 'center',
           justifyContent: 'flex-start',
         },
+        headerShown: false,
       }}
     >
       <Tabs.Screen
         name='play'
         options={{
           title: 'play',
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon name='Play' focused={focused}>
               <PlayIcon color={focused ? '#F50B00' : '#ECEDEE'} />
@@ -68,7 +68,6 @@ const TabsLayout = () => {
         name='rewards'
         options={{
           title: 'rewards',
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon name='Rewards' focused={focused}>
               <RewardsIcon color={focused ? '#FDB914' : '#ECEDEE'} />
@@ -80,7 +79,6 @@ const TabsLayout = () => {
         name='friends'
         options={{
           title: 'friends',
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon name='Friends' focused={focused}>
               <FriendsIcon color={focused ? '#51B5FD' : '#ECEDEE'} />
@@ -92,7 +90,6 @@ const TabsLayout = () => {
         name='leaderboard'
         options={{
           title: 'leaderboard',
-          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon name='Leaderboard' focused={focused}>
               <LeaderboardIcon color={focused ? '#51B5FD' : '#ECEDEE'} />

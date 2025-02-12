@@ -17,7 +17,7 @@ import ACTLogo from '@/components/Images/ACTLogo';
 import Header from '@/components/Header';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '@/components/GradientText';
-
+import ProfileImage from '@/components/ProfileImage';
 const Play = () => {
   const { user } = useAuthContext();
   const { setTestType, currentGame } = usePlayContext();
@@ -60,14 +60,7 @@ const Play = () => {
     <SafeAreaView className='flex-1 justify-start items-center w-full dark:bg-background-dark'>
       <View className='bg-white dark:bg-background-elevated-dark w-[90%] mt-4 rounded-2xl p-4'>
         <View className='flex-row justify-center items-center'>
-          <Image
-            resizeMode='contain'
-            style={{
-              width: moderateScale(80),
-              height: moderateScale(80),
-            }}
-            source={images.user1}
-          />
+          <ProfileImage />
           <View className='ml-4'>
             <Text className='text-3xl dark:text-white'>{username}</Text>
             <Text className='text-xl dark:text-gray-300'>{rank}</Text>
