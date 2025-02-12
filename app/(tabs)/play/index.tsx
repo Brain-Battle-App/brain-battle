@@ -18,6 +18,7 @@ import Header from '@/components/Header';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientText from '@/components/GradientText';
 import ProfileImage from '@/components/ProfileImage';
+import { useColorScheme } from 'nativewind';
 
 const Play = () => {
   const { user } = useAuthContext();
@@ -27,7 +28,7 @@ const Play = () => {
   const rank = user?.rank ?? 'Unranked';
 
   const router = useRouter();
-
+  const { colorScheme } = useColorScheme();
   const handleChooseTestType = (testType: string) => {
     setTestType(testType);
     router.navigate('/play/race');
@@ -75,7 +76,7 @@ const Play = () => {
             </View>
           </View>
         </View>
-        <View className='flex-row flex-wrap justify-between mt-4 w-full  '>
+        <View className='flex-row flex-wrap justify-between mt-8 w-full  '>
           {scoreCards.map((card, index) => (
             <View key={index} className='w-[50%] px-2 mb-4'>
               <LinearGradient
@@ -111,19 +112,19 @@ const Play = () => {
       </View>
       <View className='flex-row gap-2 w-[95%]'>
         <Pressable
-          className='flex-col justify-end items-center w-[48%] bg-white dark:bg-background-elevated-dark   rounded-3xl  p-4 mt-4'
+          className='flex-col justify-end items-center w-[48%] bg-white dark:bg-background-elevated-dark dark:border dark:border-white  rounded-3xl  p-4 mt-4'
           onPress={() => handleChooseTestType('SAT')}
         >
-          <SATLogo />
+          <SATLogo color={colorScheme === 'dark' ? 'white' : 'black'} />
           <View className='bg-primary px-6 py-2 rounded-2xl mt-8'>
             <Text className='text-white text-lg'>Play</Text>
           </View>
         </Pressable>
         <Pressable
-          className='flex-col justify-end items-center w-[48%] bg-white dark:bg-background-elevated-dark rounded-3xl  p-4 mt-4'
+          className='flex-col justify-end items-center w-[48%] bg-white dark:bg-background-elevated-dark dark:border dark:border-white rounded-3xl  p-4 mt-4'
           onPress={() => handleChooseTestType('ACT')}
         >
-          <ACTLogo />
+          <ACTLogo color={colorScheme === 'dark' ? 'white' : 'black'} />
           <View className='bg-primary px-6 py-2 rounded-2xl  mt-8'>
             <Text className='text-white text-lg'>Play</Text>
           </View>
