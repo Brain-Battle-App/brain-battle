@@ -28,6 +28,7 @@ const Play = () => {
 
   const username = user?.username ?? 'Guest';
   const rank = user?.rank ?? 'Unranked';
+  const streakData = user?.streakData;
 
   const router = useRouter();
   const { colorScheme } = useColorScheme();
@@ -64,7 +65,6 @@ const Play = () => {
   ];
 
   const [streakModalVisible, setStreakModalVisible] = useState(true);
-  const streak = 19; // You might want to get this from your context or props
 
   useEffect(() => {
     const checkAndShowStreakModal = async () => {
@@ -92,9 +92,9 @@ const Play = () => {
   return (
     <SafeAreaView className='flex-1 justify-start items-center w-full dark:bg-background-dark'>
       <StreakModal
+        streakData={streakData}
         visible={streakModalVisible}
         onClose={() => setStreakModalVisible(false)}
-        streak={streak}
       />
       <View className='bg-white dark:bg-background-elevated-dark w-[95%] mt-4 rounded-2xl p-4'>
         <View className='flex-row justify-center items-center'>

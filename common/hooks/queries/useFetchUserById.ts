@@ -19,6 +19,7 @@ export const useFetchUserById = () => {
           username: data.username,
           lives: data.lives,
           wins: data.win,
+          streakData: data.streakData,
         };
       }
 
