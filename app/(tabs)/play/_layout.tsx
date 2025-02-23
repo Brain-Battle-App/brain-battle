@@ -8,6 +8,7 @@ import HeartIcon from '@/components/Icons/HeartIcon';
 import NotificationIcon from '@/components/Icons/NotificationIcon';
 import React from 'react';
 import { useAuthContext } from '@/common/hooks/context/useAuthContext';
+import CloseButton from '@/components/Buttons/CloseButton';
 
 export default function PlayLayout() {
   const colorScheme = useColorScheme();
@@ -57,7 +58,19 @@ export default function PlayLayout() {
       <Stack.Screen
         name='race'
         options={{
-          title: 'Race',
+          header: ({ navigation, route, options, back }) => {
+            return (
+              <Header
+                left={<CloseButton onPress={() => navigation.goBack()} />}
+                right={
+                  <>
+                    <HeartIcon lives={lives} width={40} height={40} />
+                  </>
+                }
+                style={{ backgroundColor: backgroundColor }}
+              />
+            );
+          },
         }}
       />
       <Stack.Screen

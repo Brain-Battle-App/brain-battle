@@ -14,7 +14,7 @@ interface BackButtonProps {
 const BackButton = ({
   onPress,
   color = '#51B5FD',
-  bgClassName = 'bg-white rounded-2xl p-3',
+  bgClassName = 'bg-background-elevated rounded-2xl p-3 dark:bg-background-elevated-dark',
   textClassName = 'text-black font-semibold text-2xl',
   size = 32,
   title,

@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ left, title, right, style }) => {
       <View className='flex-row justify-between items-center w-[90%] my-4'>
         <View className='flex-row items-center gap-4'>
           {left}
-          <Text className='font-clashsemibold text-xl text-text dark:text-text-dark'>
+          <Text className='font-clashsemibold text-xl text-text dark:text-white'>
             {title}
           </Text>
         </View>

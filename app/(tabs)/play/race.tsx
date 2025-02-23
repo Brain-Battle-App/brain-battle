@@ -8,7 +8,7 @@ import { useJoinGame } from '@/common/hooks/mutations/useJoinGame';
 import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 import { useUpdateGame } from '@/common/hooks/mutations/useUpdateGame';
 import SATLogo from '@/components/Images/SATLogo';
-import CloseButton from '@/components/CloseButton';
+import CloseButton from '@/components/Buttons/CloseButton';
 import HeartIcon from '@/components/Icons/HeartIcon';
 import CalculatorIcon from '@/components/Icons/CalculatorIcon';
 import BookIcon from '@/components/Icons/BookIcon';
@@ -53,14 +53,6 @@ const Race = () => {
 
   return (
     <SafeAreaView className='flex-col justify-center items-center w-full'>
-      <View className='flex-row justify-between items-center w-[90%]'>
-        <CloseButton
-          onPress={() => router.back()}
-          className='bg-white p-4 rounded-full'
-        />
-        <Text>Race</Text>
-        <HeartIcon />
-      </View>
       <SATLogo width={200} height={100} className='mt-6' />
       <View className='flex-row flex-wrap justify-start gap-2 w-[90%] mt-8'>
         <SubjectButton
