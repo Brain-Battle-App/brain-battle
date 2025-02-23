@@ -2,6 +2,7 @@ interface IconProps {
   height?: number;
   width?: number;
   className?: string;
+  color?: string;
 }
 
 interface User {
@@ -13,4 +14,16 @@ interface User {
   elo: number;
   username: string;
   wins: number;
+  lives: number;
+  streakData: StreakData;
+}
+
+interface StreakData {
+  currentStreak: number;
+  completedDays: {
+    seconds: number;
+    nanoseconds: number;
+  }[];
+  longestStreak: number;
+  lastUpdated: Date;
 }

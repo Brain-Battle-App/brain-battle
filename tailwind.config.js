@@ -24,10 +24,10 @@ module.exports = {
         secondary: '#FDB914',
         alert: '#FB493D',
         background: {
-          DEFAULT: '#FFFFFF',
+          DEFAULT: '#F3F4F6',
           dark: '#1D1D1D',
           elevated: {
-            DEFAULT: '#F3F4F6',
+            DEFAULT: '#FFFFFF',
             dark: '#000000',
           },
         },

@@ -7,11 +7,19 @@ import ProfileButton from '@/components/ProfileButton';
 import HeartIcon from '@/components/Icons/HeartIcon';
 import NotificationIcon from '@/components/Icons/NotificationIcon';
 import React from 'react';
+import { useAuthContext } from '@/common/hooks/context/useAuthContext';
+import CloseButton from '@/components/Buttons/CloseButton';
 
 export default function PlayLayout() {
   const colorScheme = useColorScheme();
   const iconColor = colorScheme === 'dark' ? '#FFFFFF' : '#111719';
-  const backgroundColor = colorScheme === 'dark' ? '#111719' : '#F3F3F3';
+  const backgroundColor = colorScheme === 'dark' ? '#1D1D1D' : '#F3F3F3';
+
+  const { user } = useAuthContext();
+
+  console.log('user in play layout', user);
+
+  const lives = user?.lives ?? 0;
 
   return (
     <Stack
@@ -30,10 +38,10 @@ export default function PlayLayout() {
           header: ({ navigation, route, options, back }) => {
             return (
               <Header
-                left={<ProfileButton />}
+                left={<ProfileButton size={50} />}
                 right={
                   <>
-                    <HeartIcon width={40} height={40} />
+                    <HeartIcon lives={lives} width={40} height={40} />
                     <NotificationIcon
                       width={40}
                       height={40}
@@ -50,7 +58,19 @@ export default function PlayLayout() {
       <Stack.Screen
         name='race'
         options={{
-          title: 'Race',
+          header: ({ navigation, route, options, back }) => {
+            return (
+              <Header
+                left={<CloseButton onPress={() => navigation.goBack()} />}
+                right={
+                  <>
+                    <HeartIcon lives={lives} width={40} height={40} />
+                  </>
+                }
+                style={{ backgroundColor: backgroundColor }}
+              />
+            );
+          },
         }}
       />
       <Stack.Screen

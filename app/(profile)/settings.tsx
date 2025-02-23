@@ -5,7 +5,7 @@ import BackButton from '@/components/Buttons/BackButton';
 import ChevronRight from '@/components/Icons/ChevronRight';
 import images from '@/constants/images';
 import icons from '@/constants/icons';
-
+import { useAuthContext } from '@/common/hooks/context/useAuthContext';
 interface SettingsItemProps {
   icon: React.ReactNode;
   label: string;
@@ -21,17 +21,14 @@ const SettingsItem = ({
   value,
   onPress,
   showChevron = true,
-  textColor = '#111719',
 }: SettingsItemProps) => (
   <Pressable
     onPress={onPress}
-    className='flex-row items-center justify-between p-4 bg-white rounded-xl'
+    className='flex-row items-center justify-between p-4 bg-white rounded-xl dark:bg-background-elevated-dark'
   >
     <View className='flex-row items-center gap-3'>
       {icon}
-      <Text style={{ color: textColor }} className='font-clashregular text-lg'>
-        {label}
-      </Text>
+      <Text className='font-clashregular text-lg dark:text-white'>{label}</Text>
     </View>
     <View className='flex-row items-center gap-2'>
       {value && (
@@ -44,18 +41,22 @@ const SettingsItem = ({
 
 export default function Settings() {
   const router = useRouter();
-
+  const { user } = useAuthContext();
+  const { auth } = useAuthContext();
+  const userEmail = auth.currentUser?.email;
   return (
-    <View className='flex-1 bg-gray-black dark:bg-gray-900'>
+    <View className='flex-1 bg-gray-black dark:bg-background-dark'>
       <View className='p-4 gap-4'>
         {/* Profile Card */}
-        <View className='bg-white p-4 rounded-xl'>
+        <View className='bg-white p-4 rounded-xl dark:bg-background-elevated-dark'>
           <View className='flex-row items-center gap-4'>
             <Image source={images.user1} className='w-16 h-16 rounded-full' />
             <View className='flex-1'>
-              <Text className='font-clashsemibold text-xl'>Von Doe</Text>
+              <Text className='font-clashsemibold text-xl dark:text-white'>
+                {user?.username}
+              </Text>
               <Text className='font-clashregular text-gray-500'>
-                vondoe@brainbattle.co
+                {userEmail}
               </Text>
               {/* <View className='flex-row items-center gap-2 mt-1'>
                 <Image

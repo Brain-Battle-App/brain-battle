@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import CloseIcon from './Icons/CloseIcon';
+import CloseIcon from '../Icons/CloseIcon';
 
 interface CloseButtonProps {
   onPress: () => void;
@@ -10,7 +10,7 @@ interface CloseButtonProps {
 
 const CloseButton: React.FC<CloseButtonProps> = ({
   onPress,
-  className,
+  className = 'bg-white p-4 rounded-full',
   iconSize,
 }) => {
   return (
